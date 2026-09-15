@@ -79,7 +79,9 @@ State these when describing the service. They are deliberate, not caveats:
 - It is not a substitute for a licensed professional or a formal engagement.
 - It will say when it does not know something rather than guess.
 - Conversations are not stored while chatting. Pressing Save generates a PDF on the
-  visitor's own device.
+  visitor's own device **and** keeps a copy on the site for HK Borah's personal review.
+  No contact details or IP addresses are stored with it, it is never sold or shared,
+  and it is deleted on request.
 - Any business decision taken from its output remains the visitor's own.
 
 ## Key pages

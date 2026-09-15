@@ -35,6 +35,8 @@ functions/          Cloudflare Pages Functions (see functions/README.md)
   api/auth/login.ts Admin sign in (Google, or email and password)
   api/blog/*        Journal read and write endpoints
   api/contact.ts    Contact form, delivered by email
+  api/chat/save.ts  Stores a Digital Twin conversation when a visitor saves it
+  api/chat/sessions Admin read and delete for saved conversations
   sitemap.xml.ts    Sitemap generated at the edge, including journal entries
 
 robots.txt  sitemap.xml  llms.txt  _headers  _redirects

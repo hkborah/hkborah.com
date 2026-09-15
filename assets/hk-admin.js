@@ -259,12 +259,17 @@ function showEditor() {
     $('#login-view').hidden = true;
     $('#editor-view').hidden = false;
     $('#sign-out').hidden = false;
+    const transcripts = $('#transcripts-view');
+    if (transcripts) transcripts.hidden = false;
     loadPostList();
+    loadTranscripts();
 }
 
 function showLogin(message) {
     $('#login-view').hidden = false;
     $('#editor-view').hidden = true;
+    const transcripts = $('#transcripts-view');
+    if (transcripts) transcripts.hidden = true;
     $('#sign-out').hidden = true;
     if (message) $('#login-status').textContent = message;
 }
@@ -379,6 +384,90 @@ async function initGoogleButton() {
 }
 
 /* ------------------------------------------------------------------ */
+/* Saved conversations                                                 */
+/* ------------------------------------------------------------------ */
+
+function transcriptStatus(message, isError = false) {
+    const el = $('#transcripts-status');
+    if (!el) return;
+    el.textContent = message;
+    el.classList.toggle('is-error', isError);
+}
+
+/** Milliseconds or a date string to a readable label. */
+function when(value) {
+    if (!value) return 'unknown date';
+    const d = new Date(value);
+    if (Number.isNaN(d.getTime())) return 'unknown date';
+    return d.toLocaleString('en-IN', {
+        day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit',
+    });
+}
+
+async function loadTranscripts() {
+    const list = $('#transcript-list');
+    if (!list) return;
+
+    transcriptStatus('Loading…');
+    try {
+        const sessions = await api('/chat/sessions');
+        if (!sessions.length) {
+            list.innerHTML = '';
+            transcriptStatus('Nothing saved yet. A conversation appears here when a visitor presses Save.');
+            return;
+        }
+        transcriptStatus(`${sessions.length} saved conversation${sessions.length === 1 ? '' : 's'}.`);
+        list.innerHTML = sessions.map((s) => `
+            <details class="transcript" data-id="${s.id}">
+                <summary>
+                    <span class="mono-label transcript__date">${when(s.createdAt)}</span>
+                    <span class="transcript__preview">${s.preview.replace(/[<>&"]/g, '')}</span>
+                    <span class="mono-label transcript__count">${s.messageCount} messages</span>
+                </summary>
+                <div class="transcript__body">
+                    <p class="editor-hint">Opening…</p>
+                </div>
+            </details>`).join('');
+    } catch (error) {
+        list.innerHTML = '';
+        transcriptStatus(error.message, true);
+    }
+}
+
+/** Loads one conversation the first time it is opened. */
+async function openTranscript(details) {
+    const body = details.querySelector('.transcript__body');
+    if (!body || details.dataset.loaded === 'true') return;
+
+    try {
+        const session = await api(`/chat/sessions/${encodeURIComponent(details.dataset.id)}`);
+        const messages = Array.isArray(session.messages) ? session.messages : [];
+        body.innerHTML = messages.map((m) => `
+            <div class="transcript__msg transcript__msg--${m.role === 'user' ? 'user' : 'twin'}">
+                <span class="mono-label">${m.role === 'user' ? 'Visitor' : 'Twin'}</span>
+                <p>${String(m.content).replace(/[<>&]/g, (c) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]))}</p>
+            </div>`).join('')
+            + `<button class="editor-list__delete transcript__delete" type="button"
+                       data-delete-transcript="${details.dataset.id}">Delete this conversation</button>`;
+        details.dataset.loaded = 'true';
+    } catch (error) {
+        body.innerHTML = `<p class="editor-hint">${error.message}</p>`;
+    }
+}
+
+async function removeTranscript(id, details) {
+    if (!confirm('Delete this conversation? This cannot be undone.')) return;
+    try {
+        await api(`/chat/sessions/${encodeURIComponent(id)}`, { method: 'DELETE' });
+        details.remove();
+        transcriptStatus('Conversation deleted.');
+    } catch (error) {
+        transcriptStatus(error.message, true);
+    }
+}
+
+
+/* ------------------------------------------------------------------ */
 /* Editor commands                                                     */
 /* ------------------------------------------------------------------ */
 
@@ -474,6 +563,18 @@ function init() {
         const del = event.target.closest('[data-delete]');
         if (load) loadPost(load.dataset.load);
         if (del) remove(del.dataset.delete);
+    });
+
+    $('#transcript-list')?.addEventListener('toggle', (event) => {
+        const details = event.target.closest('details.transcript');
+        if (details && details.open) openTranscript(details);
+    }, true);
+
+    $('#transcript-list')?.addEventListener('click', (event) => {
+        const del = event.target.closest('[data-delete-transcript]');
+        if (!del) return;
+        event.preventDefault();
+        removeTranscript(del.dataset.deleteTranscript, del.closest('details.transcript'));
     });
 
     initToolbar();

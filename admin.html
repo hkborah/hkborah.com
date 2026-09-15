@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/hk.css?v=23">
+    <link rel="stylesheet" href="assets/hk.css?v=24">
 
     <!-- Post bodies are sanitised before preview and before saving -->
     <script src="assets/vendor/purify.min.js" defer
@@ -133,6 +133,20 @@
                         <div id="post-list" class="editor-list__items"></div>
                     </aside>
                 </div>
+            </div>
+        </section>
+
+        <!-- ============ SAVED CONVERSATIONS ============ -->
+        <section class="section" id="transcripts-view" hidden>
+            <div class="container">
+                <div class="section-head reveal">
+                    <span class="mono-label kicker">Saved conversations</span>
+                    <h2 class="display-lg">Digital Twin transcripts</h2>
+                    <p class="lead">Conversations a visitor chose to save. Nothing is captured unless they press Save, and nothing here is shared with anyone else.</p>
+                </div>
+
+                <p class="blog-status" id="transcripts-status" role="status"></p>
+                <div class="transcript-list" id="transcript-list"></div>
             </div>
         </section>
     </main>

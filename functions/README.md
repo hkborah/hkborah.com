@@ -36,6 +36,10 @@ every write calls `requireAuth`, and stored HTML is sanitised with
 | PUT | `/api/blog/posts/:id` | **admin** | Update an entry |
 | DELETE | `/api/blog/posts/:id` | **admin** | Delete an entry |
 | POST | `/api/contact` | public | About page enquiry form, emailed to you |
+| POST | `/api/chat/save` | public | Stores a Digital Twin conversation when a visitor presses Save |
+| GET | `/api/chat/sessions` | **admin** | Lists saved conversations with a preview |
+| GET | `/api/chat/sessions/:id` | **admin** | One full conversation |
+| DELETE | `/api/chat/sessions/:id` | **admin** | Deletes a conversation, for deletion requests |
 
 Admin requests carry `Authorization: Bearer <token>`.
 
@@ -80,6 +84,20 @@ Admin requests carry `Authorization: Bearer <token>`.
 ## Database
 
 The functions expect the existing tables. Nothing needs migrating.
+
+`chat_sessions` holds saved conversations: `id`, `transcript` (a JSON array of
+`{ role, content }`), and `created_at`. `/api/chat/save` is the only public
+write path in the API, so it is throttled per address and capped at 60 messages
+and 60,000 characters. No IP address or user agent is stored with a transcript,
+which is what lets the site promise that no personal data is captured with one.
+
+## Saved conversations and privacy
+
+A transcript is only written when a visitor presses Save, and the site says so
+plainly on the Advice page, the homepage and in the privacy policy. Those three
+places, plus `llms.txt`, describe storage in the same terms. **If the behaviour
+ever changes, change all four together** — the site's credibility rests on the
+disclosure matching what the code actually does.
 
 ```sql
 CREATE TABLE blog_posts (

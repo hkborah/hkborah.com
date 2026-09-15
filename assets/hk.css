@@ -1268,6 +1268,60 @@ strong { color: var(--ink); font-weight: 600; }
 /* Error state for any status line */
 .blog-status.is-error { color: var(--accent); }
 
+/* --------------------------------------------------------------------------
+   11k Saved conversations (admin) — one collapsible row per transcript
+   -------------------------------------------------------------------------- */
+
+.transcript-list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.transcript-list:empty { border-top: 0; }
+
+.transcript { border-bottom: 1px solid var(--line); }
+.transcript > summary {
+    display: grid;
+    grid-template-columns: 13rem minmax(0, 1fr) auto;
+    gap: 1.25rem;
+    align-items: baseline;
+    cursor: pointer;
+    padding: 1.1rem 0;
+    transition: color var(--m-fast) linear;
+}
+@media (max-width: 47.9rem) {
+    .transcript > summary { grid-template-columns: 1fr; gap: .4rem; }
+}
+.transcript > summary:hover .transcript__preview { color: var(--accent); }
+.transcript__date { color: var(--titanium-dim); }
+.transcript__count { color: var(--titanium-dim); text-align: right; }
+@media (max-width: 47.9rem) { .transcript__count { text-align: left; } }
+.transcript__preview {
+    font-size: .9rem;
+    line-height: 1.6;
+    color: var(--titanium);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+@media (max-width: 47.9rem) { .transcript__preview { white-space: normal; } }
+
+.transcript__body {
+    padding: 0 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.transcript__msg { display: flex; flex-direction: column; gap: .3rem; max-width: 48rem; }
+.transcript__msg .mono-label { color: var(--titanium-dim); }
+.transcript__msg p {
+    font-size: .88rem;
+    line-height: 1.7;
+    margin: 0;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+.transcript__msg--user { border-left: 2px solid var(--accent); padding-left: 1rem; }
+.transcript__msg--user p { color: var(--ink); }
+.transcript__delete { align-self: flex-start; border-left: 0; padding: .5rem 0; }
+
+
 
 /* --------------------------------------------------------------------------
    11f Execution page — tabs, self-check, burden cards
