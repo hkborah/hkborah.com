@@ -274,8 +274,6 @@ function showEditor() {
     $('#login-view').hidden = true;
     $('#editor-view').hidden = false;
     $('#sign-out').hidden = false;
-    const transcripts = $('#transcripts-view');
-    if (transcripts) transcripts.hidden = false;
     loadPostList();
     loadTranscripts();
 }
@@ -283,8 +281,6 @@ function showEditor() {
 function showLogin(message) {
     $('#login-view').hidden = false;
     $('#editor-view').hidden = true;
-    const transcripts = $('#transcripts-view');
-    if (transcripts) transcripts.hidden = true;
     $('#sign-out').hidden = true;
     if (message) $('#login-status').textContent = message;
 }
@@ -300,14 +296,7 @@ async function signInWithGoogle(credential) {
     showEditor();
 }
 
-async function signInWithPassword(email, password) {
-    const result = await api('/auth/login', { method: 'POST', body: { email, password } });
-    if (!result?.token) throw new Error('Sign in failed.');
-    setToken(result.token);
-    showEditor();
-}
-
-/** Renders Google's button when a client ID is available, else password only. */
+/** Renders Google's button, or explains why it cannot. */
 /**
  * Loads Google Identity Services and resolves once it is ready.
  *
@@ -697,7 +686,7 @@ function initTranscripts() {
         if (!button || button.disabled) return;
         tr.page = Number(button.dataset.page);
         renderTranscripts();
-        $('#transcripts-view')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+        $('#apanel-transcripts')?.scrollIntoView({ block: 'start', behavior: 'smooth' });
     });
 
     // Opening a row, ticking it, or acting on it
@@ -847,23 +836,10 @@ function initToolbar() {
 /* ------------------------------------------------------------------ */
 
 function init() {
-    const passwordForm = $('#password-form');
-    if (passwordForm) {
-        passwordForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            $('#login-status').textContent = 'Signing in...';
-            try {
-                await signInWithPassword($('#login-email').value, $('#login-password').value);
-            } catch (error) {
-                $('#login-status').textContent = error.message;
-            }
-        });
-    }
-
     $('#sign-out')?.addEventListener('click', () => {
         setToken(null);
         resetForm();
-        showLogin('Signed out.');
+        showLogin('');
     });
 
     $('#save-post')?.addEventListener('click', save);
@@ -914,6 +890,11 @@ function init() {
         if (!del) return;
         event.preventDefault();
         removeTranscript(del.dataset.deleteTranscript, del.closest('details.transcript'));
+    });
+
+    // Reload transcripts whenever that tab is opened
+    document.querySelectorAll('.tab[aria-controls="apanel-transcripts"]').forEach((tab) => {
+        tab.addEventListener('click', () => { tr.page = 1; loadTranscripts(); });
     });
 
     initToolbar();

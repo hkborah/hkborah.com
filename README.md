@@ -32,7 +32,7 @@ assets/
 
 functions/          Cloudflare Pages Functions (see functions/README.md)
   api/_lib.ts       Signed tokens, auth guard, HTML sanitiser
-  api/auth/login.ts Admin sign in (Google, or email and password)
+  api/auth/login.ts Admin sign in (Google)
   api/blog/*        Journal read and write endpoints
   api/contact.ts    Contact form, delivered by email
   api/chat/save.ts  Stores a Digital Twin conversation when a visitor saves it
@@ -151,6 +151,17 @@ whenever the branded address starts working, and update the published address
 across the site at the same time.
 
 `functions/README.md` covers the API, the database schema and the pre-launch checks.
+
+## The editor
+
+Sign in with Google as `hkborah@gmail.com`; that account is the allowlist. The
+page is split into two tabs, **Blog editor** and **Saved conversations**, using
+the same tab component as the rest of the site.
+
+The login function still accepts an email and password with a bcrypt hash, but
+nothing in the page calls it any more, so in practice Google is the only route.
+Remove that branch from `functions/api/auth/login.ts` and drop `bcryptjs` if
+you want the surface reduced to what is actually used.
 
 ## Shipping a change to CSS or JS
 

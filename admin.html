@@ -20,14 +20,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/hk.css?v=26">
+    <link rel="stylesheet" href="assets/hk.css?v=27">
 
     <!-- Post bodies are sanitised before preview and before saving -->
     <script src="assets/vendor/purify.min.js" defer
             integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla+3"
             crossorigin="anonymous"></script>
-    <script type="module" src="assets/hk.js?v=26"></script>
-    <script type="module" src="assets/hk-admin.js?v=26"></script>
+    <script type="module" src="assets/hk.js?v=27"></script>
+    <script type="module" src="assets/hk-admin.js?v=27"></script>
 </head>
 <body>
 
@@ -55,18 +55,6 @@
                         <div id="google-button"></div>
                         <p class="login-note" id="google-note" hidden></p>
 
-                        <details class="login-fallback">
-                            <summary class="mono-label">Use a password instead</summary>
-                            <form id="password-form" class="login-form">
-                                <label class="mono-label" for="login-email">Email</label>
-                                <input class="chat__input" type="email" id="login-email" name="email"
-                                       autocomplete="username" required>
-                                <label class="mono-label" for="login-password">Password</label>
-                                <input class="chat__input" type="password" id="login-password" name="password"
-                                       autocomplete="current-password" required>
-                                <button class="btn btn--solid" type="submit">Sign in</button>
-                            </form>
-                        </details>
                     </div>
 
                     <p class="blog-status" id="login-status" role="status"></p>
@@ -77,6 +65,22 @@
         <!-- ============ EDITOR ============ -->
         <section class="section section--flush" id="editor-view" hidden>
             <div class="container">
+                <div class="section-head reveal">
+                    <span class="mono-label kicker">Private</span>
+                    <h1 class="display-lg">Editor</h1>
+                </div>
+
+                <!-- Two jobs, two tabs. Stacked sections made the transcripts
+                     easy to miss entirely. -->
+                <div class="tabs" id="admin-tabs">
+                    <div class="tabs__list" role="tablist" aria-label="Editor sections">
+                        <button class="tab" id="atab-blog" role="tab" aria-controls="apanel-blog"
+                                aria-selected="true" type="button">Blog editor</button>
+                        <button class="tab" id="atab-transcripts" role="tab" aria-controls="apanel-transcripts"
+                                aria-selected="false" type="button">Saved conversations</button>
+                    </div>
+
+                    <div class="tab-panel" id="apanel-blog" role="tabpanel" aria-labelledby="atab-blog" tabindex="0">
                 <div class="editor-bar">
                     <div>
                         <span class="mono-label kicker">Journal</span>
@@ -139,17 +143,11 @@
                         <div id="post-list" class="editor-list__items"></div>
                     </aside>
                 </div>
-            </div>
-        </section>
+                    </div><!-- /blog panel -->
 
-        <!-- ============ SAVED CONVERSATIONS ============ -->
-        <section class="section" id="transcripts-view" hidden>
-            <div class="container">
-                <div class="section-head reveal">
-                    <span class="mono-label kicker">Saved conversations</span>
-                    <h2 class="display-lg">Digital Twin transcripts</h2>
-                    <p class="lead">Conversations a visitor chose to save. Nothing is captured unless they press Save, and nothing here is shared with anyone else.</p>
-                </div>
+                    <div class="tab-panel" id="apanel-transcripts" role="tabpanel"
+                         aria-labelledby="atab-transcripts" tabindex="0" hidden>
+                        <p class="lead">Conversations a visitor chose to save. Nothing is captured unless they press Save, and nothing here is shared with anyone else.</p>
 
                 <!-- Filters, page size and bulk actions, as on the previous editor -->
                 <div class="tr-tools">
@@ -186,8 +184,10 @@
                     <span class="mono-label" id="tr-selected-count"></span>
                 </div>
 
-                <div class="transcript-list" id="transcript-list"></div>
-                <nav class="pager" id="transcript-pager" aria-label="Transcript pages" hidden></nav>
+                        <div class="transcript-list" id="transcript-list"></div>
+                        <nav class="pager" id="transcript-pager" aria-label="Transcript pages" hidden></nav>
+                    </div><!-- /transcripts panel -->
+                </div><!-- /tabs -->
             </div>
         </section>
     </main>
