@@ -1,8 +1,8 @@
 /** GET /api/blog/latest/:limit - the most recent entries. */
 import { createClient } from '@libsql/client/web';
-import { json, type Env } from '../../_lib';
+import { json, safeJson, type Env } from '../../_lib';
 
-export const onRequestGet: PagesFunction<Env> = async ({ env, params }) => {
+export const onRequestGet: PagesFunction<Env> = ({ env, params }) => safeJson(async () => {
     const requested = Number(params.limit);
     const limit = Number.isFinite(requested) ? Math.min(Math.max(requested, 1), 50) : 4;
 
@@ -13,4 +13,4 @@ export const onRequestGet: PagesFunction<Env> = async ({ env, params }) => {
         args: [limit],
     });
     return json(result.rows);
-};
+});

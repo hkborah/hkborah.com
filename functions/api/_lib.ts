@@ -37,6 +37,19 @@ export function badRequest(message: string, status = 400): Response {
     return json({ error: message }, status);
 }
 
+/**
+ * Runs journal work and turns an outage into a clean 503.
+ * Without this an unreachable database surfaces as a 500 and a stack trace.
+ */
+export async function safeJson(work: () => Promise<Response>): Promise<Response> {
+    try {
+        return await work();
+    } catch (error) {
+        console.error('Journal database error:', error);
+        return json({ error: 'The journal is temporarily unavailable.' }, 503);
+    }
+}
+
 /* ------------------------------------------------------------------ */
 /* Tokens: base64url(payload) + "." + base64url(HMAC-SHA256)           */
 /* ------------------------------------------------------------------ */

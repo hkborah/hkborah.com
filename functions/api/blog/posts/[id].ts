@@ -11,8 +11,8 @@
  */
 import { createClient } from '@libsql/client/web';
 import {
-    json, badRequest, requireAuth, sanitizeHtml, buildExcerpt, slugify, pickPostFields,
-    type Env,
+    json, badRequest, safeJson, requireAuth, sanitizeHtml, buildExcerpt, slugify,
+    pickPostFields, type Env,
 } from '../../_lib';
 
 /** Largest accepted entry body. The original allowed 50MB of base64 images. */
@@ -27,10 +27,10 @@ async function findPost(env: Env, id: string) {
     return result.rows[0] as Record<string, unknown> | undefined;
 }
 
-export const onRequestGet: PagesFunction<Env> = async ({ env, params }) => {
+export const onRequestGet: PagesFunction<Env> = ({ env, params }) => safeJson(async () => {
     const post = await findPost(env, String(params.id));
     return post ? json(post) : badRequest('Post not found.', 404);
-};
+});
 
 export const onRequestPut: PagesFunction<Env> = async ({ request, env, params }) => {
     const denied = await requireAuth(request, env);

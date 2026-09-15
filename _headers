@@ -1,6 +1,9 @@
 # Security headers for Cloudflare Pages.
-# The public pages run a strict policy. The editor page is the only place
-# that may load Google's sign-in script, so it gets its own rule below.
+#
+# The public pages run a strict policy. The editor is the only page allowed to
+# load Google's sign-in script, so it gets its own rule below. Header values
+# and the meta tags inside the pages intersect, so the stricter of the two
+# applies: keep them from contradicting each other.
 
 /*
   X-Content-Type-Options: nosniff
@@ -8,13 +11,13 @@
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
   Cross-Origin-Opener-Policy: same-origin-allow-popups
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://chatwithhk-6toeltovya-uc.a.run.app; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://chatwithhk-6toeltovya-uc.a.run.app; form-action 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
+
+/admin
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://accounts.google.com https://apis.google.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com; form-action 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
 
 /admin.html
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://accounts.google.com https://apis.google.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://accounts.google.com https://apis.google.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com; form-action 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
 
 /assets/*
-  Cache-Control: public, max-age=31536000, immutable
-
-/assets/vendor/*
   Cache-Control: public, max-age=31536000, immutable

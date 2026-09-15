@@ -64,7 +64,7 @@ function sortNewestFirst(posts) {
 /** One listing card. */
 function cardHtml(post) {
     const image = resolveImage(post.image);
-    const href = `blog-post.html?slug=${encodeURIComponent(post.slug || post.id)}`;
+    const href = `/blog-post?slug=${encodeURIComponent(post.slug || post.id)}`;
     return `
         <article class="post-card reveal" data-visible="true">
             <a class="post-card__link" href="${esc(href)}">

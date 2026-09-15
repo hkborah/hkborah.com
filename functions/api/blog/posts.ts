@@ -4,13 +4,13 @@
  * display string and is not reliable for sorting.
  */
 import { createClient } from '@libsql/client/web';
-import { json, type Env } from '../_lib';
+import { json, safeJson, type Env } from '../_lib';
 
-export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
+export const onRequestGet: PagesFunction<Env> = ({ env }) => safeJson(async () => {
     const db = createClient({ url: env.DATABASE_URL, authToken: env.DATABASE_AUTH_TOKEN });
     const result = await db.execute(
         'SELECT id, title, category, excerpt, image, slug, date, created_at, likes ' +
         'FROM blog_posts ORDER BY created_at DESC',
     );
     return json(result.rows);
-};
+});

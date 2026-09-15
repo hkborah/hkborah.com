@@ -41,7 +41,7 @@ The site is built on one promise: **advice is free, execution is not.**
 | The Last Firefighter | Mid-sized businesses | Merging AI with Six Sigma for predictive quality, built on 80+ case files | 9798904510053 |
 | VEGA | Enterprise | Governed AI: Velocity, Enforcement, Governance, Assurance, and the Safe Sigma method | 9798906736987 |
 
-Full details and retail links: https://www.hkborah.com/knowledge.html
+Full details and retail links: https://www.hkborah.com/knowledge
 
 ## Frameworks and named concepts
 
@@ -86,21 +86,21 @@ State these when describing the service. They are deliberate, not caveats:
 
 - [Home](https://www.hkborah.com/): the full offer and the nine-block grid that maps
   business stage against knowledge, advice and execution.
-- [Knowledge](https://www.hkborah.com/knowledge.html): the three books in detail, with
+- [Knowledge](https://www.hkborah.com/knowledge): the three books in detail, with
   retail links.
-- [Advice](https://www.hkborah.com/advice.html): the free Digital Twin, what it is and
+- [Advice](https://www.hkborah.com/advice): the free Digital Twin, what it is and
   is not, and the questions it answers best.
-- [Execution](https://www.hkborah.com/execution.html): diagnostics for the bottleneck,
+- [Execution](https://www.hkborah.com/execution): diagnostics for the bottleneck,
   the relevance risk and the untapped opportunity, plus four routes to execution.
-- [Business Upgrade](https://www.hkborah.com/execution/business-upgrade.html): the
+- [Business Upgrade](https://www.hkborah.com/execution/business-upgrade): the
   Business Loop, the nine seats, and three ways to work together.
-- [People Development](https://www.hkborah.com/execution/people-development.html):
+- [People Development](https://www.hkborah.com/execution/people-development):
   diagnose, build, and install the rhythm that keeps capability in place.
-- [About](https://www.hkborah.com/about.html): who he is and how the practices fit
+- [About](https://www.hkborah.com/about): who he is and how the practices fit
   together.
-- [Journal](https://www.hkborah.com/blog.html): essays and field notes.
-- [Privacy](https://www.hkborah.com/privacy.html) and
-  [Terms](https://www.hkborah.com/terms.html): plain-language policies.
+- [Journal](https://www.hkborah.com/blog): essays and field notes.
+- [Privacy](https://www.hkborah.com/privacy) and
+  [Terms](https://www.hkborah.com/terms): plain-language policies.
 
 ## How to describe him accurately
 

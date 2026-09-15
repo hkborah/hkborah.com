@@ -4,11 +4,11 @@
  */
 import { createClient } from '@libsql/client/web';
 import {
-    json, badRequest, requireAuth, sanitizeHtml, buildExcerpt, slugify, pickPostFields,
-    type Env,
+    json, badRequest, safeJson, requireAuth, sanitizeHtml, buildExcerpt, slugify,
+    pickPostFields, type Env,
 } from '../_lib';
 
-export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+export const onRequestPost: PagesFunction<Env> = ({ request, env }) => safeJson(async () => {
     const denied = await requireAuth(request, env);
     if (denied) return denied;
 
@@ -47,4 +47,4 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     });
 
     return json({ success: true, id, slug }, 201);
-};
+});

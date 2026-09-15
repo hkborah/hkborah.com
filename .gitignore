@@ -8,3 +8,7 @@ coverage/
 *.log
 .env*
 !.env.example
+
+# wrangler local state
+.wrangler/
+.dev.vars

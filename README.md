@@ -43,24 +43,59 @@ _archive/           Superseded code, kept for reference. Never served.
 
 ## Running it locally
 
-The pages are plain files, so any static server works:
-
 ```bash
-python3 -m http.server 8765
+npm run dev:site
 ```
 
-Then open http://127.0.0.1:8765. The pages, their styles and their scripts all work.
-The journal, the contact form and the sitemap need the functions, which run under
-Cloudflare's tooling rather than a plain file server:
+That starts Cloudflare's own dev server (wrangler), which serves the pages *and*
+the functions, and reproduces Cloudflare's URL handling. Use it rather than a plain
+file server: Cloudflare serves these pages without the `.html` extension, so
+`/advice` is the real URL and `/advice.html` redirects to it. A basic static server
+such as `python3 -m http.server` cannot resolve `/advice` and every link will 404.
 
-```bash
-npx wrangler pages dev .
+Create a `.dev.vars` file for local secrets (it is gitignored). It mirrors the
+environment variables below, for example:
+
+```
+DATABASE_URL=libsql://your-database.turso.io
+DATABASE_AUTH_TOKEN=your-token
+JWT_SECRET=a-long-random-string
+VITE_GOOGLE_CLIENT_ID=your-id.apps.googleusercontent.com
+RESEND_API_KEY=your-key
+CONTACT_TO=email@hkborah.com
+CONTACT_FROM=HK Borah Website <website@hkborah.com>
 ```
 
 ## Deploying
 
-Target is Cloudflare Pages. Publish the repository root; `functions/` is picked up
+Target is Cloudflare Pages. Either connect the GitHub repository
+(`hkborah/hkborah.com`) in the Pages dashboard, or deploy from a terminal with
+`npm run deploy`. Publish the repository root; `functions/` is picked up
 automatically and becomes the API.
+
+Framework preset: **None**. Build command: leave empty. Build output directory: `/`.
+
+### Google sign-in and the domain
+
+The editor signs in with Google, which checks the page's origin. Every origin you
+use must be listed in Google Cloud Console under **APIs & Services → Credentials →
+your OAuth client → Authorized JavaScript origins**. Add all of these:
+
+```
+https://www.hkborah.com
+https://hkborah.com
+https://hkborah-com.pages.dev
+```
+
+An unlisted origin produces `origin_mismatch` or `401: invalid_client` at sign-in.
+Google does not accept wildcards, so per-deployment preview URLs
+(`https://<hash>.hkborah-com.pages.dev`) will not work until you either add them
+individually or use the project's stable alias. Test on the alias, not a preview
+URL. `VITE_GOOGLE_CLIENT_ID` must be the same client ID that the origins belong to,
+because the server also checks that the token was issued for it.
+
+Only `hkborah@gmail.com` is permitted to sign in, matching the allowlist in
+`functions/api/auth/login.ts`.
 
 Environment variables to set (encrypted):
 

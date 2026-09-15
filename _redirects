@@ -1,3 +1,18 @@
-# The archive folder holds superseded code kept for reference only.
-# It must never be served.
-/_archive/*  /  301
+# Cloudflare Pages accepts only 301, 302, 303, 307 and 308 here. An invalid
+# status silently voids the whole file, so keep to those.
+
+# Superseded code kept for reference. Never serve it.
+/_archive/*        /404.html  301
+
+# Source and configuration sit at the deploy root. Cloudflare would otherwise
+# serve them as static assets, exposing implementation detail and, for
+# .dev.vars, secrets. Sent to the 404 page rather than the homepage so the
+# visitor gets an explanation.
+/functions/*       /404.html  301
+/package.json      /404.html  301
+/package-lock.json /404.html  301
+/wrangler.toml     /404.html  301
+/tsconfig.json     /404.html  301
+/vite.config.ts    /404.html  301
+/.dev.vars         /404.html  301
+/README.md         /404.html  301

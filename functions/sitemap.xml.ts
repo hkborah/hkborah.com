@@ -16,15 +16,15 @@ const SITE = 'https://www.hkborah.com';
 /** Public pages, with the weight each deserves for crawlers. */
 const PAGES: Array<{ path: string; priority: string; changefreq: string }> = [
     { path: '/', priority: '1.0', changefreq: 'weekly' },
-    { path: '/knowledge.html', priority: '0.9', changefreq: 'monthly' },
-    { path: '/advice.html', priority: '0.9', changefreq: 'monthly' },
-    { path: '/execution.html', priority: '0.9', changefreq: 'monthly' },
-    { path: '/execution/business-upgrade.html', priority: '0.8', changefreq: 'monthly' },
-    { path: '/execution/people-development.html', priority: '0.8', changefreq: 'monthly' },
-    { path: '/about.html', priority: '0.7', changefreq: 'monthly' },
-    { path: '/blog.html', priority: '0.7', changefreq: 'weekly' },
-    { path: '/privacy.html', priority: '0.3', changefreq: 'yearly' },
-    { path: '/terms.html', priority: '0.3', changefreq: 'yearly' },
+    { path: '/knowledge', priority: '0.9', changefreq: 'monthly' },
+    { path: '/advice', priority: '0.9', changefreq: 'monthly' },
+    { path: '/execution', priority: '0.9', changefreq: 'monthly' },
+    { path: '/execution/business-upgrade', priority: '0.8', changefreq: 'monthly' },
+    { path: '/execution/people-development', priority: '0.8', changefreq: 'monthly' },
+    { path: '/about', priority: '0.7', changefreq: 'monthly' },
+    { path: '/blog', priority: '0.7', changefreq: 'weekly' },
+    { path: '/privacy', priority: '0.3', changefreq: 'yearly' },
+    { path: '/terms', priority: '0.3', changefreq: 'yearly' },
 ];
 
 /** Escapes a URL for XML. */
@@ -53,7 +53,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
                 ? new Date(Number(row.created_at) * 1000).toISOString().slice(0, 10)
                 : today;
             entries.push(xmlUrl(
-                `${SITE}/blog-post.html?slug=${encodeURIComponent(key)}`,
+                `${SITE}/blog-post?slug=${encodeURIComponent(key)}`,
                 stamp, 'yearly', '0.6',
             ));
         }
