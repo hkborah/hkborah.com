@@ -99,10 +99,14 @@ export const onRequestPost: PagesFunction<ContactEnv> = async ({ request, env })
 
     if (!env.RESEND_API_KEY) {
         console.error('RESEND_API_KEY is not configured; the enquiry was not sent.');
-        return fail('The contact form is not configured yet. Please write to email@hkborah.com.', 503);
+        return fail('The contact form is not configured yet. Please write to hkborah@gmail.com.', 503);
     }
 
-    const to = env.CONTACT_TO || 'email@hkborah.com';
+    // Defaults to the address HK actually reads. The site publishes a
+    // branded address, but an enquiry must never land in a mailbox that does
+    // not exist, so the destination is deliberately different from the
+    // published one. Set CONTACT_TO to override.
+    const to = env.CONTACT_TO || 'hkborah@gmail.com';
     const from = env.CONTACT_FROM || 'HK Borah Website <website@hkborah.com>';
 
     const rows: Array<[string, string]> = [
@@ -145,8 +149,11 @@ export const onRequestPost: PagesFunction<ContactEnv> = async ({ request, env })
 
     if (!response.ok) {
         const detail = await response.text().catch(() => '');
-        console.error('Resend rejected the message:', response.status, detail.slice(0, 300));
-        return fail('The message could not be sent just now. Please write to email@hkborah.com.', 502);
+        // Log the addresses too: the usual cause is an unverified sending
+        // domain, and knowing what was attempted saves a debugging round.
+        console.error('Resend rejected the message:', response.status,
+                      `from=${from} to=${to}`, detail.slice(0, 300));
+        return fail('The message could not be sent just now. Please write to hkborah@gmail.com.', 502);
     }
 
     // A plain form post lands back on the page with a confirmation flag

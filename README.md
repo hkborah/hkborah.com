@@ -134,13 +134,19 @@ Environment variables to set (encrypted):
 | `JWT_SECRET` | admin | **Required.** Without it, sign-in and every write return "not configured yet" |
 | `VITE_GOOGLE_CLIENT_ID` | admin | Alias: `GOOGLE_CLIENT_ID` |
 | `RESEND_API_KEY` | contact form | Enquiries are not sent without it |
-| `CONTACT_TO` | contact form | Defaults to `email@hkborah.com` |
+| `CONTACT_TO` | contact form | Delivery address. Defaults to `hkborah@gmail.com` |
 | `CONTACT_FROM` | contact form | A sender on a Resend-verified domain |
 | `SITE_URL` | sitemap | Canonical base URL |
 
 `GOOGLE_CLIENT_SECRET` is not used: sign-in verifies the ID token against
 Google's public endpoint and exchanges no authorisation code, so no secret is
 involved.
+
+Note the two addresses differ on purpose. The site **publishes**
+`email@hkborah.com`, and the contact form **delivers** to `hkborah@gmail.com`,
+which is the mailbox that is actually read. Point `CONTACT_TO` somewhere else
+whenever the branded address starts working, and update the published address
+across the site at the same time.
 
 `functions/README.md` covers the API, the database schema and the pre-launch checks.
 

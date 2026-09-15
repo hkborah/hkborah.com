@@ -56,7 +56,7 @@ Admin requests carry `Authorization: Bearer <token>`.
    | `JWT_SECRET` | **yes** | Signs admin sessions. Generate a new, long random value |
    | `VITE_GOOGLE_CLIENT_ID` | yes | Google client ID. Alias: `GOOGLE_CLIENT_ID` |
    | `RESEND_API_KEY` | for the form | Sends the contact form |
-   | `CONTACT_TO` | optional | Where enquiries go. Defaults to `email@hkborah.com` |
+   | `CONTACT_TO` | optional | Where enquiries are delivered. Defaults to `hkborah@gmail.com` |
    | `CONTACT_FROM` | optional | A sender on a Resend-verified domain |
    | `SITE_URL` | optional | Canonical base URL for the sitemap |
 
