@@ -292,7 +292,8 @@ function initChat() {
         role: 'assistant',
         content: 'Welcome. I am HK Borah\u2019s digital twin. I can help you validate ideas, ' +
                  'fix broken processes, or scale your startup using the Architectural Scaling ' +
-                 'Framework. What challenge are you facing today?',
+                 'Framework. Write in any language and I will answer in the same one. ' +
+                 'What challenge are you facing today?',
     }];
 
     const setStatus = (text) => { if (status) status.textContent = text; };
@@ -397,7 +398,7 @@ function initChatSave(button, history, setStatus) {
         }
 
         try {
-            const { generateChatPdf } = await import('./hk-pdf.js?v=28');
+            const { generateChatPdf } = await import('./hk-pdf.js?v=29');
             await generateChatPdf(history);
             setStatus('PDF saved to your device, and a copy is kept for HK Borah.');
         } catch (error) {

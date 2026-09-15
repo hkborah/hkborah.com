@@ -152,6 +152,22 @@ across the site at the same time.
 
 `functions/README.md` covers the API, the database schema and the pre-launch checks.
 
+## Languages
+
+The Digital Twin answers in the language the visitor writes in, Indian or
+international. Verified against the live twin in Hindi, Assamese, Bengali,
+Marathi, Tamil and Spanish, each replying in the correct script. The site says
+**"the language you write in"** rather than "all languages", because that is the
+claim that can be kept.
+
+That promise appears in six places, which should move together if it ever
+changes: the advice hero, the chat bar, the twin's greeting in `hk.js`, the
+homepage teaser, the About page, and `llms.txt` (including the FAQ answers in
+the structured data, so assistants quote them correctly).
+
+The twin lives on `/advice`, not in a section of the homepage. Every link to it
+points there. The homepage carries a short teaser instead.
+
 ## Navigation
 
 One navigation, identical on every page, generated per page so only the current

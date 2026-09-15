@@ -39,7 +39,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/hk.css?v=28">
+    <link rel="stylesheet" href="assets/hk.css?v=29">
 
     <!-- Markdown + sanitising for the twin's replies (self-hosted) -->
     <script src="assets/vendor/marked.min.js" defer
@@ -48,7 +48,7 @@
     <script src="assets/vendor/purify.min.js" defer
             integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla+3"
             crossorigin="anonymous"></script>
-    <script type="module" src="assets/hk.js?v=28"></script>
+    <script type="module" src="assets/hk.js?v=29"></script>
 
     <script type="application/ld+json">
     {
@@ -120,6 +120,22 @@
                         "acceptedAnswer": {
                             "@type": "Answer",
                             "text": "Three books: The Order of Chaos for the founder stage, The Last Firefighter for the mid-sized stage, and VEGA for enterprise governance."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Can I ask the Digital Twin in my own language?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Yes. Write in Hindi, Assamese, Tamil, Bengali, Marathi or Spanish, or any other language, Indian or international. The Digital Twin answers in the same language."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Does HK Borah speak my language?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "HK Borah works in English, Hindi and Assamese. His clients are in Canada, the USA, Brazil, India and Singapore, and some share no common language with him, which is one reason the Digital Twin exists: it answers in whatever language the visitor writes in. Requirements calls are multilingual, so there is no need to switch to English."
                         }
                     }
                 ]
@@ -205,6 +221,7 @@
                 <h1 class="display-xl reveal">Advice is free. <span class="text-accent">Ask anything.</span></h1>
 
                 <p class="lead reveal">I built a digital twin trained on my published frameworks and twenty years of building, breaking, and rebuilding. Ask it about your business, your DPR, your model, or your bottleneck.</p>
+                <p class="lead reveal"><strong class="text-accent">Ask in any language.</strong> The twin answers in the language you write in - Indian or international.</p>
 
                 <div class="hero__actions reveal">
                     <a class="btn btn--solid" href="#twin-chat" data-focus-chat>Talk to My Digital Twin</a>
@@ -225,7 +242,7 @@
                                 <span class="chat__dot" aria-hidden="true"></span>
                                 Digital Twin · Live
                             </span>
-                            <span class="mono-label text-dim">No signup · No card</span>
+                            <span class="mono-label text-dim">Write in any language</span>
                         </div>
 
                         <div class="chat__log" id="chat-messages" aria-live="polite"></div>
@@ -638,6 +655,20 @@
                             <p>Three books. <a class="link-inline" href="/knowledge#order-of-chaos">The Order of Chaos</a> for the founder stage,
                                <a class="link-inline" href="/knowledge#last-firefighter">The Last Firefighter</a> for the mid-sized stage, and
                                <a class="link-inline" href="/knowledge#vega">VEGA</a> for enterprise governance.</p>
+                        </div>
+                    </details>
+                    <details class="faq__item">
+                        <summary>Can I ask in my own language?</summary>
+                        <div class="faq__answer">
+                            <p>Yes. Write in Hindi, Assamese, Tamil, Bengali, Marathi, Spanish - any language you are comfortable in, Indian or international. The twin answers in the same language.</p>
+                            <p>Your thinking is clearer in your own language, and clearer thinking gets better advice. You should not have to translate your problem before you can ask about it.</p>
+                        </div>
+                    </details>
+                    <details class="faq__item">
+                        <summary>Do you speak my language?</summary>
+                        <div class="faq__answer">
+                            <p>I work in English, Hindi and Assamese. My clients are in Canada, the USA, Brazil, India and Singapore, and some of them and I share no common language at all. That is one reason the twin exists: it answers in whatever language you write in.</p>
+                            <p>Our call is multilingual as well. You will not have to switch to English to be understood.</p>
                         </div>
                     </details>
                 </div>

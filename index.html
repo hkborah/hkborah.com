@@ -44,7 +44,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/hk.css?v=28">
+    <link rel="stylesheet" href="assets/hk.css?v=29">
 
     <!-- Markdown rendering + sanitising for the Digital Twin (self-hosted) -->
     <script src="assets/vendor/marked.min.js" defer
@@ -53,7 +53,7 @@
     <script src="assets/vendor/purify.min.js" defer
             integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla+3"
             crossorigin="anonymous"></script>
-    <script type="module" src="assets/hk.js?v=28"></script>
+    <script type="module" src="assets/hk.js?v=29"></script>
 
     <!-- Machine-readable identity for search engines and AI assistants -->
     <script type="application/ld+json">
@@ -148,7 +148,7 @@
                 <p class="lead reveal">Books for knowledge. A Digital Twin for advice. Execution when you are ready to move.</p>
 
                 <div class="hero__actions reveal">
-                    <a class="btn btn--ghost" href="#advice">Talk to My Digital Twin</a>
+                    <a class="btn btn--ghost" href="/advice">Talk to My Digital Twin</a>
                     <a class="btn btn--solid" href="/execution">Upgrade your Business</a>
                 </div>
 
@@ -300,7 +300,7 @@
                                     <span class="matrix__celltag">Advice</span>
                                     <h4>Talk to my Digital Twin</h4>
                                     <p>Free for 10 conversations. Ask anything about your business, DPR, or model.</p>
-                                    <a class="link-arrow" href="#advice">Start chatting</a>
+                                    <a class="link-arrow" href="/advice">Start chatting</a>
                                 </div>
                                 <div class="matrix__cell">
                                     <span class="matrix__celltag">Execution</span>
@@ -329,7 +329,7 @@
                                     <span class="matrix__celltag">Advice</span>
                                     <h4>Talk to my Digital Twin</h4>
                                     <p>Free for 10 conversations. Ask about process, tech injection, or operational performance.</p>
-                                    <a class="link-arrow" href="#advice">Start chatting</a>
+                                    <a class="link-arrow" href="/advice">Start chatting</a>
                                 </div>
                                 <div class="matrix__cell">
                                     <span class="matrix__celltag">Execution</span>
@@ -393,7 +393,7 @@
                 <div class="section-cta reveal">
                     <p class="section-cta__note">Not sure which block is yours? The Twin will tell you in one message.</p>
                     <div class="section-cta__actions">
-                        <a class="btn btn--ghost" href="#advice">Ask the Twin</a>
+                        <a class="btn btn--ghost" href="/advice">Ask the Twin</a>
                         <a class="btn btn--solid" href="/execution#book">Book a Call</a>
                     </div>
                 </div>
@@ -401,183 +401,19 @@
         </section>
 
         <!-- ======================= 4. DIGITAL TWIN ======================= -->
-        <section class="section" id="advice">
+        <section class="section" id="twin">
             <div class="container">
                 <div class="section-head section-head--center reveal">
-                    <span class="mono-label kicker">Exhibit 03 · The Digital Twin</span>
+                    <span class="mono-label kicker">The Digital Twin</span>
                     <h2 class="display-lg">Advice is free.</h2>
                     <p class="lead">I built a digital twin trained on my books, my frameworks, and my thinking. It will answer your questions, challenge your assumptions, and help you see what you are missing.</p>
+                    <p class="lead"><strong class="text-accent">Ask in any language.</strong> The twin answers in the language you write in, Indian or international.</p>
                 </div>
 
-                <!-- The AI-trust exhibit: show the machine openly -->
-                <figure class="exhibit reveal" id="exhibit-twin">
-                    <div class="exhibit__bar">
-                        <p class="mono-label exhibit__bar-num">Exhibit 03</p>
-                        <div class="exhibit__bar-meta">
-                            <p class="mono-label">How the Twin Thinks</p>
-                            <button class="exhibit__read" type="button" aria-expanded="false" aria-controls="twin-read">
-                                <svg class="exhibit__read-icon" width="10" height="10" viewBox="0 0 24 24" fill="none"
-                                     stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
-                                    <path d="M12 5v14M5 12h14"></path>
-                                </svg>
-                                Read
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="exhibit__body">
-                        <svg class="svg" viewBox="0 0 960 360" role="img" aria-labelledby="twin-title twin-desc"
-                             preserveAspectRatio="xMidYMid meet">
-                            <title id="twin-title">How the Twin Thinks</title>
-                            <desc id="twin-desc">Three source boxes on the left - three books, twenty years of work, the
-                                scaling framework - feed dashed lines into a central engine labelled The Digital Twin.
-                                One dashed line leaves the engine into a speech box labelled Plain Answers. Below, two
-                                panels state what the twin is and what it is not.</desc>
-
-                            <!-- Inputs -->
-                            <g class="hotspot" tabindex="0" role="img" aria-label="Source one: three books - the frameworks, written down.">
-                                <rect x="60" y="40" width="250" height="64" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.25" class="draw d-0"></rect>
-                                <text x="80" y="66" class="t-md f-ink">Three books</text>
-                                <text x="80" y="84" class="t-xs f-dim">the frameworks, written down</text>
-                            </g>
-                            <g class="hotspot" tabindex="0" role="img" aria-label="Source two: over twenty years of work - building, breaking, rebuilding.">
-                                <rect x="60" y="124" width="250" height="64" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.25" class="draw d-1"></rect>
-                                <text x="80" y="150" class="t-md f-ink">Over 20 years of work</text>
-                                <text x="80" y="168" class="t-xs f-dim">building, breaking, rebuilding</text>
-                            </g>
-                            <g class="hotspot" tabindex="0" role="img" aria-label="Source three: the Architectural Scaling Framework - how growth actually behaves.">
-                                <rect x="60" y="208" width="250" height="64" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.25" class="draw d-2"></rect>
-                                <text x="80" y="234" class="t-md f-ink">The Scaling Framework</text>
-                                <text x="80" y="252" class="t-xs f-dim">how growth actually behaves</text>
-                            </g>
-
-                            <!-- Connectors into the engine -->
-                            <path d="M310,72 Q360,72 380,150 L400,168" fill="none" stroke="var(--titanium)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-2"></path>
-                            <path d="M310,156 Q355,168 400,180" fill="none" stroke="var(--titanium)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-3"></path>
-                            <path d="M310,240 Q360,240 380,200 L400,192" fill="none" stroke="var(--titanium)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-4"></path>
-
-                            <!-- The engine -->
-                            <g class="hotspot" tabindex="0" role="img" aria-label="The Digital Twin: an engine trained on one mind, not the internet.">
-                                <rect x="400" y="110" width="180" height="140" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.5" class="draw d-3"></rect>
-                                <rect x="400" y="110" width="180" height="4" fill="var(--accent)" class="fade d-4"></rect>
-                                <text x="490" y="142" text-anchor="middle" class="t-lg f-ink">The Twin</text>
-                                <circle cx="490" cy="195" r="16" fill="none" stroke="var(--titanium)" stroke-width="1.2" class="draw d-4"></circle>
-                                <circle cx="490" cy="195" r="3" fill="var(--accent)" class="pulse-red fade d-5"></circle>
-                                <line x1="490" y1="171" x2="490" y2="186" stroke="var(--titanium)" stroke-width="1" class="fade d-5"></line>
-                                <line x1="490" y1="204" x2="490" y2="219" stroke="var(--titanium)" stroke-width="1" class="fade d-5"></line>
-                                <line x1="466" y1="195" x2="481" y2="195" stroke="var(--titanium)" stroke-width="1" class="fade d-5"></line>
-                                <line x1="499" y1="195" x2="514" y2="195" stroke="var(--titanium)" stroke-width="1" class="fade d-5"></line>
-                                <text x="490" y="238" text-anchor="middle" class="t-xs f-dim">trained on one mind - not the internet</text>
-                            </g>
-
-                            <!-- Output -->
-                            <path d="M580,180 L660,180" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-5"></path>
-                            <polygon points="656,176 666,180 656,184" fill="var(--accent)" class="fade d-6"></polygon>
-                            <g class="hotspot" tabindex="0" role="img" aria-label="Plain answers: here is your bottleneck - here is the fix.">
-                                <rect x="660" y="120" width="240" height="120" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" class="draw d-6"></rect>
-                                <text x="780" y="150" text-anchor="middle" class="t-md f-acc">Plain answers</text>
-                                <line x1="700" y1="164" x2="860" y2="164" stroke="var(--line)" stroke-width="1" class="fade d-7"></line>
-                                <text x="780" y="188" text-anchor="middle" class="t-xs f-tit">&ldquo;here is your bottleneck -</text>
-                                <text x="780" y="204" text-anchor="middle" class="t-xs f-ink">here is the fix.&rdquo;</text>
-                            </g>
-
-                            <!-- Honest boundaries -->
-                            <g class="hotspot" tabindex="0" role="img" aria-label="What the twin is: my frameworks in plain words, and honest enough to disagree with you.">
-                                <rect x="60" y="288" width="420" height="58" fill="var(--panel)" stroke="var(--line)" stroke-width="1" class="fade d-6"></rect>
-                                <text x="80" y="310" class="t-xs f-acc">What it is</text>
-                                <text x="80" y="330" class="t-xs f-tit">my frameworks, plainly · honest - it will disagree</text>
-                            </g>
-                            <g class="hotspot" tabindex="0" role="img" aria-label="What the twin is not: not ChatGPT or generic, not legal or tax advice, and it gives no flattery.">
-                                <rect x="480" y="288" width="420" height="58" fill="var(--panel)" stroke="var(--line)" stroke-width="1" class="fade d-7"></rect>
-                                <text x="500" y="310" class="t-xs f-dim">What it is not</text>
-                                <text x="500" y="330" class="t-xs f-tit">not ChatGPT, not generic · not legal or tax advice · no flattery</text>
-                            </g>
-                        </svg>
-                    </div>
-
-                    <div class="exhibit__panel" id="twin-read" data-open="false" aria-hidden="true">
-                        <div>
-                            <div class="exhibit__panel-inner">
-                                <p class="mono-label text-accent">How to read this</p>
-                                <p>Every answer the Twin gives you comes from the three boxes on the left -
-                                   <strong>my books, my twenty years, my framework</strong> - and nothing else.
-                                   It does not browse the internet and it does not guess politely. That is why it can
-                                   disagree with you, and why the advice is worth acting on. The two panels at the
-                                   bottom are the honest fine print: I would rather you trust me for being clear about
-                                   the limits than for pretending there are none.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <figcaption class="exhibit__caption">
-                        Not ChatGPT with my name on it. A digital version of how I think - sources shown, limits shown.
-                    </figcaption>
-                </figure>
-
-                <!-- The chat itself -->
-                <div class="chat-wrap reveal">
-                    <div class="chat" id="chat-container">
-                        <div class="chat__bar">
-                            <span class="chat__live mono-label">
-                                <span class="chat__dot" aria-hidden="true"></span>
-                                Digital Twin · Live
-                            </span>
-                        </div>
-
-                        <div class="chat__log" id="chat-messages" aria-live="polite"></div>
-
-                        <div class="chat__chips" id="quick-options">
-                            <button class="chip" type="button" data-prompt="Diagnose my scaling bottleneck">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
-                                    <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
-                                </svg>
-                                Diagnose my scaling bottleneck
-                            </button>
-                            <button class="chip" type="button" data-prompt="Validate my startup idea">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
-                                </svg>
-                                Validate my startup idea
-                            </button>
-                            <button class="chip" type="button" data-prompt="Fix my broken processes">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M14.7 6.3a1 1 0 000 1.4 1 1 0 001.4 0l3.776-3.776m-3.276 5.818a4 4 0 01-5.657 0l-6.879 6.879a2 2 0 000 2.828l.707.707a2 2 0 002.828 0L15.9 12.157a4 4 0 010-5.657z"></path>
-                                </svg>
-                                Fix my broken processes
-                            </button>
-                        </div>
-
-                        <div class="chat__foot">
-                            <form class="chat__form" id="chat-form">
-                                <button class="chat__icon-btn" type="button" id="chat-save" title="Save chat transcript" aria-label="Save chat transcript">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                        <path d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
-                                    </svg>
-                                </button>
-                                <input class="chat__input" type="text" id="chat-input" name="message"
-                                       placeholder="Type your challenge here&hellip;" autocomplete="off"
-                                       maxlength="2000" required aria-label="Your message to the Digital Twin">
-                                <button class="btn btn--solid chat__send" type="submit" id="chat-submit">Send</button>
-                            </form>
-                            <p class="chat__status" id="chat-status" role="status"></p>
-                        </div>
-                    </div>
-
-                    <p class="chat__privacy">
-                        <span class="mono-label">Privacy, plainly</span>
-                        <span>No signup. No card. Nothing is stored while you chat. If you press Save you get a PDF on your own device, and a copy is kept for HK Borah to read personally. Nothing is sold or shared, ever. Write to email@hkborah.com and it is deleted.</span>
-                    </p>
-
-                    <div class="section-cta reveal">
-                        <p class="section-cta__note">Prefer to talk to a human? Book a requirements call. My AI takes the intake before I take the call.</p>
-                        <div class="section-cta__actions">
-                            <a class="btn btn--solid" href="/execution#book">Book a requirements call</a>
-                        </div>
+                <div class="section-cta reveal">
+                    <div class="section-cta__actions">
+                        <a class="btn btn--solid" href="/advice">Talk to My Digital Twin</a>
+                        <a class="btn btn--ghost" href="/advice#questions">See what it will not do</a>
                     </div>
                 </div>
             </div>
@@ -637,7 +473,7 @@
 
                 <div class="section-cta reveal">
                     <div class="section-cta__actions">
-                        <a class="btn btn--ghost" href="#advice">Know more</a>
+                        <a class="btn btn--ghost" href="/advice">Know more</a>
                     </div>
                 </div>
             </div>
@@ -646,14 +482,14 @@
         <section class="section" id="presence">
             <div class="container">
                 <div class="section-head section-head--center reveal">
-                    <span class="mono-label kicker">Exhibit 04 · Field Presence</span>
+                    <span class="mono-label kicker">Exhibit 03 · Field Presence</span>
                     <h2 class="display-lg">Client Locations</h2>
                     <p class="lead">Clients in five countries - Canada, the USA, Brazil, India, and Singapore.</p>
                 </div>
 
                 <figure class="exhibit reveal" id="exhibit-network">
                     <div class="exhibit__bar">
-                        <p class="mono-label exhibit__bar-num">Exhibit 04</p>
+                        <p class="mono-label exhibit__bar-num">Exhibit 03</p>
                         <div class="exhibit__bar-meta">
                             <p class="mono-label">The Client Network</p>
                             <button class="exhibit__read" type="button" aria-expanded="false" aria-controls="network-read">
@@ -747,7 +583,7 @@
                 <div class="section-cta reveal">
                     <p class="section-cta__note">Your business can be next on this map. Start with one free conversation.</p>
                     <div class="section-cta__actions">
-                        <a class="btn btn--solid" href="#advice">Talk to My Digital Twin</a>
+                        <a class="btn btn--solid" href="/advice">Talk to My Digital Twin</a>
                     </div>
                 </div>
             </div>
@@ -834,7 +670,7 @@
             <div class="container reveal">
                 <figure class="exhibit" id="exhibit-escalation">
                     <div class="exhibit__bar">
-                        <p class="mono-label exhibit__bar-num">Exhibit 05</p>
+                        <p class="mono-label exhibit__bar-num">Exhibit 04</p>
                         <div class="exhibit__bar-meta">
                             <p class="mono-label">How Engagements Run</p>
                             <button class="exhibit__read" type="button" aria-expanded="false" aria-controls="escalation-read">
