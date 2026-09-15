@@ -52,7 +52,9 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
         );
         if (!response.ok) return badRequest('Google could not verify that sign-in.', 401);
 
-        const info = await response.json() as { email?: string; email_verified?: string; aud?: string };
+        const info = await response.json() as {
+            email?: string; email_verified?: string; aud?: string; sub?: string;
+        };
         const email = (info.email || '').toLowerCase();
 
         // Reject tokens minted for a different application
@@ -88,7 +90,8 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
         sql: 'SELECT username, password FROM users WHERE username = ?',
         args: [email],
     });
-    const user = result.rows[0] as { username: string; password: string | null } | undefined;
+    const user = result.rows[0] as unknown as
+        { username: string; password: string | null } | undefined;
 
     // One message for both failure modes, so the response cannot be used
     // to discover which accounts exist.

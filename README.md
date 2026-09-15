@@ -68,12 +68,33 @@ CONTACT_FROM=HK Borah Website <website@hkborah.com>
 
 ## Deploying
 
-Target is Cloudflare Pages. Either connect the GitHub repository
-(`hkborah/hkborah.com`) in the Pages dashboard, or deploy from a terminal with
-`npm run deploy`. Publish the repository root; `functions/` is picked up
+Target is Cloudflare Pages. Connect the GitHub repository
+(`hkborah/hkborah.com`) in the Pages dashboard. `functions/` is picked up
 automatically and becomes the API.
 
-Framework preset: **None**. Build command: leave empty. Build output directory: `/`.
+### The settings, exactly
+
+| Setting | Value |
+|---|---|
+| Framework preset | **None** |
+| Build command | **leave empty** |
+| Build output directory | **`/`** |
+| Root directory | `/` (default) |
+
+**There is no build step.** Cloudflare serves these files as they are. Do not
+set `npm run build`: that script belonged to the retired React app and has been
+removed, because it emitted only `index.html` and `assets/`, silently dropping
+every other page along with `_headers`, `_redirects`, `_routes.json`, `404.html`,
+`robots.txt`, `llms.txt` and `sitemap.xml`.
+
+To publish from a terminal instead of Git, use:
+
+```bash
+npm run deploy          # -> wrangler pages deploy .
+```
+
+Note that `wrangler deploy` (without `pages`) is the Workers command and will not
+publish this site.
 
 ### Google sign-in and the domain
 

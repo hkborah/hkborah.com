@@ -35,10 +35,12 @@ function tooMany(key: string): boolean {
 }
 
 /** Escapes text for safe inclusion in the notification email. */
+const ESCAPES: Record<string, string> = {
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+};
+
 function esc(value: string): string {
-    return value.replace(/[&<>"']/g, (ch) => ({
-        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
-    })[ch]);
+    return value.replace(/[&<>"']/g, (ch) => ESCAPES[ch] ?? ch);
 }
 
 const clean = (value: unknown, max: number) =>
