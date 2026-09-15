@@ -364,6 +364,18 @@ async function initGoogleButton() {
     window.google.accounts.id.renderButton(holder, {
         theme: 'filled_black', size: 'large', text: 'signin_with', shape: 'rectangular',
     });
+
+    // Google reports an unregistered origin only to the browser console, and
+    // then renders nothing. Without this check the page shows a blank space
+    // where the button should be, with no clue why.
+    window.setTimeout(() => {
+        const frame = holder.querySelector('iframe');
+        const drawn = frame && frame.getBoundingClientRect().width > 1;
+        if (!drawn) {
+            googleNote('Google sign-in is not available for this web address. The origin '
+                + 'must be listed for this client ID in Google Cloud Console, or use a password below.');
+        }
+    }, 1800);
 }
 
 /* ------------------------------------------------------------------ */
