@@ -40,6 +40,7 @@ every write calls `requireAuth`, and stored HTML is sanitised with
 | GET | `/api/chat/sessions` | **admin** | Lists saved conversations with a preview |
 | GET | `/api/chat/sessions/:id` | **admin** | One full conversation |
 | DELETE | `/api/chat/sessions/:id` | **admin** | Deletes a conversation, for deletion requests |
+| POST | `/api/chat/sessions/delete-multiple` | **admin** | Deletes a batch, or all of them with `{ all: true }` |
 
 Admin requests carry `Authorization: Bearer <token>`.
 

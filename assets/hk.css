@@ -1275,6 +1275,64 @@ strong { color: var(--ink); font-weight: 600; }
 /* Error state for any status line */
 .blog-status.is-error { color: var(--accent); }
 
+/* Transcript browser controls: filters, page size, bulk actions */
+.tr-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem 2rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    margin-bottom: 1.25rem;
+}
+.tr-tools__group { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.tr-tools__group .mono-label { color: var(--titanium-dim); }
+.tr-tools__date {
+    width: auto;
+    padding: .5rem .7rem;
+    font-size: .8rem;
+    color-scheme: dark;
+}
+
+.tr-btn {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    color: var(--titanium);
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    padding: .5rem .8rem;
+    cursor: pointer;
+    transition: color var(--m-fast) linear, border-color var(--m-fast) linear;
+}
+.tr-btn:hover:not([disabled]) { color: var(--accent); border-color: var(--accent-line); }
+.tr-btn[disabled] { opacity: .45; cursor: not-allowed; }
+.tr-btn[aria-pressed="true"] { color: var(--ink); border-color: var(--accent); background: var(--accent-soft); }
+.tr-btn--danger:hover:not([disabled]) { color: var(--accent); border-color: var(--accent); }
+
+.transcript-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .6rem 0;
+    border-bottom: 1px solid var(--line);
+}
+.transcript-head__all { display: inline-flex; align-items: center; gap: .6rem; cursor: pointer; color: var(--titanium-dim); }
+.transcript-head__all input { accent-color: var(--accent); cursor: pointer; }
+#tr-selected-count { color: var(--accent); }
+
+/* The row now leads with a checkbox */
+.transcript > summary { grid-template-columns: auto 13rem minmax(0, 1fr) auto; }
+@media (max-width: 47.9rem) {
+    .transcript > summary { grid-template-columns: auto 1fr; }
+    .transcript > summary .transcript__count { grid-column: 2; }
+}
+.transcript > summary > input { accent-color: var(--accent); cursor: pointer; margin-top: .2rem; }
+.transcript__body .tr-btn { align-self: flex-start; }
+
 /* --------------------------------------------------------------------------
    11k Saved conversations (admin) — one collapsible row per transcript
    -------------------------------------------------------------------------- */

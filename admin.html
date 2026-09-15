@@ -20,7 +20,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/hk.css?v=25">
+    <link rel="stylesheet" href="assets/hk.css?v=26">
 
     <!-- Post bodies are sanitised before preview and before saving -->
     <script src="assets/vendor/purify.min.js" defer
@@ -121,8 +121,8 @@
                             <span class="editor-toolbar__sep" aria-hidden="true"></span>
                             <button type="button" data-cmd="insertUnorderedList" title="Bulleted list">Bullets</button>
                             <button type="button" data-cmd="insertOrderedList" title="Numbered list">Numbers</button>
-                            <button type="button" data-cmd="indent" title="Indent (nest a list item)">Indent</button>
-                            <button type="button" data-cmd="outdent" title="Outdent (un-nest a list item)">Outdent</button>
+                            <button type="button" data-action="indent" title="Indent (nest a list item)">Indent</button>
+                            <button type="button" data-action="outdent" title="Outdent (move a nested item back a level)">Outdent</button>
                             <span class="editor-toolbar__sep" aria-hidden="true"></span>
                             <button type="button" data-block="blockquote" title="Quote">Quote</button>
                             <button type="button" data-link="1" title="Link">Link</button>
@@ -151,8 +151,43 @@
                     <p class="lead">Conversations a visitor chose to save. Nothing is captured unless they press Save, and nothing here is shared with anyone else.</p>
                 </div>
 
+                <!-- Filters, page size and bulk actions, as on the previous editor -->
+                <div class="tr-tools">
+                    <div class="tr-tools__group">
+                        <label class="mono-label" for="tr-from">From</label>
+                        <input class="chat__input tr-tools__date" type="date" id="tr-from">
+                        <label class="mono-label" for="tr-to">To</label>
+                        <input class="chat__input tr-tools__date" type="date" id="tr-to">
+                        <button class="tr-btn" type="button" id="tr-clear">Clear</button>
+                    </div>
+
+                    <div class="tr-tools__group">
+                        <span class="mono-label">Per page</span>
+                        <button class="tr-btn tr-btn--size" type="button" data-size="50">50</button>
+                        <button class="tr-btn tr-btn--size" type="button" data-size="100">100</button>
+                        <button class="tr-btn tr-btn--size" type="button" data-size="200">200</button>
+                        <button class="tr-btn tr-btn--size" type="button" data-size="0">All</button>
+                    </div>
+
+                    <div class="tr-tools__group">
+                        <button class="tr-btn" type="button" id="tr-download">Download</button>
+                        <button class="tr-btn tr-btn--danger" type="button" id="tr-delete-selected" disabled>Delete selected</button>
+                        <button class="tr-btn tr-btn--danger" type="button" id="tr-delete-all">Delete all</button>
+                    </div>
+                </div>
+
                 <p class="blog-status" id="transcripts-status" role="status"></p>
+
+                <div class="transcript-head" id="transcript-head" hidden>
+                    <label class="transcript-head__all">
+                        <input type="checkbox" id="tr-select-page">
+                        <span class="mono-label">Select this page</span>
+                    </label>
+                    <span class="mono-label" id="tr-selected-count"></span>
+                </div>
+
                 <div class="transcript-list" id="transcript-list"></div>
+                <nav class="pager" id="transcript-pager" aria-label="Transcript pages" hidden></nav>
             </div>
         </section>
     </main>
