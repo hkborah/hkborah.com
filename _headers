@@ -1,9 +1,14 @@
 # Security headers for Cloudflare Pages.
 #
-# The public pages run a strict policy. The editor is the only page allowed to
-# load Google's sign-in script, so it gets its own rule below. Header values
-# and the meta tags inside the pages intersect, so the stricter of the two
-# applies: keep them from contradicting each other.
+# The Content Security Policy deliberately lives in a <meta> tag inside each
+# page rather than here. Cloudflare merges every matching rule in this file
+# instead of overriding, so a path-specific rule cannot relax a site-wide
+# one: the browser enforces the intersection and the strictest policy wins.
+# A per-page meta tag is the only way to have a strict policy everywhere and
+# a slightly looser one on the editor, which needs Google's sign-in script.
+#
+# Consequence: every page must carry its own CSP meta tag. If you add a page,
+# copy the meta block from a sibling.
 
 /*
   X-Content-Type-Options: nosniff
@@ -11,13 +16,6 @@
   X-Frame-Options: DENY
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
   Cross-Origin-Opener-Policy: same-origin-allow-popups
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://chatwithhk-6toeltovya-uc.a.run.app; form-action 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
-
-/admin
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://accounts.google.com https://apis.google.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com; form-action 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
-
-/admin.html
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://accounts.google.com https://apis.google.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com; form-action 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'
 
 /assets/*
   Cache-Control: public, max-age=31536000, immutable
