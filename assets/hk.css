@@ -289,6 +289,56 @@ strong { color: var(--ink); font-weight: 600; }
     border-bottom-color: var(--accent);
 }
 
+/* Execution carries two practices, so it reveals them on hover or keyboard
+   focus. No JavaScript: :focus-within means a keyboard user tabbing onto
+   Execution is offered the same two links a mouse user sees. */
+.nav__group { position: relative; }
+
+.nav__link--parent::after {
+    content: "";
+    display: inline-block;
+    width: .34rem;
+    height: .34rem;
+    margin-left: .45rem;
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+}
+
+.nav__menu {
+    position: absolute;
+    /* Lands flush under the header's bottom border rather than overlapping
+       it. The offset is half the difference between the header height and
+       the link height. */
+    top: calc(100% + 1.8rem);
+    left: 0;
+    min-width: 15rem;
+    margin: 0;
+    padding: .4rem 0;
+    list-style: none;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    display: none;
+}
+.nav__group:hover .nav__menu,
+.nav__group:focus-within .nav__menu { display: block; }
+
+.nav__menu a {
+    display: block;
+    padding: .7rem 1.1rem;
+    font-size: .7rem;
+    font-weight: 500;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--titanium);
+    transition: color var(--m-fast) linear, background var(--m-fast) linear;
+}
+.nav__menu a:hover,
+.nav__menu a[aria-current="page"] {
+    color: var(--accent);
+    background: var(--panel-muted);
+}
+
 /* Hamburger (mobile only) */
 .nav-toggle {
     display: none;
@@ -317,6 +367,18 @@ strong { color: var(--ink); font-weight: 600; }
     .nav[data-open="true"] { display: flex; }
     .nav__link { padding: 1rem var(--gutter); border-bottom: 0; }
     .nav .btn { margin: 1rem var(--gutter); }
+    .nav__group { width: 100%; }
+    .nav__link--parent::after { content: none; }
+    .nav__menu {
+        position: static;
+        display: block;
+        min-width: 0;
+        border: 0;
+        border-top: 1px solid var(--line);
+        background: none;
+        padding: 0;
+    }
+    .nav__menu a { padding: .8rem var(--gutter) .8rem calc(var(--gutter) + 1.25rem); }
     .site-header .btn { display: none; } /* CTA lives inside the open panel */
 }
 

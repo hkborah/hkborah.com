@@ -17,8 +17,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="/assets/hk.css?v=27">
-    <script type="module" src="/assets/hk.js?v=27"></script>
+    <link rel="stylesheet" href="/assets/hk.css?v=28">
+    <script type="module" src="/assets/hk.js?v=28"></script>
 </head>
 <body>
 
@@ -33,7 +33,13 @@
             <nav class="nav" aria-label="Main navigation">
                 <a class="nav__link" href="/knowledge">Knowledge</a>
                 <a class="nav__link" href="/advice">Advice</a>
-                <a class="nav__link" href="/execution">Execution</a>
+                <div class="nav__group">
+                    <a class="nav__link nav__link--parent" href="/execution">Execution</a>
+                    <ul class="nav__menu">
+                        <li><a href="/execution/business-upgrade">Business Upgrade</a></li>
+                        <li><a href="/execution/people-development">People Development</a></li>
+                    </ul>
+                </div>
                 <a class="nav__link" href="/blog">Blog</a>
                 <a class="nav__link" href="/about">About</a>
                 <a class="btn btn--solid btn--nav" href="/execution#book">Book a Call</a>

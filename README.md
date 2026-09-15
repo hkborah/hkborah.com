@@ -152,6 +152,17 @@ across the site at the same time.
 
 `functions/README.md` covers the API, the database schema and the pre-launch checks.
 
+## Navigation
+
+One navigation, identical on every page, generated per page so only the current
+item carries `aria-current`. **Resist editing it by hand per page**: doing that is
+how Blog went missing from two pages without anyone noticing.
+
+Execution is a group that reveals its two practices on hover or keyboard focus,
+with no JavaScript: `:focus-within` gives a keyboard user the same links a mouse
+user sees. On the mobile stacked navigation there is no hover, so the two links
+are shown inline instead of hidden behind an interaction that cannot happen.
+
 ## The editor
 
 Sign in with Google as `hkborah@gmail.com`; that account is the allowlist. The
