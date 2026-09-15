@@ -1188,6 +1188,13 @@ strong { color: var(--ink); font-weight: 600; }
 }
 .editor-toolbar button:hover { color: var(--accent); background: var(--panel-muted); }
 
+/* Group divider inside the toolbar */
+.editor-toolbar__sep {
+    width: 1px;
+    background: var(--line);
+    margin-block: 0;
+}
+
 .editor-surface {
     min-height: 26rem;
     border: 1px solid var(--line);

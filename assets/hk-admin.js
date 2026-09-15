@@ -25,12 +25,27 @@ const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 /** Sanitises authored HTML, keeping only formatting the editor produces. */
 function clean(html) {
     if (!window.DOMPurify) return '';
-    return window.DOMPurify.sanitize(html, {
+
+    const safe = window.DOMPurify.sanitize(html, {
         ALLOWED_TAGS: ['p', 'br', 'strong', 'b', 'em', 'i', 'u', 'h2', 'h3', 'ul', 'ol', 'li',
                        'blockquote', 'a', 'code', 'pre', 'hr'],
         ALLOWED_ATTR: ['href', 'target', 'rel'],
         ALLOWED_URI_REGEXP: /^(?:https?:|mailto:|#|\/)/i,
     });
+
+    // The browser produces <b> and <i> for the bold and italic buttons, but
+    // the stylesheet targets <strong> and <em>. Normalise here so what is
+    // published matches what the editor showed.
+    const holder = document.createElement('div');
+    holder.innerHTML = safe;
+    for (const [from, to] of [['b', 'strong'], ['i', 'em']]) {
+        holder.querySelectorAll(from).forEach((el) => {
+            const replacement = document.createElement(to);
+            replacement.innerHTML = el.innerHTML;
+            el.replaceWith(replacement);
+        });
+    }
+    return holder.innerHTML;
 }
 
 const getToken = () => {
