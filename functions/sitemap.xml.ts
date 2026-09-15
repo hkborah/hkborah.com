@@ -9,7 +9,7 @@
  * sitemap always exists.
  */
 import { createClient } from '@libsql/client/web';
-import type { Env } from './api/_lib';
+import { databaseUrl, databaseToken, type Env } from './api/_lib';
 
 const SITE = 'https://www.hkborah.com';
 
@@ -43,7 +43,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
 
     // Journal entries: included when the database answers
     try {
-        const db = createClient({ url: env.DATABASE_URL, authToken: env.DATABASE_AUTH_TOKEN });
+        const db = createClient({ url: databaseUrl(env), authToken: databaseToken(env) });
         const result = await db.execute(
             'SELECT id, slug, date, created_at FROM blog_posts ORDER BY created_at DESC LIMIT 500',
         );

@@ -3,10 +3,8 @@
  * The original version checked no credentials at all.
  */
 import { createClient } from '@libsql/client/web';
-import {
-    json, badRequest, safeJson, requireAuth, sanitizeHtml, buildExcerpt, slugify,
-    pickPostFields, type Env,
-} from '../_lib';
+import { json, badRequest, safeJson, requireAuth, sanitizeHtml, buildExcerpt, slugify,
+    pickPostFields, type Env, databaseUrl, databaseToken } from '../_lib';
 
 export const onRequestPost: PagesFunction<Env> = ({ request, env }) => safeJson(async () => {
     const denied = await requireAuth(request, env);
@@ -30,7 +28,7 @@ export const onRequestPost: PagesFunction<Env> = ({ request, env }) => safeJson(
     const id = crypto.randomUUID();
     const slug = fields.slug || slugify(fields.title);
 
-    const db = createClient({ url: env.DATABASE_URL, authToken: env.DATABASE_AUTH_TOKEN });
+    const db = createClient({ url: databaseUrl(env), authToken: databaseToken(env) });
     await db.execute({
         sql: 'INSERT INTO blog_posts (id, title, category, excerpt, content, image, slug, date, likes) ' +
              'VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)',

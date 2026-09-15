@@ -127,16 +127,20 @@ Only `hkborah@gmail.com` is permitted to sign in, matching the allowlist in
 
 Environment variables to set (encrypted):
 
-| Variable | Used by | Purpose |
+| Variable | Used by | Notes |
 |---|---|---|
-| `DATABASE_URL` | journal | libSQL/Turso database URL |
-| `DATABASE_AUTH_TOKEN` | journal | Turso auth token |
-| `JWT_SECRET` | admin | Signs admin sessions. Long and random |
-| `VITE_GOOGLE_CLIENT_ID` | admin | Google sign-in button |
-| `RESEND_API_KEY` | contact form | Sends enquiries |
-| `CONTACT_TO` | contact form | Where enquiries go |
-| `CONTACT_FROM` | contact form | A sender on a verified domain |
+| `DATABASE_URL` | journal | Alias: `TURSO_DATABASE_URL` |
+| `DATABASE_AUTH_TOKEN` | journal | Alias: `TURSO_AUTH_TOKEN` |
+| `JWT_SECRET` | admin | **Required.** Without it, sign-in and every write return "not configured yet" |
+| `VITE_GOOGLE_CLIENT_ID` | admin | Alias: `GOOGLE_CLIENT_ID` |
+| `RESEND_API_KEY` | contact form | Enquiries are not sent without it |
+| `CONTACT_TO` | contact form | Defaults to `email@hkborah.com` |
+| `CONTACT_FROM` | contact form | A sender on a Resend-verified domain |
 | `SITE_URL` | sitemap | Canonical base URL |
+
+`GOOGLE_CLIENT_SECRET` is not used: sign-in verifies the ID token against
+Google's public endpoint and exchanges no authorisation code, so no secret is
+involved.
 
 `functions/README.md` covers the API, the database schema and the pre-launch checks.
 

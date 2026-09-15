@@ -10,16 +10,14 @@
  * before it is stored.
  */
 import { createClient } from '@libsql/client/web';
-import {
-    json, badRequest, safeJson, requireAuth, sanitizeHtml, buildExcerpt, slugify,
-    pickPostFields, type Env,
-} from '../../_lib';
+import { json, badRequest, safeJson, requireAuth, sanitizeHtml, buildExcerpt, slugify,
+    pickPostFields, type Env, databaseUrl, databaseToken } from '../../_lib';
 
 /** Largest accepted entry body. The original allowed 50MB of base64 images. */
 const MAX_BODY_BYTES = 2 * 1024 * 1024;
 
 async function findPost(env: Env, id: string) {
-    const db = createClient({ url: env.DATABASE_URL, authToken: env.DATABASE_AUTH_TOKEN });
+    const db = createClient({ url: databaseUrl(env), authToken: databaseToken(env) });
     let result = await db.execute({ sql: 'SELECT * FROM blog_posts WHERE id = ?', args: [id] });
     if (result.rows.length === 0) {
         result = await db.execute({ sql: 'SELECT * FROM blog_posts WHERE slug = ?', args: [id] });
@@ -54,7 +52,7 @@ export const onRequestPut: PagesFunction<Env> = async ({ request, env, params })
         return badRequest('The entry is too short to publish.');
     }
 
-    const db = createClient({ url: env.DATABASE_URL, authToken: env.DATABASE_AUTH_TOKEN });
+    const db = createClient({ url: databaseUrl(env), authToken: databaseToken(env) });
     await db.execute({
         sql: 'UPDATE blog_posts SET title = ?, category = ?, excerpt = ?, content = ?, ' +
              'image = ?, slug = ?, date = ? WHERE id = ?',
@@ -80,7 +78,7 @@ export const onRequestDelete: PagesFunction<Env> = async ({ request, env, params
     const id = String(params.id);
     if (!(await findPost(env, id))) return badRequest('Post not found.', 404);
 
-    const db = createClient({ url: env.DATABASE_URL, authToken: env.DATABASE_AUTH_TOKEN });
+    const db = createClient({ url: databaseUrl(env), authToken: databaseToken(env) });
     await db.execute({ sql: 'DELETE FROM blog_posts WHERE id = ?', args: [id] });
     return json({ success: true });
 };

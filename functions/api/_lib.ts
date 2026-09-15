@@ -11,11 +11,32 @@
 
 /** Minimal shape of the Pages environment we rely on. */
 export interface Env {
-    DATABASE_URL: string;
-    DATABASE_AUTH_TOKEN: string;
-    JWT_SECRET: string;
+    /* Canonical names, as documented in the README. */
+    DATABASE_URL?: string;
+    DATABASE_AUTH_TOKEN?: string;
     VITE_GOOGLE_CLIENT_ID?: string;
+    JWT_SECRET?: string;
     SITE_URL?: string;
+
+    /* Aliases, so either naming works in the dashboard. */
+    TURSO_DATABASE_URL?: string;
+    TURSO_AUTH_TOKEN?: string;
+    GOOGLE_CLIENT_ID?: string;
+}
+
+/* Configuration is resolved in one place, so the alias rules live here
+   rather than in every handler. */
+
+export function databaseUrl(env: Env): string {
+    return env.DATABASE_URL || env.TURSO_DATABASE_URL || '';
+}
+
+export function databaseToken(env: Env): string {
+    return env.DATABASE_AUTH_TOKEN || env.TURSO_AUTH_TOKEN || '';
+}
+
+export function googleClientId(env: Env): string {
+    return env.VITE_GOOGLE_CLIENT_ID || env.GOOGLE_CLIENT_ID || '';
 }
 
 /** The only account allowed into the editor. */
@@ -105,6 +126,13 @@ export async function verifyToken(token: string, secret: string): Promise<{ sub:
 
 /** Reads the Bearer token from a request and verifies it. */
 export async function requireAuth(request: Request, env: Env): Promise<Response | null> {
+    // Fail closed. Without a secret the signature check would use a guessable
+    // value, which is worse than refusing the request outright.
+    if (!env.JWT_SECRET) {
+        console.error('JWT_SECRET is not set. Refusing admin requests.');
+        return badRequest('Admin sign-in is not configured yet.', 503);
+    }
+
     const header = request.headers.get('Authorization') || '';
     const token = header.startsWith('Bearer ') ? header.slice(7) : '';
     if (!token) return badRequest('Authentication required.', 401);

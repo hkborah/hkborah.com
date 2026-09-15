@@ -11,7 +11,7 @@
  */
 import bcrypt from 'bcryptjs';
 import { createClient } from '@libsql/client/web';
-import { json, badRequest, signToken, type Env } from '../_lib';
+import { json, badRequest, signToken, type Env, databaseUrl, databaseToken } from '../_lib';
 
 const SUPER_ADMIN = 'hkborah@gmail.com';
 const GOOGLE_TOKEN_INFO = 'https://oauth2.googleapis.com/tokeninfo';
@@ -33,6 +33,14 @@ function throttled(key: string): boolean {
 }
 
 export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
+    // Signing without a secret would produce forgeable tokens, so refuse
+    // outright rather than issue them.
+    const jwtSecret = env.JWT_SECRET;
+    if (!jwtSecret) {
+        console.error('JWT_SECRET is not set. Admin sign-in cannot be offered.');
+        return badRequest('Admin sign-in is not configured yet.', 503);
+    }
+
     const clientKey = request.headers.get('CF-Connecting-IP') || 'unknown';
     if (throttled(clientKey)) {
         return badRequest('Too many attempts. Please wait a few minutes.', 429);
@@ -65,7 +73,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
             return badRequest('Access denied. Only the site owner can sign in.', 403);
         }
 
-        const db = createClient({ url: env.DATABASE_URL, authToken: env.DATABASE_AUTH_TOKEN });
+        const db = createClient({ url: databaseUrl(env), authToken: databaseToken(env) });
         const existing = await db.execute({
             sql: 'SELECT id FROM users WHERE username = ?',
             args: [email],
@@ -77,7 +85,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
             });
         }
 
-        return json({ success: true, token: await signToken(email, env.JWT_SECRET) });
+        return json({ success: true, token: await signToken(email, jwtSecret) });
     }
 
     /* ---- Email + password ---- */
@@ -85,7 +93,7 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
     const password = String(body.password || '');
     if (!email || !password) return badRequest('Email and password are required.');
 
-    const db = createClient({ url: env.DATABASE_URL, authToken: env.DATABASE_AUTH_TOKEN });
+    const db = createClient({ url: databaseUrl(env), authToken: databaseToken(env) });
     const result = await db.execute({
         sql: 'SELECT username, password FROM users WHERE username = ?',
         args: [email],
@@ -113,5 +121,5 @@ export const onRequestPost: PagesFunction<Env> = async ({ request, env }) => {
         });
     }
 
-    return json({ success: true, token: await signToken(email, env.JWT_SECRET) });
+    return json({ success: true, token: await signToken(email, jwtSecret) });
 };

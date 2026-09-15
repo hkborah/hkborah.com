@@ -49,13 +49,28 @@ Admin requests carry `Authorization: Bearer <token>`.
    ```
 3. Set these as Pages environment variables (encrypted):
 
-   | Variable | Purpose |
-   |---|---|
-   | `DATABASE_URL` | libSQL/Turso database URL |
-   | `DATABASE_AUTH_TOKEN` | Turso auth token |
-   | `JWT_SECRET` | **New, long random value.** Signs admin tokens |
-   | `VITE_GOOGLE_CLIENT_ID` | Google OAuth client ID (also used to check the token's audience) |
-   | `SITE_URL` | `https://www.hkborah.com` |
+   | Variable | Required | Purpose |
+   |---|---|---|
+   | `DATABASE_URL` | yes | libSQL/Turso database URL. Alias: `TURSO_DATABASE_URL` |
+   | `DATABASE_AUTH_TOKEN` | yes | Turso auth token. Alias: `TURSO_AUTH_TOKEN` |
+   | `JWT_SECRET` | **yes** | Signs admin sessions. Generate a new, long random value |
+   | `VITE_GOOGLE_CLIENT_ID` | yes | Google client ID. Alias: `GOOGLE_CLIENT_ID` |
+   | `RESEND_API_KEY` | for the form | Sends the contact form |
+   | `CONTACT_TO` | optional | Where enquiries go. Defaults to `email@hkborah.com` |
+   | `CONTACT_FROM` | optional | A sender on a Resend-verified domain |
+   | `SITE_URL` | optional | Canonical base URL for the sitemap |
+
+   The Turso and Google variables accept either name, so the `TURSO_*` and
+   `GOOGLE_CLIENT_ID` names already used in the dashboard work as they are.
+
+   `GOOGLE_CLIENT_SECRET` is **not used**. Sign-in verifies the Google ID token
+   against Google's public endpoint, which needs no secret, and no authorisation
+   code is exchanged. Setting it is harmless; it simply does nothing.
+
+   `JWT_SECRET` is the one that bites if it is missing. Without it the site
+   refuses admin sign-in and all writes with "Admin sign-in is not configured
+   yet", rather than falling back to a guessable signing key. Generate it with
+   `openssl rand -hex 64`.
    | `RESEND_API_KEY` | Sends the contact form (Resend) |
    | `CONTACT_TO` | Where enquiries go. Defaults to `email@hkborah.com` |
    | `CONTACT_FROM` | A sender on a Resend-verified domain |
