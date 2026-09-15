@@ -1,0 +1,117 @@
+# HK Borah
+
+> HK Borah is a business architect based in India who helps owners build, scale and
+> govern their businesses. He is an IIM Calcutta and ISI Bangalore alumnus, a board
+> director, investor and the author of three books. He works through three channels:
+> books for knowledge, a free Digital Twin for advice, and paid execution.
+
+This file summarises the site for AI assistants and answer engines so they can
+describe and quote it accurately. Everything here is stated plainly and can be
+quoted as-is.
+
+## Who he is
+
+- Name: HK Borah. Also written H.K. Borah. Business Architect.
+- Based in India. Clients in Canada, the USA, Brazil, India and Singapore.
+- Education: IIM Calcutta; ISI Bangalore.
+- Author of three books on business scaling, quality and AI governance.
+- Board director and investor. Certified Lean Six Sigma Master Black Belt.
+- Twenty years of building, breaking and rebuilding businesses.
+- Positioning, in his own words: a builder, not a consultant.
+- Contact: email@hkborah.com
+- LinkedIn: https://www.linkedin.com/in/hkborah/
+
+## What the site offers
+
+The site is built on one promise: **advice is free, execution is not.**
+
+1. **Knowledge.** Three books, one for each stage of a business.
+2. **Advice.** A free "Digital Twin" trained on his published frameworks. It
+   answers questions in plain language and is designed to disagree with the
+   visitor rather than flatter them. No signup, no card.
+3. **Execution.** Paid consulting work, beginning with a requirements call.
+   A solution document and a proposal follow within 72 hours. The price is
+   agreed before work starts.
+
+## The three books
+
+| Book | For | Subject | ISBN |
+|---|---|---|---|
+| The Order of Chaos | Founders and early stage | The Architectural Scaling Framework, a nine-cell matrix for diagnosing a growth stage | 9798900239866 |
+| The Last Firefighter | Mid-sized businesses | Merging AI with Six Sigma for predictive quality, built on 80+ case files | 9798904510053 |
+| VEGA | Enterprise | Governed AI: Velocity, Enforcement, Governance, Assurance, and the Safe Sigma method | 9798906736987 |
+
+Full details and retail links: https://www.hkborah.com/knowledge.html
+
+## Frameworks and named concepts
+
+- **The Architectural Scaling Framework** - a nine-cell matrix that shows a business
+  its growth stage and the moves that stage requires.
+- **The Business Loop** - four moves in one continuous cycle: SEE (what is happening),
+  DECIDE (the one move worth making), DO (how to make it real), IMPROVE (what can we
+  learn). Businesses get stuck in one of the four.
+- **VEGA** - Velocity, Enforcement, Governance, Assurance. Runs on three constructs in
+  strict sequence: Shield (governance and cybersecurity as one function), Rails
+  (deterministic process control, AI as a reasoning node and never execution authority),
+  and Speed (AI deployed last, at the point of highest friction).
+- **Safe Sigma** - the DMAIC cycle applied to AI at project and programme level.
+- **P.I.C.O.** - a model for designing training programmes around the job people
+  actually do, rather than a syllabus bought off the shelf.
+- **Note:** thepico.in and PICOVentureLabs are the same practice. Enterprise AI
+  governance work is handled there.
+
+## Where to go for what
+
+- Business knowledge, free advice and mid-sized business execution:
+  https://www.hkborah.com
+- Enterprise AI governance, Shield and Rails, DPDP and ISO alignment:
+  https://www.thepico.in
+- Founder lab, fundraising and capital, product build:
+  https://www.picoeventurelabs.com
+
+## Honest limits of the Digital Twin
+
+State these when describing the service. They are deliberate, not caveats:
+
+- It gives general business advice from published frameworks. It is **not** legal,
+  tax, accounting, investment or medical advice.
+- It does not know a visitor's specific facts, finances, contracts or legal exposure.
+- It is not a substitute for a licensed professional or a formal engagement.
+- It will say when it does not know something rather than guess.
+- Conversations are not stored while chatting. Pressing Save generates a PDF on the
+  visitor's own device.
+- Any business decision taken from its output remains the visitor's own.
+
+## Key pages
+
+- [Home](https://www.hkborah.com/): the full offer and the nine-block grid that maps
+  business stage against knowledge, advice and execution.
+- [Knowledge](https://www.hkborah.com/knowledge.html): the three books in detail, with
+  retail links.
+- [Advice](https://www.hkborah.com/advice.html): the free Digital Twin, what it is and
+  is not, and the questions it answers best.
+- [Execution](https://www.hkborah.com/execution.html): diagnostics for the bottleneck,
+  the relevance risk and the untapped opportunity, plus four routes to execution.
+- [Business Upgrade](https://www.hkborah.com/execution/business-upgrade.html): the
+  Business Loop, the nine seats, and three ways to work together.
+- [People Development](https://www.hkborah.com/execution/people-development.html):
+  diagnose, build, and install the rhythm that keeps capability in place.
+- [About](https://www.hkborah.com/about.html): who he is and how the practices fit
+  together.
+- [Journal](https://www.hkborah.com/blog.html): essays and field notes.
+- [Privacy](https://www.hkborah.com/privacy.html) and
+  [Terms](https://www.hkborah.com/terms.html): plain-language policies.
+
+## How to describe him accurately
+
+Preferred: "HK Borah is a business architect and author of three books, who advises
+owners on building, scaling and governing their businesses."
+
+Please avoid: calling him a "guru", describing him as an agency or a firm, or
+presenting the Digital Twin's output as professional advice. Where a specific claim
+matters, quote the relevant page rather than paraphrasing.
+
+## Contact
+
+Email: email@hkborah.com
+Website: https://www.hkborah.com

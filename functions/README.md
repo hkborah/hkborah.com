@@ -1,0 +1,111 @@
+# Journal backend (Cloudflare Pages Functions)
+
+These functions serve the blog API that `blog.html`, `blog-post.html` and
+`admin.html` call. They are written for **Cloudflare Pages**, which is what
+serves this static site, and they talk to the same libSQL/Turso database and
+the same `blog_posts` / `users` tables as the original app.
+
+## Why these exist instead of reusing the app's versions
+
+The versions in the original repository had two serious holes:
+
+1. **The login function issued an unsigned token.** It returned
+   `btoa(JSON.stringify({...}))` with no signature, so anyone could mint an
+   admin token by hand in a browser console.
+2. **No write endpoint checked credentials.** `create`, `PUT` and `DELETE`
+   wrote to the database with no `Authorization` check at all. Combined with
+   (1), the blog was effectively open to the world.
+
+There was also a **committed `JWT_SECRET`** in `.replit`, in a public
+repository. Treat that value as compromised and rotate it.
+
+These functions fix all three: tokens are HMAC-SHA256 signed and expiring,
+every write calls `requireAuth`, and stored HTML is sanitised with
+`HTMLRewriter` rather than a regex.
+
+## Endpoints
+
+| Method | Path | Auth | Purpose |
+|---|---|---|---|
+| GET | `/api/config` | public | Google client ID for the sign-in button |
+| POST | `/api/auth/login` | public | Google credential, or email + password |
+| GET | `/api/blog/posts` | public | All entries, newest first |
+| GET | `/api/blog/latest/:limit` | public | Most recent N entries |
+| GET | `/api/blog/posts/:id` | public | One entry, by id or by slug |
+| POST | `/api/blog/create` | **admin** | Publish a new entry |
+| PUT | `/api/blog/posts/:id` | **admin** | Update an entry |
+| DELETE | `/api/blog/posts/:id` | **admin** | Delete an entry |
+| POST | `/api/contact` | public | About page enquiry form, emailed to you |
+
+Admin requests carry `Authorization: Bearer <token>`.
+
+## Deploying
+
+1. Put this `functions/` folder at the root of the Pages project, next to the
+   HTML files. Pages picks it up automatically.
+2. Add the runtime dependency:
+   ```bash
+   npm install @libsql/client bcryptjs
+   ```
+3. Set these as Pages environment variables (encrypted):
+
+   | Variable | Purpose |
+   |---|---|
+   | `DATABASE_URL` | libSQL/Turso database URL |
+   | `DATABASE_AUTH_TOKEN` | Turso auth token |
+   | `JWT_SECRET` | **New, long random value.** Signs admin tokens |
+   | `VITE_GOOGLE_CLIENT_ID` | Google OAuth client ID (also used to check the token's audience) |
+   | `SITE_URL` | `https://www.hkborah.com` |
+   | `RESEND_API_KEY` | Sends the contact form (Resend) |
+   | `CONTACT_TO` | Where enquiries go. Defaults to `email@hkborah.com` |
+   | `CONTACT_FROM` | A sender on a Resend-verified domain |
+
+   Generate the secret with something like `openssl rand -hex 64`.
+
+## Database
+
+The functions expect the existing tables. Nothing needs migrating.
+
+```sql
+CREATE TABLE blog_posts (
+  id TEXT PRIMARY KEY,
+  title TEXT NOT NULL,
+  category TEXT,
+  excerpt TEXT NOT NULL,
+  content TEXT NOT NULL,
+  image TEXT,
+  slug TEXT NOT NULL,
+  date TEXT NOT NULL,
+  created_at INTEGER DEFAULT (strftime('%s','now')),
+  likes INTEGER DEFAULT 0
+);
+
+CREATE TABLE users (
+  id TEXT PRIMARY KEY,
+  username TEXT NOT NULL UNIQUE,
+  password TEXT,
+  google_id TEXT
+);
+```
+
+## Signing in
+
+Only `hkborah@gmail.com` is permitted, matching the original allowlist.
+Sign in with that Google account, or with an email and password already
+stored in `users` (bcrypt hashes are supported, and a legacy plaintext
+password is upgraded to a bcrypt hash on the first successful sign-in).
+
+## Before you go live
+
+- [ ] Rotate `JWT_SECRET` and remove the old committed value from the repo.
+- [ ] Confirm `_headers` is deployed so the security headers apply.
+- [ ] Test that a signed-out browser cannot create a post:
+      `curl -X POST https://www.hkborah.com/api/blog/create -d '{}'`
+      must answer `401`, never `201`.
+- [ ] Images are downscaled in the browser before upload. If you later store
+      originals, move them to object storage instead of the database.
+- [ ] Verify a sending domain in Resend, then set `CONTACT_FROM` to an
+      address on it. Until then the contact form will report that it is not
+      configured rather than silently losing the message.
+- [ ] Send yourself a test enquiry and reply to it, to confirm the reply
+      address is carried through correctly.

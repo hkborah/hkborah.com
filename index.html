@@ -1,0 +1,953 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HK Borah | Build, Scale, Govern</title>
+    <meta name="description" content="I help businesses build, scale, and govern. Books for knowledge. A Digital Twin for advice. Execution when you are ready to move.">
+    <link rel="canonical" href="https://www.hkborah.com/">
+
+    <!-- Sharing and social preview. Title and description mirror the page's own,
+         so they can never drift apart. -->
+    <meta name="author" content="HK Borah">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="HK Borah">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:url" content="https://www.hkborah.com/">
+    <meta property="og:title" content="HK Borah | Build, Scale, Govern">
+    <meta property="og:description" content="I help businesses build, scale, and govern. Books for knowledge. A Digital Twin for advice. Execution when you are ready to move.">
+    <meta property="og:image" content="https://www.hkborah.com/assets/social/hk-borah-share.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="HK Borah, business architect. Books for knowledge, a Digital Twin for advice, execution when you are ready to move.">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="HK Borah | Build, Scale, Govern">
+    <meta name="twitter:description" content="I help businesses build, scale, and govern. Books for knowledge. A Digital Twin for advice. Execution when you are ready to move.">
+    <meta name="twitter:image" content="https://www.hkborah.com/assets/social/hk-borah-share.png">
+    <meta name="twitter:image:alt" content="HK Borah, business architect. Books for knowledge, a Digital Twin for advice, execution when you are ready to move.">
+
+
+    <!--
+      Content Security Policy: everything is self-hosted except Google Fonts
+      and the Digital Twin API. No inline scripts or styles anywhere, so the
+      page runs with a strict policy (see also _headers for server-side copy).
+    -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://chatwithhk-6toeltovya-uc.a.run.app; object-src 'none'; base-uri 'none'; form-action 'none';">
+
+    <link rel="icon" type="image/png" href="assets/logos/hk-borah-emblem.png">
+    <link rel="apple-touch-icon" href="assets/logos/hk-borah-emblem.png">
+
+    <!-- Fonts: the same pair thepico.in uses -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/hk.css?v=22">
+
+    <!-- Markdown rendering + sanitising for the Digital Twin (self-hosted) -->
+    <script src="assets/vendor/marked.min.js" defer
+            integrity="sha384-948ahk4ZmxYVYOc+rxN1H2gM1EJ2Duhp7uHtZ4WSLkV4Vtx5MUqnV+l7u9B+jFv+"
+            crossorigin="anonymous"></script>
+    <script src="assets/vendor/purify.min.js" defer
+            integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla+3"
+            crossorigin="anonymous"></script>
+    <script type="module" src="assets/hk.js"></script>
+
+    <!-- Machine-readable identity for search engines and AI assistants -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "Person",
+                "@id": "https://www.hkborah.com/#hkborah",
+                "name": "HK Borah",
+                "alternateName": "Hemant K. Borah",
+                "jobTitle": "Business Architect",
+                "email": "mailto:email@hkborah.com",
+                "url": "https://www.hkborah.com/",
+                "image": "https://www.hkborah.com/assets/people/hk-borah-portrait.jpg",
+                "logo": "https://www.hkborah.com/assets/logos/hk-borah-logo.png",
+                "alumniOf": { "@type": "CollegeOrUniversity", "name": "IIM Calcutta" },
+                "knowsAbout": ["Business Consulting", "Six Sigma", "Business Scaling",
+                               "AI Governance", "Product Development", "Training and Development"],
+                "sameAs": ["https://www.linkedin.com/in/hkborah/", "https://www.thepico.in",
+                               "https://www.picoeventurelabs.com"]
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://www.hkborah.com/#website",
+                "url": "https://www.hkborah.com/",
+                "name": "HK Borah - Build, Scale, Govern",
+                "publisher": { "@id": "https://www.hkborah.com/#hkborah" }
+            }
+        ]
+    }
+    </script>
+</head>
+<body>
+
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <!-- ======================= 1. HEADER ======================= -->
+    <header class="site-header">
+        <div class="container site-header__inner">
+
+            <a class="brand" href="/" aria-label="HK Borah - home">
+                <img class="brand__logo" src="assets/logos/hk-borah-logo.png" alt="HK Borah"
+                     width="1000" height="400">
+            </a>
+
+            <nav class="nav" aria-label="Main navigation">
+                <a class="nav__link" href="knowledge.html">Knowledge</a>
+                <a class="nav__link" href="/advice.html">Advice</a>
+                <a class="nav__link" href="/execution.html">Execution</a>
+                <a class="nav__link" href="/about.html">About</a>
+                <a class="btn btn--solid btn--nav" href="/execution.html#book">Book a Call</a>
+            </nav>
+
+            <button class="motion-toggle" type="button" aria-pressed="true">
+                <span class="motion-toggle__dot" aria-hidden="true"></span>
+                <span class="mono-label">Motion</span>
+            </button>
+
+            <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Menu">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                    <path d="M3 6h18M3 12h18M3 18h18"></path>
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ======================= 2. HERO ======================= -->
+        <section class="section section--flush blueprint grain" id="top">
+            <div class="container hero">
+                <div class="hero__meta reveal">
+                    <span class="mono-label text-dim">HK Borah - Business Architect</span>
+                    <span class="mono-label text-accent">Advice is free · Execution is not</span>
+                </div>
+
+                <h1 class="display-xl reveal">
+                    I help businesses <span class="text-accent">build</span>,
+                    <span class="text-accent">scale</span>, and
+                    <span class="text-accent">govern</span>.
+                </h1>
+
+                <p class="lead reveal">Books for knowledge. A Digital Twin for advice. Execution when you are ready to move.</p>
+
+                <div class="hero__actions reveal">
+                    <a class="btn btn--ghost" href="#advice">Talk to My Digital Twin</a>
+                    <a class="btn btn--solid" href="/execution.html">Upgrade your Business</a>
+                </div>
+
+                <p class="mono-label hero__creds reveal">IIM Calcutta &nbsp;·&nbsp; ISI Bangalore &nbsp;·&nbsp; Board Director &nbsp;·&nbsp; Author &nbsp;·&nbsp; Investor</p>
+
+                <!-- Exhibit 01 - the shape of the whole offer -->
+                <figure class="exhibit" id="exhibit-journey">
+                    <div class="exhibit__bar">
+                        <p class="mono-label exhibit__bar-num">Exhibit 01</p>
+                        <div class="exhibit__bar-meta">
+                            <p class="mono-label">The Owner&rsquo;s Journey</p>
+                            <button class="exhibit__read" type="button" aria-expanded="false" aria-controls="journey-read">
+                                <svg class="exhibit__read-icon" width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                                    <path d="M12 5v14M5 12h14"></path>
+                                </svg>
+                                Read
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="exhibit__body">
+                        <svg class="svg" viewBox="0 0 960 300" role="img" aria-labelledby="journey-title journey-desc"
+                             preserveAspectRatio="xMidYMid meet">
+                            <title id="journey-title">The Owner&rsquo;s Journey</title>
+                            <desc id="journey-desc">A chart of one owner&rsquo;s path. On the left a jagged red line fights
+                                through a hatched zone labelled firefighting, where every decision routes through the owner.
+                                A gate marked Ask the Twin leads to two clean rails with a moving centre line, under a rising
+                                white curve labelled governed growth.</desc>
+
+                            <defs>
+                                <pattern id="hatch-red" patternUnits="userSpaceOnUse" width="9" height="9" patternTransform="rotate(45)">
+                                    <line x1="0" y1="0" x2="0" y2="9" stroke="var(--accent)" stroke-width="1.2" opacity="0.32"></line>
+                                </pattern>
+                            </defs>
+
+                            <!-- Baseline axis -->
+                            <line x1="40" y1="240" x2="928" y2="240" stroke="var(--titanium)" stroke-width="1" class="draw d-0"></line>
+                            <polygon points="928,236 938,240 928,244" fill="var(--ink)" class="fade d-1"></polygon>
+                            <line x1="60" y1="236" x2="60" y2="244" stroke="var(--titanium)" stroke-width="0.9" class="fade d-1"></line>
+                            <line x1="459" y1="236" x2="459" y2="244" stroke="var(--titanium)" stroke-width="0.9" class="fade d-2"></line>
+                            <line x1="920" y1="236" x2="920" y2="244" stroke="var(--titanium)" stroke-width="0.9" class="fade d-2"></line>
+                            <text x="60" y="258" class="t-sm">Day one</text>
+                            <text x="459" y="258" text-anchor="middle" class="t-sm">The first honest question</text>
+                            <text x="920" y="258" text-anchor="end" class="t-sm">The system takes over</text>
+
+                            <!-- Left: firefighting chaos -->
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Firefighting: a jagged red line inside a hatched area. This is the stage where every decision routes through the owner and energy leaks as fires.">
+                                <path d="M60,240 L60,190 L85,150 L110,205 L135,140 L160,200 L185,130 L210,195 L235,155 L260,210 L285,145 L310,200 L335,160 L360,205 L385,170 L410,190 L430,175 L430,240 Z"
+                                      fill="url(#hatch-red)" stroke="none" class="fade d-2"></path>
+                                <path d="M60,190 L85,150 L110,205 L135,140 L160,200 L185,130 L210,195 L235,155 L260,210 L285,145 L310,200 L335,160 L360,205 L385,170 L410,190 L430,175"
+                                      fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" class="draw d-1"></path>
+                                <text x="245" y="105" text-anchor="middle" class="t-md f-acc">Firefighting</text>
+                                <text x="245" y="118" text-anchor="middle" class="t-xs f-dim">every decision routes through you</text>
+                            </g>
+
+                            <!-- The gate: ask the twin -->
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Ask the Twin: a small gate square. Free, any hour, no signup. This is the decision point between chaos and rails.">
+                                <text x="459" y="118" text-anchor="middle" class="t-xs f-dim">free · any hour · no signup</text>
+                                <text x="459" y="134" text-anchor="middle" class="t-md f-acc">Ask the Twin</text>
+                                <rect x="448" y="152" width="22" height="22" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" class="draw d-3"></rect>
+                                <circle cx="459" cy="163" r="2.5" fill="var(--accent)" class="pulse-red fade d-4"></circle>
+                                <path d="M430,175 L448,163" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-3"></path>
+                                <path d="M470,163 L486,163 L486,177 L495,177" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-4"></path>
+                            </g>
+
+                            <!-- Right: governed growth rails -->
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Governed growth: two rails with a moving centre line and packets, under a rising white curve. Systems that watch while you sleep.">
+                                <path d="M495,140 C600,120 750,95 920,80" fill="none" stroke="var(--ink)" stroke-width="2" class="draw d-6"></path>
+                                <text x="600" y="70" text-anchor="middle" class="t-md f-ink">Governed growth</text>
+                                <text x="600" y="84" text-anchor="middle" class="t-xs f-dim">systems that watch while you sleep</text>
+                                <line x1="495" y1="150" x2="920" y2="150" stroke="var(--titanium)" stroke-width="1.2" class="draw d-4"></line>
+                                <line x1="495" y1="205" x2="920" y2="205" stroke="var(--titanium)" stroke-width="1.2" class="draw d-4"></line>
+                                <line x1="495" y1="177" x2="920" y2="177" stroke="var(--accent)" stroke-width="1.4" stroke-dasharray="6 8" class="march fade d-5"></line>
+                                <rect class="packet d-2" width="14" height="3" fill="var(--ink)" data-path="M495,176 L920,176"></rect>
+                                <rect class="packet d-6" width="14" height="3" fill="var(--accent)" data-path="M495,176 L920,176"></rect>
+                            </g>
+
+                        </svg>
+                    </div>
+
+                    <div class="exhibit__panel" id="journey-read" data-open="false" aria-hidden="true">
+                        <div>
+                            <div class="exhibit__panel-inner">
+                                <p class="mono-label text-accent">How to read this</p>
+                                <p>The red line on the left is how most businesses run: up, down, fire to fire.
+                                   The hatched area underneath is your energy and money leaking out. The small gate in the
+                                   middle costs nothing to walk through - <strong>that is the Digital Twin</strong>. The rails
+                                   on the right are what execution builds: a business that moves in a straight line while
+                                   you sleep.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <figcaption class="exhibit__caption">
+                        Most owners stay on the left half of this chart their whole life. One honest question is usually all it takes to cross over.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+
+        <!-- ======================= 3. THE 9-BLOCKER GRID ======================= -->
+        <section class="section" id="matrix">
+            <div class="container">
+                <div class="section-head section-head--center reveal">
+                    <span class="mono-label kicker">Exhibit 02 · The 9-Blocker Grid</span>
+                    <h2 class="display-lg">Who are you, and what do you need?</h2>
+                    <p class="lead">Pick your row. Pick your column. I will meet you there.</p>
+                </div>
+
+                <figure class="exhibit reveal">
+                    <div class="exhibit__bar">
+                        <p class="mono-label exhibit__bar-num">Exhibit 02</p>
+                        <div class="exhibit__bar-meta">
+                            <p class="mono-label">The 9-Blocker Grid</p>
+                            <button class="exhibit__read" type="button" aria-expanded="false" aria-controls="matrix-read">
+                                <svg class="exhibit__read-icon" width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                                    <path d="M12 5v14M5 12h14"></path>
+                                </svg>
+                                Read
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="exhibit__body exhibit__body--flush">
+                        <div class="matrix">
+                            <div class="matrix__colheads" aria-hidden="true">
+                                <div class="matrix__colhead"></div>
+                                <div class="matrix__colhead">Knowledge</div>
+                                <div class="matrix__colhead">Advice</div>
+                                <div class="matrix__colhead">Execution</div>
+                            </div>
+
+                            <!-- Row 1: Small / Early Stage -->
+                            <details class="matrix__row">
+                                <summary>Small / Early Stage</summary>
+<div class="matrix__rowgrid"><div class="matrix__rowhead">
+                                    <span class="mono-label">Stage 01</span>
+                                    <h3>Small /<br>Early Stage</h3>
+                                </div>
+                                <div class="matrix__cell">
+                                    <span class="matrix__celltag">Knowledge</span>
+                                    <h4>Read: The Order of Chaos</h4>
+                                    <p>The frameworks for founders building without a map.</p>
+                                    <a class="link-arrow" href="knowledge.html#order-of-chaos">Get the book</a>
+                                </div>
+                                <div class="matrix__cell">
+                                    <span class="matrix__celltag">Advice</span>
+                                    <h4>Talk to my Digital Twin</h4>
+                                    <p>Free for 10 conversations. Ask anything about your business, DPR, or model.</p>
+                                    <a class="link-arrow" href="#advice">Start chatting</a>
+                                </div>
+                                <div class="matrix__cell">
+                                    <span class="matrix__celltag">Execution</span>
+                                    <h4>Join the Lab</h4>
+                                    <p>Founder mentoring, DPR clinics, cohort programs. Built by someone who has run an incubator.</p>
+                                    <a class="link-arrow" href="https://www.picoeventurelabs.com"
+                                       target="_blank" rel="noopener noreferrer">Inquire</a>
+                                </div>
+</div>
+</details>
+
+                            <!-- Row 2: Mid-Sized Business -->
+                            <details class="matrix__row">
+                                <summary>Mid-Sized Business</summary>
+<div class="matrix__rowgrid"><div class="matrix__rowhead">
+                                    <span class="mono-label">Stage 02</span>
+                                    <h3>Mid-Sized<br>Business</h3>
+                                </div>
+                                <div class="matrix__cell">
+                                    <span class="matrix__celltag">Knowledge</span>
+                                    <h4>Read: Last Firefighter</h4>
+                                    <p>How established businesses survive disruption - and inject technology without burning the house down.</p>
+                                    <a class="link-arrow" href="knowledge.html#last-firefighter">Get the book</a>
+                                </div>
+                                <div class="matrix__cell">
+                                    <span class="matrix__celltag">Advice</span>
+                                    <h4>Talk to my Digital Twin</h4>
+                                    <p>Free for 10 conversations. Ask about process, tech injection, or operational performance.</p>
+                                    <a class="link-arrow" href="#advice">Start chatting</a>
+                                </div>
+                                <div class="matrix__cell">
+                                    <span class="matrix__celltag">Execution</span>
+                                    <h4>Learn about Business Upgrade</h4>
+                                    <p>AI takes the intake. I take the call. You get a solution document and a proposal in 72 hours.</p>
+                                    <a class="link-arrow" href="/execution.html">Book now</a>
+                                </div>
+</div>
+</details>
+
+                            <!-- Row 3: Enterprise -->
+                            <details class="matrix__row">
+                                <summary>Enterprise</summary>
+<div class="matrix__rowgrid"><div class="matrix__rowhead">
+                                    <span class="mono-label">Stage 03</span>
+                                    <h3>Enterprise</h3>
+                                </div>
+                                <div class="matrix__cell">
+                                    <span class="matrix__celltag">Knowledge</span>
+                                    <h4>Read: VEGA</h4>
+                                    <p>The enterprise governance framework.</p>
+                                    <a class="link-arrow" href="knowledge.html#vega">Get the book</a>
+                                </div>
+                                <div class="matrix__cell">
+                                    <span class="matrix__celltag">Advice</span>
+                                    <h4>Book a Pico Consultation</h4>
+                                    <p>Enterprise engagement starts with a conversation.</p>
+                                    <a class="link-arrow" href="https://thepico.in"
+                                       target="_blank" rel="noopener noreferrer">Go to thepico.in</a>
+                                </div>
+                                <div class="matrix__cell">
+                                    <span class="matrix__celltag">Execution</span>
+                                    <h4>Enterprise Execution</h4>
+                                    <p>Deploy deterministic architecture and safe AI frameworks directly into your enterprise operations.</p>
+                                    <a class="link-arrow" href="https://www.thepico.in"
+                                       target="_blank" rel="noopener noreferrer">Visit thepico.in</a>
+                                </div>
+</div>
+</details>
+                        </div>
+                    </div>
+
+                    <div class="exhibit__panel" id="matrix-read" data-open="false" aria-hidden="true">
+                        <div>
+                            <div class="exhibit__panel-inner">
+                                <p class="mono-label text-accent">How to read this</p>
+                                <p>Find your row first - the stage your business is in today, not the one you
+                                   wish it were in. Then read across. <strong>Knowledge is a book you buy. Advice is
+                                   free, today. Execution is paid work, when you are ready.</strong> If you are not sure
+                                   which row is yours, ask the Twin below - that is exactly the kind of question
+                                   it answers well.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <figcaption class="exhibit__caption">
+                        Nine doors, one house. Wherever you stand today, there is a next step on this grid that costs you nothing.
+                    </figcaption>
+                </figure>
+
+                <div class="section-cta reveal">
+                    <p class="section-cta__note">Not sure which block is yours? The Twin will tell you in one message.</p>
+                    <div class="section-cta__actions">
+                        <a class="btn btn--ghost" href="#advice">Ask the Twin</a>
+                        <a class="btn btn--solid" href="/execution.html#book">Book a Call</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= 4. DIGITAL TWIN ======================= -->
+        <section class="section" id="advice">
+            <div class="container">
+                <div class="section-head section-head--center reveal">
+                    <span class="mono-label kicker">Exhibit 03 · The Digital Twin</span>
+                    <h2 class="display-lg">Advice is free.</h2>
+                    <p class="lead">I built a digital twin trained on my books, my frameworks, and my thinking. It will answer your questions, challenge your assumptions, and help you see what you are missing.</p>
+                </div>
+
+                <!-- The AI-trust exhibit: show the machine openly -->
+                <figure class="exhibit reveal" id="exhibit-twin">
+                    <div class="exhibit__bar">
+                        <p class="mono-label exhibit__bar-num">Exhibit 03</p>
+                        <div class="exhibit__bar-meta">
+                            <p class="mono-label">How the Twin Thinks</p>
+                            <button class="exhibit__read" type="button" aria-expanded="false" aria-controls="twin-read">
+                                <svg class="exhibit__read-icon" width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                                    <path d="M12 5v14M5 12h14"></path>
+                                </svg>
+                                Read
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="exhibit__body">
+                        <svg class="svg" viewBox="0 0 960 360" role="img" aria-labelledby="twin-title twin-desc"
+                             preserveAspectRatio="xMidYMid meet">
+                            <title id="twin-title">How the Twin Thinks</title>
+                            <desc id="twin-desc">Three source boxes on the left - three books, twenty years of work, the
+                                scaling framework - feed dashed lines into a central engine labelled The Digital Twin.
+                                One dashed line leaves the engine into a speech box labelled Plain Answers. Below, two
+                                panels state what the twin is and what it is not.</desc>
+
+                            <!-- Inputs -->
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Source one: three books - the frameworks, written down.">
+                                <rect x="60" y="40" width="250" height="64" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.25" class="draw d-0"></rect>
+                                <text x="80" y="66" class="t-md f-ink">Three books</text>
+                                <text x="80" y="84" class="t-xs f-dim">the frameworks, written down</text>
+                            </g>
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Source two: over twenty years of work - building, breaking, rebuilding.">
+                                <rect x="60" y="124" width="250" height="64" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.25" class="draw d-1"></rect>
+                                <text x="80" y="150" class="t-md f-ink">Over 20 years of work</text>
+                                <text x="80" y="168" class="t-xs f-dim">building, breaking, rebuilding</text>
+                            </g>
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Source three: the Architectural Scaling Framework - how growth actually behaves.">
+                                <rect x="60" y="208" width="250" height="64" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.25" class="draw d-2"></rect>
+                                <text x="80" y="234" class="t-md f-ink">The Scaling Framework</text>
+                                <text x="80" y="252" class="t-xs f-dim">how growth actually behaves</text>
+                            </g>
+
+                            <!-- Connectors into the engine -->
+                            <path d="M310,72 Q360,72 380,150 L400,168" fill="none" stroke="var(--titanium)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-2"></path>
+                            <path d="M310,156 Q355,168 400,180" fill="none" stroke="var(--titanium)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-3"></path>
+                            <path d="M310,240 Q360,240 380,200 L400,192" fill="none" stroke="var(--titanium)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-4"></path>
+
+                            <!-- The engine -->
+                            <g class="hotspot" tabindex="0" role="img" aria-label="The Digital Twin: an engine trained on one mind, not the internet.">
+                                <rect x="400" y="110" width="180" height="140" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.5" class="draw d-3"></rect>
+                                <rect x="400" y="110" width="180" height="4" fill="var(--accent)" class="fade d-4"></rect>
+                                <text x="490" y="142" text-anchor="middle" class="t-lg f-ink">The Twin</text>
+                                <circle cx="490" cy="195" r="16" fill="none" stroke="var(--titanium)" stroke-width="1.2" class="draw d-4"></circle>
+                                <circle cx="490" cy="195" r="3" fill="var(--accent)" class="pulse-red fade d-5"></circle>
+                                <line x1="490" y1="171" x2="490" y2="186" stroke="var(--titanium)" stroke-width="1" class="fade d-5"></line>
+                                <line x1="490" y1="204" x2="490" y2="219" stroke="var(--titanium)" stroke-width="1" class="fade d-5"></line>
+                                <line x1="466" y1="195" x2="481" y2="195" stroke="var(--titanium)" stroke-width="1" class="fade d-5"></line>
+                                <line x1="499" y1="195" x2="514" y2="195" stroke="var(--titanium)" stroke-width="1" class="fade d-5"></line>
+                                <text x="490" y="238" text-anchor="middle" class="t-xs f-dim">trained on one mind - not the internet</text>
+                            </g>
+
+                            <!-- Output -->
+                            <path d="M580,180 L660,180" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-5"></path>
+                            <polygon points="656,176 666,180 656,184" fill="var(--accent)" class="fade d-6"></polygon>
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Plain answers: here is your bottleneck - here is the fix.">
+                                <rect x="660" y="120" width="240" height="120" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" class="draw d-6"></rect>
+                                <text x="780" y="150" text-anchor="middle" class="t-md f-acc">Plain answers</text>
+                                <line x1="700" y1="164" x2="860" y2="164" stroke="var(--line)" stroke-width="1" class="fade d-7"></line>
+                                <text x="780" y="188" text-anchor="middle" class="t-xs f-tit">&ldquo;here is your bottleneck -</text>
+                                <text x="780" y="204" text-anchor="middle" class="t-xs f-ink">here is the fix.&rdquo;</text>
+                            </g>
+
+                            <!-- Honest boundaries -->
+                            <g class="hotspot" tabindex="0" role="img" aria-label="What the twin is: my frameworks in plain words, and honest enough to disagree with you.">
+                                <rect x="60" y="288" width="420" height="58" fill="var(--panel)" stroke="var(--line)" stroke-width="1" class="fade d-6"></rect>
+                                <text x="80" y="310" class="t-xs f-acc">What it is</text>
+                                <text x="80" y="330" class="t-xs f-tit">my frameworks, plainly · honest - it will disagree</text>
+                            </g>
+                            <g class="hotspot" tabindex="0" role="img" aria-label="What the twin is not: not ChatGPT or generic, not legal or tax advice, and it gives no flattery.">
+                                <rect x="480" y="288" width="420" height="58" fill="var(--panel)" stroke="var(--line)" stroke-width="1" class="fade d-7"></rect>
+                                <text x="500" y="310" class="t-xs f-dim">What it is not</text>
+                                <text x="500" y="330" class="t-xs f-tit">not ChatGPT, not generic · not legal or tax advice · no flattery</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="exhibit__panel" id="twin-read" data-open="false" aria-hidden="true">
+                        <div>
+                            <div class="exhibit__panel-inner">
+                                <p class="mono-label text-accent">How to read this</p>
+                                <p>Every answer the Twin gives you comes from the three boxes on the left -
+                                   <strong>my books, my twenty years, my framework</strong> - and nothing else.
+                                   It does not browse the internet and it does not guess politely. That is why it can
+                                   disagree with you, and why the advice is worth acting on. The two panels at the
+                                   bottom are the honest fine print: I would rather you trust me for being clear about
+                                   the limits than for pretending there are none.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <figcaption class="exhibit__caption">
+                        Not ChatGPT with my name on it. A digital version of how I think - sources shown, limits shown.
+                    </figcaption>
+                </figure>
+
+                <!-- The chat itself -->
+                <div class="chat-wrap reveal">
+                    <div class="chat" id="chat-container">
+                        <div class="chat__bar">
+                            <span class="chat__live mono-label">
+                                <span class="chat__dot" aria-hidden="true"></span>
+                                Digital Twin · Live
+                            </span>
+                        </div>
+
+                        <div class="chat__log" id="chat-messages" aria-live="polite"></div>
+
+                        <div class="chat__chips" id="quick-options">
+                            <button class="chip" type="button" data-prompt="Diagnose my scaling bottleneck">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                    <path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+                                </svg>
+                                Diagnose my scaling bottleneck
+                            </button>
+                            <button class="chip" type="button" data-prompt="Validate my startup idea">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                                </svg>
+                                Validate my startup idea
+                            </button>
+                            <button class="chip" type="button" data-prompt="Fix my broken processes">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M14.7 6.3a1 1 0 000 1.4 1 1 0 001.4 0l3.776-3.776m-3.276 5.818a4 4 0 01-5.657 0l-6.879 6.879a2 2 0 000 2.828l.707.707a2 2 0 002.828 0L15.9 12.157a4 4 0 010-5.657z"></path>
+                                </svg>
+                                Fix my broken processes
+                            </button>
+                        </div>
+
+                        <div class="chat__foot">
+                            <form class="chat__form" id="chat-form">
+                                <button class="chat__icon-btn" type="button" id="chat-save" title="Save chat transcript" aria-label="Save chat transcript">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                        <path d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path>
+                                    </svg>
+                                </button>
+                                <input class="chat__input" type="text" id="chat-input" name="message"
+                                       placeholder="Type your challenge here&hellip;" autocomplete="off"
+                                       maxlength="2000" required aria-label="Your message to the Digital Twin">
+                                <button class="btn btn--solid chat__send" type="submit" id="chat-submit">Send</button>
+                            </form>
+                            <p class="chat__status" id="chat-status" role="status"></p>
+                        </div>
+                    </div>
+
+                    <p class="chat__privacy">
+                        <span class="mono-label">Privacy, plainly</span>
+                        <span>No signup. No card. Your conversation is used only to give you an answer - nothing is sold, ever. Write to email@hkborah.com and your transcript is deleted, no questions asked.</span>
+                    </p>
+
+                    <div class="section-cta reveal">
+                        <p class="section-cta__note">Prefer to talk to a human? Book a requirements call. My AI takes the intake before I take the call.</p>
+                        <div class="section-cta__actions">
+                            <a class="btn btn--solid" href="/execution.html#book">Book a requirements call</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= 5. KNOWLEDGE STRIP ======================= -->
+        <section class="section" id="knowledge">
+            <div class="container">
+                <div class="section-head section-head--center reveal">
+                    <span class="mono-label kicker">The Knowledge</span>
+                    <h2 class="display-lg">The Knowledge.</h2>
+                    <p class="lead">Three books. Three stages. One architect.</p>
+                </div>
+
+                <div class="book-strip reveal">
+                    <a class="book-strip__item" href="knowledge.html#order-of-chaos">
+                        <img src="assets/books/order-of-chaos.png" alt="The Order of Chaos book cover" width="1763" height="2813" loading="lazy">
+                        <span class="book-strip__name">The Order of Chaos</span>
+                    </a>
+                    <a class="book-strip__item" href="knowledge.html#last-firefighter">
+                        <img src="assets/books/last-firefighter.png" alt="The Last Firefighter book cover" width="923" height="1394" loading="lazy">
+                        <span class="book-strip__name">The Last Firefighter</span>
+                    </a>
+                    <a class="book-strip__item" href="knowledge.html#vega">
+                        <img src="assets/books/vega.png" alt="VEGA book cover" width="1333" height="2000" loading="lazy">
+                        <span class="book-strip__name">VEGA</span>
+                    </a>
+                </div>
+
+                <div class="table-scroll reveal">
+                    <table class="book-table">
+                        <thead>
+                            <tr><th scope="col">Book</th><th scope="col">For</th><th scope="col">One-line</th><th scope="col"><span class="visually-hidden">Details</span></th></tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="book-table__title">The Order of Chaos</td>
+                                <td>Founders and early stage</td>
+                                <td>The frameworks for building without a map.</td>
+                                <td><a class="link-arrow" href="knowledge.html#order-of-chaos">Read more</a></td>
+                            </tr>
+                            <tr>
+                                <td class="book-table__title">The Last Firefighter</td>
+                                <td>Mid-sized business</td>
+                                <td>How established businesses survive disruption.</td>
+                                <td><a class="link-arrow" href="knowledge.html#last-firefighter">Read more</a></td>
+                            </tr>
+                            <tr>
+                                <td class="book-table__title">VEGA</td>
+                                <td>Enterprise</td>
+                                <td>Board-ready governance. Shield. Rails.</td>
+                                <td><a class="link-arrow" href="knowledge.html#vega">Read more</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="section-cta reveal">
+                    <div class="section-cta__actions">
+                        <a class="btn btn--ghost" href="#advice">Know more</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+<!-- ======================= 6. CLIENT LOCATIONS ======================= -->
+        <section class="section" id="presence">
+            <div class="container">
+                <div class="section-head section-head--center reveal">
+                    <span class="mono-label kicker">Exhibit 04 · Field Presence</span>
+                    <h2 class="display-lg">Client Locations</h2>
+                    <p class="lead">Clients in five countries - Canada, the USA, Brazil, India, and Singapore.</p>
+                </div>
+
+                <figure class="exhibit reveal" id="exhibit-network">
+                    <div class="exhibit__bar">
+                        <p class="mono-label exhibit__bar-num">Exhibit 04</p>
+                        <div class="exhibit__bar-meta">
+                            <p class="mono-label">The Client Network</p>
+                            <button class="exhibit__read" type="button" aria-expanded="false" aria-controls="network-read">
+                                <svg class="exhibit__read-icon" width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                                    <path d="M12 5v14M5 12h14"></path>
+                                </svg>
+                                Read
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="exhibit__body">
+                        <div class="map-stage">
+                            <div class="map-stage__land" aria-hidden="true"></div>
+                            <svg class="svg map-stage__routes" viewBox="0 0 950 620" role="img" aria-labelledby="net-title net-desc"
+                                 preserveAspectRatio="xMidYMid meet">
+                                <title id="net-title">The Client Network</title>
+                                <desc id="net-desc">A world map with a faint grid. India is marked as the home base.
+                                    Dashed red arcs connect India to Canada, the USA, Brazil and Singapore, and a
+                                    small dot travels along each arc.</desc>
+
+                                <!-- Graticule -->
+                                <g stroke="var(--line)" stroke-width="0.8" opacity="0.7" aria-hidden="true">
+                                    <line x1="119" y1="0" x2="119" y2="620"></line><line x1="238" y1="0" x2="238" y2="620"></line>
+                                    <line x1="356" y1="0" x2="356" y2="620"></line><line x1="475" y1="0" x2="475" y2="620"></line>
+                                    <line x1="594" y1="0" x2="594" y2="620"></line><line x1="713" y1="0" x2="713" y2="620"></line>
+                                    <line x1="831" y1="0" x2="831" y2="620"></line>
+                                    <line x1="0" y1="124" x2="950" y2="124"></line><line x1="0" y1="248" x2="950" y2="248"></line>
+                                    <line x1="0" y1="372" x2="950" y2="372"></line><line x1="0" y1="496" x2="950" y2="496"></line>
+                                </g>
+
+                                <!-- Arcs from the home base to every client region -->
+                                <path d="M679,280 Q330,40 190,99" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-1"></path>
+                                <path d="M679,280 Q390,110 209,180" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-1"></path>
+                                <path d="M679,280 Q440,450 299,400" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-2"></path>
+                                <path d="M679,280 Q760,360 737,332" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-2"></path>
+
+                                <!-- One moving packet per client region -->
+                                <rect class="packet d-1" width="12" height="3" fill="var(--ink)" data-path="M679,280 Q330,40 190,99"></rect>
+                                <rect class="packet d-2" width="12" height="3" fill="var(--accent)" data-path="M679,280 Q390,110 209,180"></rect>
+                                <rect class="packet d-3" width="12" height="3" fill="var(--ink)" data-path="M679,280 Q440,450 299,400"></rect>
+                                <rect class="packet d-4" width="12" height="3" fill="var(--accent)" data-path="M679,280 Q760,360 737,332"></rect>
+
+                                <!-- Home base -->
+                                <g class="hotspot" tabindex="0" role="img" aria-label="India - the home base. Work starts here.">
+                                    <rect x="669" y="270" width="20" height="20" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" class="draw d-0"></rect>
+                                    <circle cx="679" cy="280" r="3.5" fill="var(--accent)" class="pulse-red fade d-1"></circle>
+                                    <text x="679" y="316" text-anchor="middle" class="t-md f-acc">India</text>
+                                    <text x="679" y="332" text-anchor="middle" class="t-xs f-dim">Home base</text>
+                                </g>
+
+                                <!-- Client regions -->
+                                <g class="hotspot" tabindex="0" role="img" aria-label="Canada. Clients served.">
+                                    <circle cx="190" cy="99" r="5" fill="var(--accent)" class="pulse-red fade d-1"></circle>
+                                    <text x="190" y="126" text-anchor="middle" class="t-sm">Canada</text>
+                                </g>
+                                <g class="hotspot" tabindex="0" role="img" aria-label="USA. Clients served.">
+                                    <circle cx="209" cy="180" r="5" fill="var(--accent)" class="pulse-red fade d-1"></circle>
+                                    <text x="209" y="207" text-anchor="middle" class="t-sm">USA</text>
+                                </g>
+                                <g class="hotspot" tabindex="0" role="img" aria-label="Brazil. Clients served.">
+                                    <circle cx="299" cy="400" r="5" fill="var(--accent)" class="pulse-red fade d-2"></circle>
+                                    <text x="299" y="427" text-anchor="middle" class="t-sm">Brazil</text>
+                                </g>
+                                <g class="hotspot" tabindex="0" role="img" aria-label="Singapore. Clients served.">
+                                    <circle cx="737" cy="332" r="5" fill="var(--accent)" class="pulse-red fade d-2"></circle>
+                                    <text x="737" y="359" text-anchor="middle" class="t-sm">Singapore</text>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div class="exhibit__panel" id="network-read" data-open="false" aria-hidden="true">
+                        <div>
+                            <div class="exhibit__panel-inner">
+                                <p class="mono-label text-accent">How to read this</p>
+                                <p>Clients sit in <strong>Canada, the USA, Brazil, India and Singapore</strong>. The
+                                   home base is India - work starts there and travels out along the red lines.
+                                   The moving dots are that work in motion: plans, reviews and fixes. The same
+                                   way of working reaches every country.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <figcaption class="exhibit__caption">
+                        Clients in five countries. Work starts at the home base and travels to them.
+                    </figcaption>
+                </figure>
+
+                <div class="section-cta reveal">
+                    <p class="section-cta__note">Your business can be next on this map. Start with one free conversation.</p>
+                    <div class="section-cta__actions">
+                        <a class="btn btn--solid" href="#advice">Talk to My Digital Twin</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= 7. TESTIMONIALS ======================= -->
+        <section class="section" id="records">
+            <div class="container">
+                <div class="section-head section-head--center reveal">
+                    <span class="mono-label kicker">Field Records</span>
+                    <h2 class="display-lg">What Our Clients Say</h2>
+                </div>
+
+                <div class="tst reveal" id="testimonial-stage">
+                    <button class="tst__arrow tst__arrow--prev" type="button" aria-label="Previous testimonial">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M15 19l-7-7 7-7"></path>
+                        </svg>
+                    </button>
+
+                    <div class="tst__slides">
+                        <figure class="tst__slide" data-index="0">
+                            <span class="tst__avatar" aria-hidden="true">AB</span>
+                            <span class="mono-label tst__stamp">Field Record · 01</span>
+                            <blockquote class="tst__quote">
+                                &ldquo;PICO has been a vital partner in our operational transformation program. Their team worked closely with us to identify inefficiencies and implement innovative solutions that have streamlined our processes. Thanks to their expertise, we&rsquo;ve significantly improved productivity and reduced costs.&rdquo;
+                            </blockquote>
+                            <figcaption class="tst__who"><strong>Anuj Bansal</strong> - Executive Director, Kalika Steel</figcaption>
+                        </figure>
+
+                        <figure class="tst__slide" data-index="1">
+                            <span class="tst__avatar" aria-hidden="true">SJ</span>
+                            <span class="mono-label tst__stamp">Field Record · 02</span>
+                            <blockquote class="tst__quote">
+                                &ldquo;The Architectural Scaling Framework provided the exact blueprint we needed to transition from a chaotic growth phase into deterministic, governed operations. HK Borah&rsquo;s methodology doesn&rsquo;t just treat symptoms; it rebuilds the foundation.&rdquo;
+                            </blockquote>
+                            <figcaption class="tst__who"><strong>Sarah Jenkins</strong> - VP Operations, Nexus Tech</figcaption>
+                        </figure>
+
+                        <figure class="tst__slide" data-index="2">
+                            <span class="tst__avatar" aria-hidden="true">DC</span>
+                            <span class="mono-label tst__stamp">Field Record · 03</span>
+                            <blockquote class="tst__quote">
+                                &ldquo;Deploying the digital twin architecture allowed our executive team to pressure-test decisions against established governance frameworks in real-time. It completely transformed our risk mitigation strategy.&rdquo;
+                            </blockquote>
+                            <figcaption class="tst__who"><strong>David Chen</strong> - Managing Partner, Vertex Capital</figcaption>
+                        </figure>
+                    </div>
+
+                    <button class="tst__arrow tst__arrow--next" type="button" aria-label="Next testimonial">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M9 5l7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="tst__dots" role="tablist" aria-label="Choose testimonial">
+                    <button class="tst__dot" type="button" data-index="0" aria-label="Field record 1"></button>
+                    <button class="tst__dot" type="button" data-index="1" aria-label="Field record 2"></button>
+                    <button class="tst__dot" type="button" data-index="2" aria-label="Field record 3"></button>
+                </div>
+
+                <div class="section-cta reveal">
+                    <p class="section-cta__note">Your record can be next. It starts with one free conversation.</p>
+                    <div class="section-cta__actions">
+                        <a class="btn btn--solid" href="/execution.html#book">Book a Call</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ======================= 8. THE CLOSE ======================= -->
+        <section class="close-panel blueprint grain" id="close">
+            <div class="container close-panel__inner">
+                <div class="reveal">
+                    <h2 class="display-lg">Ready to move?</h2>
+                    <p class="lead">Advice is free. Execution is not. Book a requirements gathering call. My AI takes the intake before I take the call. You will get a solution document and a proposal within 72 hours.</p>
+                </div>
+                <a class="btn btn--solid reveal" href="/execution.html">Upgrade your Business</a>
+            </div>
+
+            <div class="container reveal">
+                <figure class="exhibit" id="exhibit-escalation">
+                    <div class="exhibit__bar">
+                        <p class="mono-label exhibit__bar-num">Exhibit 05</p>
+                        <div class="exhibit__bar-meta">
+                            <p class="mono-label">How Engagements Run</p>
+                            <button class="exhibit__read" type="button" aria-expanded="false" aria-controls="escalation-read">
+                                <svg class="exhibit__read-icon" width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                     stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true">
+                                    <path d="M12 5v14M5 12h14"></path>
+                                </svg>
+                                Read
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="exhibit__body">
+                        <svg class="svg" viewBox="0 0 960 170" role="img" aria-labelledby="esc-title esc-desc"
+                             preserveAspectRatio="xMidYMid meet">
+                            <title id="esc-title">How Engagements Run</title>
+                            <desc id="esc-desc">Three boxes in a row with moving arrows between them: ask the twin,
+                                free today; solution document and proposal within seventy-two hours; execution, paid,
+                                when you are ready.</desc>
+
+                            <text x="165" y="35" text-anchor="middle" class="t-xs f-dim">Step 01</text>
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Step one: ask the twin. Free, today, no signup.">
+                                <rect x="40" y="45" width="250" height="80" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.25" class="draw d-0"></rect>
+                                <text x="165" y="82" text-anchor="middle" class="t-md f-ink">Ask the Twin</text>
+                                <text x="165" y="102" text-anchor="middle" class="t-xs f-dim">free · today · no signup</text>
+                            </g>
+
+                            <path d="M290,85 L355,85" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-1"></path>
+                            <polygon points="351,81 361,85 351,89" fill="var(--accent)" class="fade d-2"></polygon>
+                            <rect class="packet d-2" width="12" height="3" fill="var(--ink)" data-path="M290,84 L355,84"></rect>
+
+                            <text x="480" y="35" text-anchor="middle" class="t-xs f-dim">Step 02</text>
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Step two: a solution document and proposal in your hands within seventy-two hours of the call.">
+                                <rect x="355" y="45" width="250" height="80" fill="var(--bg)" stroke="var(--titanium)" stroke-width="1.25" class="draw d-2"></rect>
+                                <text x="480" y="82" text-anchor="middle" class="t-md f-ink">Solution document</text>
+                                <text x="480" y="102" text-anchor="middle" class="t-xs f-dim">+ proposal in 72 hours</text>
+                            </g>
+
+                            <path d="M605,85 L670,85" fill="none" stroke="var(--accent)" stroke-width="1.2" stroke-dasharray="6 8" class="march fade d-3"></path>
+                            <polygon points="666,81 676,85 666,89" fill="var(--accent)" class="fade d-4"></polygon>
+                            <rect class="packet d-4" width="12" height="3" fill="var(--accent)" data-path="M605,84 L670,84"></rect>
+
+                            <text x="795" y="35" text-anchor="middle" class="t-xs f-dim">Step 03</text>
+                            <g class="hotspot" tabindex="0" role="img" aria-label="Step three: execution. Paid work, when you are ready.">
+                                <rect x="670" y="45" width="250" height="80" fill="var(--bg)" stroke="var(--accent)" stroke-width="2" class="draw d-4"></rect>
+                                <rect x="670" y="45" width="250" height="4" fill="var(--accent)" class="fade d-5"></rect>
+                                <text x="795" y="82" text-anchor="middle" class="t-md f-acc">Execution</text>
+                                <text x="795" y="102" text-anchor="middle" class="t-xs f-dim">paid · when you are ready</text>
+                            </g>
+                        </svg>
+                    </div>
+
+                    <div class="exhibit__panel" id="escalation-read" data-open="false" aria-hidden="true">
+                        <div>
+                            <div class="exhibit__panel-inner">
+                                <p class="mono-label text-accent">How to read this</p>
+                                <p>Nothing here is a trap. <strong>Step 01 is free and anonymous.</strong> Step 02 is my
+                                   written commitment: within 72 hours of our call you hold a solution document and a
+                                   proposal, so you are deciding on paper, not on promises. Step 03 starts only when you
+                                   say so - the price is agreed before the work begins.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <figcaption class="exhibit__caption">
+                        Advice is free. Execution is not. The steps in between are written down.
+                    </figcaption>
+                </figure>
+            </div>
+        </section>
+    </main>
+
+    <!-- ======================= 9. FOOTER ======================= -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a class="brand" href="/" aria-label="HK Borah - home">
+                        <img class="brand__logo brand__logo--footer" src="assets/logos/hk-borah-logo.png" alt="HK Borah"
+                             width="1000" height="400">
+                    </a>
+                    <p>Books for knowledge. A Digital Twin for advice. Execution when you are ready to move.</p>
+                    <p><a href="mailto:email@hkborah.com">email@hkborah.com</a></p>
+                </div>
+
+                <nav class="footer-col" aria-label="Footer - explore">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="knowledge.html">Knowledge</a></li>
+                        <li><a href="/advice.html">Advice</a></li>
+                        <li><a href="/execution.html">Execution</a></li>
+                        <li><a href="/about.html">About</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="footer-col" aria-label="Footer - offerings">
+                    <h4>Offerings</h4>
+                    <ul>
+                        <li><a href="/execution/business-upgrade.html">Business Upgrade</a></li>
+                        <li><a href="/execution/people-development.html">People Development</a></li>
+                        <li><a href="https://www.picoeventurelabs.com" target="_blank" rel="noopener noreferrer">Founder Lab</a></li>
+                        <li><a href="https://thepico.in" target="_blank" rel="noopener noreferrer">thepico.in</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="footer-col" aria-label="Footer - contact">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:email@hkborah.com">email@hkborah.com</a></li>
+                        <li><a href="https://www.linkedin.com/in/hkborah/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="footer-bottom">
+                <span>&copy; 2026 HK Borah. All rights reserved.</span>
+                <span>IIM Calcutta · ISI Bangalore · Board Director · Author · Investor</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

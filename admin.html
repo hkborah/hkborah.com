@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor | HK Borah</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="description" content="Private journal editor.">
+
+    <!--
+      The admin page is the only page allowed to load Google's sign-in script,
+      so the relaxed policy lives here and the public pages stay strict.
+    -->
+    <meta http-equiv="Content-Security-Policy"
+          content="default-src 'self'; script-src 'self' https://accounts.google.com https://apis.google.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none';">
+
+    <link rel="icon" type="image/png" href="assets/logos/hk-borah-emblem.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="assets/hk.css?v=22">
+
+    <!-- Post bodies are sanitised before preview and before saving -->
+    <script src="assets/vendor/purify.min.js" defer
+            integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla+3"
+            crossorigin="anonymous"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script type="module" src="assets/hk.js"></script>
+    <script type="module" src="assets/hk-admin.js"></script>
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <a class="brand" href="index.html" aria-label="HK Borah - home">
+                <img class="brand__logo" src="assets/logos/hk-borah-logo.png" alt="HK Borah" width="1000" height="400">
+                <span class="brand__tag mono-label">Journal Editor</span>
+            </a>
+            <button class="btn btn--ghost btn--nav" type="button" id="sign-out" hidden>Sign out</button>
+        </div>
+    </header>
+
+    <main id="main">
+
+        <!-- ============ LOGIN ============ -->
+        <section class="section section--flush" id="login-view">
+            <div class="container">
+                <div class="login-panel">
+                    <span class="mono-label kicker">Private</span>
+                    <h1 class="display-lg">Editor sign in</h1>
+                    <p class="lead">Only the site owner can sign in here. Readers never see this page.</p>
+
+                    <div class="login-methods">
+                        <div id="google-button"></div>
+
+                        <div class="login-divider"><span class="mono-label">or</span></div>
+
+                        <form id="password-form" class="login-form">
+                            <label class="mono-label" for="login-email">Email</label>
+                            <input class="chat__input" type="email" id="login-email" name="email"
+                                   autocomplete="username" required>
+                            <label class="mono-label" for="login-password">Password</label>
+                            <input class="chat__input" type="password" id="login-password" name="password"
+                                   autocomplete="current-password" required>
+                            <button class="btn btn--solid" type="submit">Sign in</button>
+                        </form>
+                    </div>
+
+                    <p class="blog-status" id="login-status" role="status"></p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============ EDITOR ============ -->
+        <section class="section section--flush" id="editor-view" hidden>
+            <div class="container">
+                <div class="editor-bar">
+                    <div>
+                        <span class="mono-label kicker">Journal</span>
+                        <h1 class="display-lg" id="editor-heading">New entry</h1>
+                    </div>
+                    <div class="editor-bar__actions">
+                        <button class="btn btn--ghost" type="button" id="new-post">New entry</button>
+                        <button class="btn btn--solid" type="button" id="save-post">Publish</button>
+                    </div>
+                </div>
+
+                <p class="blog-status" id="editor-status" role="status"></p>
+
+                <div class="editor-grid">
+                    <!-- Form -->
+                    <div class="editor-form">
+                        <label class="mono-label" for="field-title">Headline</label>
+                        <input class="chat__input" type="text" id="field-title" maxlength="160" required>
+
+                        <label class="mono-label" for="field-category">Category</label>
+                        <input class="chat__input" type="text" id="field-category" maxlength="40"
+                               placeholder="Frameworks, Case Files, Field Notes">
+
+                        <label class="mono-label" for="field-image">Featured image</label>
+                        <input class="chat__input" type="file" id="field-image" accept="image/*">
+                        <input class="chat__input" type="url" id="field-image-url"
+                               placeholder="Or paste an image URL">
+                        <div class="editor-preview" id="image-preview-box" hidden>
+                            <img id="image-preview" alt="">
+                            <button class="link-arrow" type="button" id="clear-image">Remove image</button>
+                        </div>
+
+                        <label class="mono-label" for="field-content">Entry</label>
+                        <div class="editor-toolbar" id="editor-toolbar" role="toolbar" aria-label="Formatting">
+                            <button type="button" data-cmd="bold" title="Bold"><strong>B</strong></button>
+                            <button type="button" data-cmd="italic" title="Italic"><em>I</em></button>
+                            <button type="button" data-cmd="underline" title="Underline"><u>U</u></button>
+                            <button type="button" data-block="h2" title="Heading">H2</button>
+                            <button type="button" data-block="h3" title="Sub-heading">H3</button>
+                            <button type="button" data-block="p" title="Paragraph">P</button>
+                            <button type="button" data-cmd="insertUnorderedList" title="Bullet list">List</button>
+                            <button type="button" data-block="blockquote" title="Quote">Quote</button>
+                            <button type="button" data-link="1" title="Link">Link</button>
+                        </div>
+                        <div class="editor-surface" id="field-content" contenteditable="true"
+                             role="textbox" aria-multiline="true" aria-label="Entry body"></div>
+
+                        <p class="editor-hint" id="editor-hint"></p>
+                    </div>
+
+                    <!-- Existing entries -->
+                    <aside class="editor-list">
+                        <h2 class="mono-label editor-list__head">Published entries</h2>
+                        <div id="post-list" class="editor-list__items"></div>
+                    </aside>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <span>&copy; 2026 HK Borah. All rights reserved.</span>
+                <span><a href="blog.html">View the journal</a></span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
