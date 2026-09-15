@@ -152,6 +152,26 @@ across the site at the same time.
 
 `functions/README.md` covers the API, the database schema and the pre-launch checks.
 
+## Shipping a change to CSS or JS
+
+Assets are cached for ten minutes rather than immutably, because there is no
+build step to hash filenames. Freshness comes from the version query on each
+reference, so **when you change `hk.css`, `hk.js`, `hk-admin.js`, `hk-blog.js`
+or `hk-pdf.js`, bump the version in all of them together**:
+
+```
+assets/hk.css?v=26      assets/hk.js?v=26
+assets/hk-admin.js?v=26 assets/hk-blog.js?v=26
+assets/hk-pdf.js?v=26   (imported from hk.js)
+```
+
+Forgetting leaves returning visitors on the old file until the ten-minute
+ceiling expires, which is why that ceiling exists.
+
+Do not add more specific rules under `/assets/` in `_headers`. Cloudflare
+concatenates overlapping rules into one malformed header instead of letting
+the specific rule win, which silently broke caching and, earlier, the CSP.
+
 ## Design system
 
 Everything visual lives in `assets/hk.css`, organised in numbered sections. The

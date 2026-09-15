@@ -17,5 +17,14 @@
   Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=()
   Cross-Origin-Opener-Policy: same-origin-allow-popups
 
+# Assets are cached briefly rather than immutably. There is no build step to
+# hash filenames, so freshness is handled by version queries (hk.js?v=26) and
+# this ceiling is the safety net: if a version is ever forgotten, the file
+# refreshes within ten minutes instead of sitting in a browser for a year.
+#
+# Do not add a more specific /assets/... rule here. Cloudflare concatenates
+# overlapping rules into a single malformed Cache-Control header rather than
+# letting the specific one win, which is exactly how the CSP was broken once
+# already.
 /assets/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=600, must-revalidate

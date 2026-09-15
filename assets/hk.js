@@ -397,7 +397,7 @@ function initChatSave(button, history, setStatus) {
         }
 
         try {
-            const { generateChatPdf } = await import('./hk-pdf.js');
+            const { generateChatPdf } = await import('./hk-pdf.js?v=26');
             await generateChatPdf(history);
             setStatus('PDF saved to your device, and a copy is kept for HK Borah.');
         } catch (error) {
