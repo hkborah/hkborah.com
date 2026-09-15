@@ -77,13 +77,19 @@ automatically and becomes the API.
 | Setting | Value |
 |---|---|
 | Framework preset | **None** |
-| Build command | **leave empty** |
+| Build command | **`npm ci`** |
 | Build output directory | **`/`** |
 | Root directory | `/` (default) |
 
-**There is no build step.** Cloudflare serves these files as they are. Do not
-set `npm run build`: that script belonged to the retired React app and has been
-removed, because it emitted only `index.html` and `assets/`, silently dropping
+**`npm ci` is required even though nothing is compiled.** Cloudflare only runs
+`npm install` when a build command is present. Leave the box empty and the
+dependencies are never installed, so bundling the Functions fails with
+`Could not resolve "@libsql/client/web"` and `Could not resolve "bcryptjs"`.
+The command installs packages and builds nothing; the site is served as-is from
+the output directory.
+
+Do not use `npm run build`. That script belonged to the retired React app and
+has been removed: it emitted only `index.html` and `assets/`, silently dropping
 every other page along with `_headers`, `_redirects`, `_routes.json`, `404.html`,
 `robots.txt`, `llms.txt` and `sitemap.xml`.
 
@@ -93,6 +99,7 @@ To publish from a terminal instead of Git, use:
 npm run deploy          # -> wrangler pages deploy .
 ```
 
+That path bundles the Functions locally, so it does not need the build command.
 Note that `wrangler deploy` (without `pages`) is the Workers command and will not
 publish this site.
 

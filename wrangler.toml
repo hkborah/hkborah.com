@@ -7,5 +7,7 @@ pages_build_output_dir = "."
 compatibility_date = "2024-11-01"
 compatibility_flags = ["nodejs_compat"]
 
-# Note: Pages reads plain-text variables and secrets from the dashboard, not
-# from this file. See functions/README.md for the list to set.
+# Build command and environment variables are set in the Pages dashboard, not
+# here. The build command must be `npm ci` even though nothing is compiled:
+# Cloudflare only installs dependencies when a build command is present, and
+# without them the functions fail to bundle. See README.md.
