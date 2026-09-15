@@ -1102,18 +1102,37 @@ strong { color: var(--ink); font-weight: 600; }
 .login-panel .display-lg { margin-block: .5rem 1rem; }
 .login-methods { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
 .login-methods #google-button { display: flex; justify-content: center; min-height: 2.5rem; }
-.login-divider {
+/* Why the Google button is absent, when it is */
+.login-note {
+    font-size: .8rem;
+    line-height: 1.6;
+    color: var(--titanium-dim);
+    margin: 0;
+}
+
+/* The password route is a fallback, so it stays folded away */
+.login-fallback {
+    border-top: 1px solid var(--line);
+    padding-top: 1.25rem;
+    text-align: left;
+}
+.login-fallback > summary {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    justify-content: center;
+    gap: .5rem;
+    cursor: pointer;
     color: var(--titanium-dim);
+    transition: color var(--m-fast) linear;
 }
-.login-divider::before, .login-divider::after {
-    content: "";
-    flex: 1 0 auto;
-    height: 1px;
-    background: var(--line);
+.login-fallback > summary::after {
+    content: "+";
+    font-family: var(--font-mono);
+    color: var(--accent);
 }
+.login-fallback[open] > summary::after { content: "\2212"; /* minus */ }
+.login-fallback > summary:hover { color: var(--accent); }
+.login-fallback .login-form { margin-top: 1.25rem; }
 .login-form { display: flex; flex-direction: column; gap: .5rem; text-align: left; }
 .login-form .mono-label { color: var(--titanium-dim); margin-top: .5rem; }
 .login-form .btn { margin-top: 1.25rem; align-self: flex-start; }

@@ -12,7 +12,7 @@
       so the relaxed policy lives here and the public pages stay strict.
     -->
     <meta http-equiv="Content-Security-Policy"
-          content="default-src 'self'; script-src 'self' https://accounts.google.com https://apis.google.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'none';">
+          content="default-src 'self'; script-src 'self' https://accounts.google.com https://apis.google.com; style-src 'self' https://fonts.googleapis.com 'unsafe-inline'; font-src https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://accounts.google.com; frame-src https://accounts.google.com; object-src 'none'; base-uri 'none'; form-action 'self';">
 
     <link rel="icon" type="image/png" href="assets/logos/hk-borah-emblem.png">
 
@@ -20,13 +20,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/hk.css?v=22">
+    <link rel="stylesheet" href="assets/hk.css?v=23">
 
     <!-- Post bodies are sanitised before preview and before saving -->
     <script src="assets/vendor/purify.min.js" defer
             integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla+3"
             crossorigin="anonymous"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script type="module" src="assets/hk.js"></script>
     <script type="module" src="assets/hk-admin.js"></script>
 </head>
@@ -54,18 +53,20 @@
 
                     <div class="login-methods">
                         <div id="google-button"></div>
+                        <p class="login-note" id="google-note" hidden></p>
 
-                        <div class="login-divider"><span class="mono-label">or</span></div>
-
-                        <form id="password-form" class="login-form">
-                            <label class="mono-label" for="login-email">Email</label>
-                            <input class="chat__input" type="email" id="login-email" name="email"
-                                   autocomplete="username" required>
-                            <label class="mono-label" for="login-password">Password</label>
-                            <input class="chat__input" type="password" id="login-password" name="password"
-                                   autocomplete="current-password" required>
-                            <button class="btn btn--solid" type="submit">Sign in</button>
-                        </form>
+                        <details class="login-fallback">
+                            <summary class="mono-label">Use a password instead</summary>
+                            <form id="password-form" class="login-form">
+                                <label class="mono-label" for="login-email">Email</label>
+                                <input class="chat__input" type="email" id="login-email" name="email"
+                                       autocomplete="username" required>
+                                <label class="mono-label" for="login-password">Password</label>
+                                <input class="chat__input" type="password" id="login-password" name="password"
+                                       autocomplete="current-password" required>
+                                <button class="btn btn--solid" type="submit">Sign in</button>
+                            </form>
+                        </details>
                     </div>
 
                     <p class="blog-status" id="login-status" role="status"></p>

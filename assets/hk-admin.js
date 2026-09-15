@@ -288,17 +288,68 @@ async function signInWithPassword(email, password) {
 }
 
 /** Renders Google's button when a client ID is available, else password only. */
+/**
+ * Loads Google Identity Services and resolves once it is ready.
+ *
+ * It is fetched on demand rather than with a static tag, because a tag loaded
+ * with `async defer` races this module: the readiness check used to run first,
+ * find nothing, and return without ever rendering the button.
+ */
+function loadGoogleScript() {
+    if (window.google?.accounts?.id) return Promise.resolve();
+
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = 'https://accounts.google.com/gsi/client';
+        script.async = true;
+        script.defer = true;
+        script.addEventListener('load', () => {
+            // The script can finish before the library is ready, so wait a beat
+            let tries = 0;
+            const wait = window.setInterval(() => {
+                if (window.google?.accounts?.id) {
+                    window.clearInterval(wait);
+                    resolve();
+                } else if ((tries += 1) > 40) {
+                    window.clearInterval(wait);
+                    reject(new Error('Google sign-in did not become ready.'));
+                }
+            }, 100);
+        });
+        script.addEventListener('error', () => reject(new Error('Google sign-in could not be loaded.')));
+        document.head.appendChild(script);
+    });
+}
+
+/** Reports why the button is not showing, rather than failing silently. */
+function googleNote(message) {
+    const note = $('#google-note');
+    if (!note) return;
+    note.textContent = message;
+    note.hidden = !message;
+}
+
 async function initGoogleButton() {
     const holder = $('#google-button');
-    if (!holder || !window.google?.accounts?.id) return;
+    if (!holder) return;
 
     let clientId = '';
     try {
         const config = await api('/config');
         clientId = config?.googleClientId || '';
-    } catch { /* password sign in still works */ }
+    } catch { /* the password fallback below still works */ }
 
-    if (!clientId) return;
+    if (!clientId) {
+        googleNote('Google sign-in is not configured yet. Set VITE_GOOGLE_CLIENT_ID, or use a password below.');
+        return;
+    }
+
+    try {
+        await loadGoogleScript();
+    } catch (error) {
+        googleNote(`${error.message} Use a password below instead.`);
+        return;
+    }
 
     window.google.accounts.id.initialize({
         client_id: clientId,
