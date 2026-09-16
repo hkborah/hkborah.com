@@ -231,7 +231,7 @@ async function renderPost() {
     const slug = params.get('slug') || params.get('id');
 
     if (!slug) {
-        container.innerHTML = '<p class="prose-center">No post was requested. <a class="link-inline" href="blog.html">Back to the journal</a>.</p>';
+        container.innerHTML = '<p class="prose-center">No post was requested. <a class="link-inline" href="/blog">Back to the journal</a>.</p>';
         return;
     }
 
@@ -240,7 +240,7 @@ async function renderPost() {
         post = await getJson(`/posts/${encodeURIComponent(slug)}`);
     } catch (error) {
         console.error('Post unavailable:', error);
-        container.innerHTML = '<p class="prose-center">That entry could not be found. <a class="link-inline" href="blog.html">Back to the journal</a>.</p>';
+        container.innerHTML = '<p class="prose-center">That entry could not be found. <a class="link-inline" href="/blog">Back to the journal</a>.</p>';
         return;
     }
 
@@ -266,7 +266,14 @@ async function renderPost() {
         ${image ? `<figure class="post-figure"><img src="${esc(image)}" alt=""></figure>` : ''}
         <div class="post-body">${safeContent}</div>
         <div class="post-foot">
-            <a class="link-arrow" href="blog.html">Back to the journal</a>
+            <div class="post-cta">
+                <p class="post-cta__note">If this raised a question about your own business, ask the Twin. It is free, and it answers in your language.</p>
+                <div class="section-cta__actions">
+                    <a class="btn btn--ghost" href="/advice">Talk to My Digital Twin</a>
+                    <a class="btn btn--solid" href="/execution#book">Book a Call</a>
+                </div>
+            </div>
+            <a class="link-arrow" href="/blog">Back to the journal</a>
         </div>`;
 }
 
