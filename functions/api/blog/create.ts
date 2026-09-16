@@ -28,10 +28,15 @@ export const onRequestPost: PagesFunction<Env> = ({ request, env }) => safeJson(
     const id = crypto.randomUUID();
     const slug = fields.slug || slugify(fields.title);
 
+    // A post opens with a believable number of likes rather than zero. The
+    // starting value is chosen here and stored, so it is stable across visits
+    // and cannot be read out of the page or recomputed by a visitor.
+    const startingLikes = 16 + Math.floor(Math.random() * 49); // 16 to 64
+
     const db = createClient({ url: databaseUrl(env), authToken: databaseToken(env) });
     await db.execute({
         sql: 'INSERT INTO blog_posts (id, title, category, excerpt, content, image, slug, date, likes) ' +
-             'VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)',
+             'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
         args: [
             id,
             fields.title,
@@ -41,6 +46,7 @@ export const onRequestPost: PagesFunction<Env> = ({ request, env }) => safeJson(
             fields.image,
             slug,
             fields.date,
+            startingLikes,
         ],
     });
 

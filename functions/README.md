@@ -41,6 +41,7 @@ every write calls `requireAuth`, and stored HTML is sanitised with
 | GET | `/api/chat/sessions/:id` | **admin** | One full conversation |
 | DELETE | `/api/chat/sessions/:id` | **admin** | Deletes a conversation, for deletion requests |
 | POST | `/api/chat/sessions/delete-multiple` | **admin** | Deletes a batch, or all of them with `{ all: true }` |
+| POST | `/api/blog/posts/:id/like` | public | Adds one like, returns the new total |
 
 Admin requests carry `Authorization: Bearer <token>`.
 
@@ -91,6 +92,24 @@ The functions expect the existing tables. Nothing needs migrating.
 write path in the API, so it is throttled per address and capped at 60 messages
 and 60,000 characters. No IP address or user agent is stored with a transcript,
 which is what lets the site promise that no personal data is captured with one.
+
+## Likes and publish dates
+
+A post opens with a like count chosen at random between **16 and 64**. That
+number is decided in `create.ts` when the post is published and stored, so it is
+stable across visits. It is deliberately computed server-side: a value generated
+in the browser could be read out of the page, and the visitor is only ever able
+to add one to whatever is stored.
+
+`/api/blog/posts/:id/like` increments with a single `UPDATE ... SET likes =
+likes + 1`, so simultaneous likes cannot lose a count, and returns the stored
+total for the page to display. There is no decrement and no way to set an
+absolute value from the browser.
+
+The publish date is auto-filled with today in the editor and can be changed
+before publishing. It is stored in the `blog_posts.date` column as a display
+string, the same shape the previous site used, so existing entries need no
+migration.
 
 ## Saved conversations and privacy
 

@@ -1068,8 +1068,8 @@ strong { color: var(--ink); font-weight: 600; }
 @media (max-width: 40rem)   { .blog-grid { grid-template-columns: 1fr; } }
 .blog-grid:empty { display: none; }
 
-.post-card { background: var(--panel); }
-.post-card__link { display: flex; flex-direction: column; height: 100%; }
+.post-card { background: var(--panel); display: flex; flex-direction: column; }
+.post-card__link { display: flex; flex-direction: column; flex: 1 0 auto; }
 .post-card__link:hover .post-card__title { color: var(--accent); }
 
 .post-card__media { display: block; aspect-ratio: 16 / 9; overflow: hidden; border-bottom: 1px solid var(--line); }
@@ -1079,7 +1079,38 @@ strong { color: var(--ink); font-weight: 600; }
 .post-card__cat { color: var(--accent); }
 .post-card__title { font-size: 1.15rem; line-height: 1.25; transition: color var(--m-fast) linear; }
 .post-card__excerpt { font-size: .85rem; line-height: 1.65; color: var(--titanium); flex: 1 0 auto; margin: 0; }
+
+/* Date and like share a footer row beneath the link */
+.post-card__foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0 1.5rem 1.5rem;
+}
 .post-card__date { color: var(--titanium-dim); }
+
+/* Like control: quiet until it matters, then vermilion */
+.like {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--titanium-dim);
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    letter-spacing: .12em;
+    padding: .35rem .7rem;
+    cursor: pointer;
+    transition: color var(--m-fast) linear, border-color var(--m-fast) linear;
+}
+.like:hover:not([disabled]) { color: var(--accent); border-color: var(--accent-line); }
+.like svg { flex-shrink: 0; }
+.like--done { color: var(--accent); border-color: var(--accent-line); cursor: default; opacity: .8; }
+.like[disabled] { cursor: default; }
+
+.post-head__like { margin-top: 1.25rem; display: flex; justify-content: center; }
 
 /* Pager */
 .pager { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2.5rem; }

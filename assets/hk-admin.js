@@ -100,6 +100,26 @@ function todayLabel() {
     return new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
 }
 
+/** A stored display date ("Sep 15, 2026") as the yyyy-mm-dd an input needs. */
+function toDateInput(value) {
+    if (!value) return '';
+    const parsed = new Date(value);
+    if (Number.isNaN(parsed.getTime())) return '';
+    // Local date, not UTC, so the chosen day does not shift by a timezone
+    const pad = (n) => String(n).padStart(2, '0');
+    return `${parsed.getFullYear()}-${pad(parsed.getMonth() + 1)}-${pad(parsed.getDate())}`;
+}
+
+/** The date input's value as the display string the journal stores. */
+function fromDateInput(value) {
+    if (!value) return '';
+    const [y, m, d] = value.split('-').map(Number);
+    if (!y || !m || !d) return '';
+    return new Date(y, m - 1, d).toLocaleDateString('en-US', {
+        month: 'short', day: 'numeric', year: 'numeric',
+    });
+}
+
 function slugify(title) {
     return title.toLowerCase().trim()
         .replace(/[^a-z0-9\s-]/g, '')
@@ -170,7 +190,7 @@ async function save() {
         content,
         excerpt: plain.slice(0, 100).trim() + (plain.length > 100 ? '...' : ''),
         slug: slugify(title),
-        date: state.date || todayLabel(),
+        date: fromDateInput($('#field-date').value) || state.date || todayLabel(),
         image: state.image || '',
     };
 
@@ -230,6 +250,7 @@ async function loadPost(id) {
         state.date = post.date || '';
         $('#field-title').value = post.title || '';
         $('#field-category').value = post.category || '';
+        $('#field-date').value = toDateInput(post.date) || toDateInput(new Date().toDateString());
         $('#field-content').innerHTML = clean(post.content || '');
         showImagePreview();
         $('#editor-heading').textContent = 'Editing entry';
@@ -258,6 +279,7 @@ function resetForm() {
     state.date = '';
     $('#field-title').value = '';
     $('#field-category').value = '';
+    $('#field-date').value = toDateInput(new Date().toDateString());
     $('#field-content').innerHTML = '';
     $('#field-image').value = '';
     $('#field-image-url').value = '';
@@ -900,6 +922,13 @@ function init() {
     initToolbar();
     initTranscripts();
     showImagePreview();
+
+    // Start a new entry with today already in the date field, so it is
+    // visible rather than merely implied.
+    const dateField = $('#field-date');
+    if (dateField && !dateField.value) {
+        dateField.value = toDateInput(new Date().toDateString());
+    }
     initGoogleButton();
 
     // Already signed in?

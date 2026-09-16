@@ -20,14 +20,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/hk.css?v=29">
+    <link rel="stylesheet" href="assets/hk.css?v=30">
 
     <!-- Post bodies are sanitised before preview and before saving -->
     <script src="assets/vendor/purify.min.js" defer
             integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla+3"
             crossorigin="anonymous"></script>
-    <script type="module" src="assets/hk.js?v=29"></script>
-    <script type="module" src="assets/hk-admin.js?v=29"></script>
+    <script type="module" src="assets/hk.js?v=30"></script>
+    <script type="module" src="assets/hk-admin.js?v=31"></script>
 </head>
 <body>
 
@@ -103,6 +103,10 @@
                         <label class="mono-label" for="field-category">Category</label>
                         <input class="chat__input" type="text" id="field-category" maxlength="40"
                                placeholder="Frameworks, Case Files, Field Notes">
+
+                        <label class="mono-label" for="field-date">Publish date</label>
+                        <input class="chat__input" type="date" id="field-date">
+                        <p class="editor-hint">Filled with today. Change it to date an entry earlier or later.</p>
 
                         <label class="mono-label" for="field-image">Featured image</label>
                         <input class="chat__input" type="file" id="field-image" accept="image/*">

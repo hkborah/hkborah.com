@@ -62,9 +62,72 @@ function sortNewestFirst(posts) {
 }
 
 /** One listing card. */
+/**
+ * Remembers, in this browser only, which posts have been liked. It keeps an
+ * accidental double tap from counting twice; the count itself always comes
+ * from the server.
+ */
+const LIKED_KEY = 'hk-liked';
+
+function likedPosts() {
+    try {
+        return new Set(JSON.parse(localStorage.getItem(LIKED_KEY) || '[]'));
+    } catch {
+        return new Set();
+    }
+}
+
+function rememberLike(id) {
+    try {
+        const all = likedPosts();
+        all.add(id);
+        localStorage.setItem(LIKED_KEY, JSON.stringify([...all]));
+    } catch {
+        /* storage unavailable: the count still works, it just may add twice */
+    }
+}
+
+/** The like control. The number shown is the one the server stored. */
+function likeHtml(post) {
+    const id = post.id;
+    const count = Number(post.likes ?? 0);
+    const already = likedPosts().has(id);
+    return `
+        <button class="like${already ? ' like--done' : ''}" type="button"
+                data-like="${id}" ${already ? 'disabled' : ''}
+                aria-label="Like this entry. ${count} so far.">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 21s-7.5-4.6-9.5-9A5.4 5.4 0 0 1 12 6.6a5.4 5.4 0 0 1 9.5 5.4c-2 4.4-9.5 9-9.5 9z"></path>
+            </svg>
+            <span data-count>${count}</span>
+        </button>`;
+}
+
+/**
+ * Sends the like and shows what the server returns, rather than guessing the
+ * next number locally: the starting value is the server's business, not ours.
+ */
+async function sendLike(button) {
+    const id = button.dataset.like;
+    button.disabled = true;
+    try {
+        const response = await fetch(`${API}/posts/${encodeURIComponent(id)}/like`, { method: 'POST' });
+        if (!response.ok) throw new Error(String(response.status));
+        const data = await response.json();
+        button.querySelector('[data-count]').textContent = data.likes;
+        button.classList.add('like--done');
+        rememberLike(id);
+    } catch (error) {
+        console.error('Like failed:', error);
+        button.disabled = false;   // let them try again
+    }
+}
+
 function cardHtml(post) {
     const image = resolveImage(post.image);
     const href = `/blog-post?slug=${encodeURIComponent(post.slug || post.id)}`;
+    // The date and the like sit outside the link: a button inside an anchor is
+    // invalid, and would make the whole card try to navigate when liked.
     return `
         <article class="post-card reveal" data-visible="true">
             <a class="post-card__link" href="${esc(href)}">
@@ -73,9 +136,12 @@ function cardHtml(post) {
                     ${post.category ? `<span class="mono-label post-card__cat">${esc(post.category)}</span>` : ''}
                     <h2 class="post-card__title">${esc(post.title)}</h2>
                     ${post.excerpt ? `<p class="post-card__excerpt">${esc(post.excerpt)}</p>` : ''}
-                    <span class="mono-label post-card__date">${esc(formatDate(post.date))}</span>
                 </span>
             </a>
+            <div class="post-card__foot">
+                <span class="mono-label post-card__date">${esc(formatDate(post.date))}</span>
+                ${likeHtml(post)}
+            </div>
         </article>`;
 }
 
@@ -195,6 +261,7 @@ async function renderPost() {
             ${post.category ? `<span class="mono-label kicker">${esc(post.category)}</span>` : ''}
             <h1 class="display-lg">${esc(post.title)}</h1>
             <p class="mono-label post-head__date">${esc(formatDate(post.date))}</p>
+            <div class="post-head__like" data-like-host="${post.id}">${likeHtml(post)}</div>
         </header>
         ${image ? `<figure class="post-figure"><img src="${esc(image)}" alt=""></figure>` : ''}
         <div class="post-body">${safeContent}</div>
@@ -205,7 +272,20 @@ async function renderPost() {
 
 /* ------------------------------------------------------------------ */
 
+/** Wires up whichever like controls are on the page. */
+function initLikes() {
+    document.addEventListener('click', (event) => {
+        const button = event.target.closest('[data-like]');
+        if (!button || button.disabled) return;
+        // On a listing the whole card is a link, so stop it navigating
+        event.preventDefault();
+        event.stopPropagation();
+        sendLike(button);
+    }, true);
+}
+
 async function init() {
+    initLikes();
     if ($('#blog-grid')) await renderIndex();
     else if ($('#blog-post')) await renderPost();
 }
