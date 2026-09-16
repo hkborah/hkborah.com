@@ -152,6 +152,26 @@ across the site at the same time.
 
 `functions/README.md` covers the API, the database schema and the pre-launch checks.
 
+## Changing where "Book a Call" goes
+
+Every booking button on the site points at `/book`, a single function that
+decides the destination. Nothing links to the booking section directly.
+
+To point them all somewhere else, set one environment variable in Cloudflare:
+
+| Variable | Effect |
+|---|---|
+| `BOOK_URL` | Where every Book a Call button lands. Default `/execution#book` |
+
+Set it to a scheduler, a form, or a calling API when that exists. **No page
+needs editing and no redeploy of the pages is required** — the buttons follow
+the variable. An absolute URL works, and so does an in-site path with a
+fragment.
+
+If you add a Function of your own, remember it must also be listed in
+`_routes.json`, or it will not run and the path will 404. That file is what
+keeps every other request on the fast static path.
+
 ## Languages
 
 The Digital Twin answers in the language the visitor writes in, Indian or

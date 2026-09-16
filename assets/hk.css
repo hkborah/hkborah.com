@@ -1110,7 +1110,45 @@ strong { color: var(--ink); font-weight: 600; }
 .like--done { color: var(--accent); border-color: var(--accent-line); cursor: default; opacity: .8; }
 .like[disabled] { cursor: default; }
 
-.post-head__like { margin-top: 1.25rem; display: flex; justify-content: center; }
+/* Engagement row: the like and the share controls, at the top and the foot */
+.post-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: .6rem;
+    margin-top: 1.25rem;
+}
+
+.share { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.share > .mono-label { color: var(--titanium-dim); margin-right: .2rem; }
+
+.share__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    background: none;
+    border: 1px solid var(--line);
+    color: var(--titanium-dim);
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    padding: .35rem .7rem;
+    cursor: pointer;
+    transition: color var(--m-fast) linear, border-color var(--m-fast) linear;
+}
+.share__btn:hover { color: var(--accent); border-color: var(--accent-line); }
+.share__btn svg { flex-shrink: 0; }
+
+/* The pair of calls to action directly under the title */
+.post-head__cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: .75rem;
+    margin-top: 1.75rem;
+}
 
 /* Pager */
 .pager { display: flex; align-items: center; justify-content: center; gap: 1.5rem; margin-top: 2.5rem; }

@@ -1,5 +1,6 @@
 {
   "version": 1,
-  "include": ["/api/*", "/sitemap.xml"],
+  "_comment": "Only these paths invoke a Function. Everything else is served as a static asset, which is faster. Add a path here when a new Function is created, or it will 404.",
+  "include": ["/api/*", "/sitemap.xml", "/book"],
   "exclude": []
 }

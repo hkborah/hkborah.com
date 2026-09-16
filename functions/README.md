@@ -35,6 +35,7 @@ every write calls `requireAuth`, and stored HTML is sanitised with
 | POST | `/api/blog/create` | **admin** | Publish a new entry |
 | PUT | `/api/blog/posts/:id` | **admin** | Update an entry |
 | DELETE | `/api/blog/posts/:id` | **admin** | Delete an entry |
+| GET | `/book` | public | Redirects to `BOOK_URL`, the single destination behind every booking button |
 | POST | `/api/contact` | public | About page enquiry form, emailed to you |
 | POST | `/api/chat/save` | public | Stores a Digital Twin conversation when a visitor presses Save |
 | GET | `/api/chat/sessions` | **admin** | Lists saved conversations with a preview |
@@ -65,6 +66,7 @@ Admin requests carry `Authorization: Bearer <token>`.
    | `CONTACT_TO` | optional | Where enquiries are delivered. Defaults to `hkborah@gmail.com` |
    | `CONTACT_FROM` | optional | A sender on a Resend-verified domain |
    | `SITE_URL` | optional | Canonical base URL for the sitemap |
+   | `BOOK_URL` | optional | Where "Book a Call" lands. Defaults to `/execution#book` |
 
    The Turso and Google variables accept either name, so the `TURSO_*` and
    `GOOGLE_CLIENT_ID` names already used in the dashboard work as they are.
