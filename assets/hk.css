@@ -1288,17 +1288,6 @@ strong { color: var(--ink); font-weight: 600; }
 @media (max-width: 63.9rem) {
     .editor-grid { grid-template-columns: 1fr; }
 }
-/* On a wide screen the list keeps pace with the form, so writing a long entry
-   never scrolls the entry you want out of sight. */
-@media (min-width: 64rem) {
-    .editor-list {
-        position: sticky;
-        top: 6.5rem;
-        max-height: calc(100vh - 8rem);
-    }
-    /* The aside already caps the height, so the rows just fill what is left. */
-    .editor-list__items { max-height: none; }
-}
 
 .editor-form { display: flex; flex-direction: column; gap: .5rem; }
 .editor-form .mono-label { color: var(--titanium-dim); margin-top: 1.25rem; }
@@ -1368,7 +1357,15 @@ strong { color: var(--ink); font-weight: 600; }
 .editor-hint { font-size: .78rem; color: var(--titanium-dim); }
 
 /* Published entries list */
-.editor-list { border: 1px solid var(--line); background: var(--panel); display: flex; flex-direction: column; }
+.editor-list {
+    /* Runs the full length of the editor beside it, so the two columns finish
+       level instead of leaving the list stranded halfway down the page. */
+    align-self: stretch;
+    border: 1px solid var(--line);
+    background: var(--panel);
+    display: flex;
+    flex-direction: column;
+}
 .editor-list__head {
     padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--line);
@@ -1396,15 +1393,14 @@ strong { color: var(--ink); font-weight: 600; }
 }
 .editor-list__search .chat__input::placeholder { color: var(--titanium-dim); }
 .editor-list__items {
-    flex: 1 1 auto;
-    max-height: 34rem;
+    /* Grows to fill whatever height the panel has. The 20rem basis is what the
+       list asks for while the page is still being laid out, so a long list
+       scrolls inside the panel instead of stretching the page. */
+    flex: 1 1 20rem;
     overflow-y: auto;
     scrollbar-width: thin;
     scrollbar-color: var(--line) transparent;
 }
-/* Stacked under the form on narrow screens, the list gets a shorter window of
-   its own so it does not become a second page to scroll. */
-@media (max-width: 63.9rem) { .editor-list__items { max-height: 20rem; } }
 .editor-list__row {
     display: flex;
     align-items: stretch;
