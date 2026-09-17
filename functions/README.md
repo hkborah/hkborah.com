@@ -43,8 +43,21 @@ every write calls `requireAuth`, and stored HTML is sanitised with
 | DELETE | `/api/chat/sessions/:id` | **admin** | Deletes a conversation, for deletion requests |
 | POST | `/api/chat/sessions/delete-multiple` | **admin** | Deletes a batch, or all of them with `{ all: true }` |
 | POST | `/api/blog/posts/:id/like` | public | Adds one like, returns the new total |
+| GET | `/api/blog/posts/:id/image` | public | Serves the entry's stored picture as an image file |
+| GET | `/blog-post` | public | The entry page, with the entry's own sharing tags |
 
 Admin requests carry `Authorization: Bearer <token>`.
+
+`/blog-post` is not an API. It serves the same HTML file that sits on disk, with
+the head rewritten for the entry named in `?slug=`, so a link shared to LinkedIn,
+WhatsApp or Slack previews as that entry. Those crawlers run no JavaScript, so
+without this every entry arrived as "Journal | HK Borah" with the site's card
+picture. The handler is optional at runtime: if the lookup fails, the untouched
+page is served and the browser fills it in as usual.
+
+Every path that runs a Function must also be listed in `_routes.json`. Anything
+not listed is served as a static file, so a new Function will 404 until it is
+added there.
 
 ## Deploying
 
@@ -112,6 +125,33 @@ The publish date is auto-filled with today in the editor and can be changed
 before publishing. It is stored in the `blog_posts.date` column as a display
 string, the same shape the previous site used, so existing entries need no
 migration.
+
+## Pictures
+
+An entry's picture is stored **inside its row**, in `blog_posts.image`, as a
+base64 data URI. The editor downscales the file to 1600px wide and re-encodes it
+as JPEG on the device before sending it, so a stored picture is typically under
+100KB and no separate file store is needed.
+
+Two problems came with storing pictures that way, and both are handled by
+`/api/blog/posts/:id/image`, which hands the same bytes out as a normal image
+response:
+
+- **Sharing.** LinkedIn, WhatsApp and Slack will not fetch a data URI, so a
+  shared entry showed the site's card instead of the entry's picture.
+- **Weight.** Every list request carried all 79 pictures inline, which came to
+  7.6MB of JSON before the page could draw anything.
+
+So the list endpoints return `image` as a **URL**, never as the stored value, and
+each card's picture loads separately and lazily. The single-entry endpoint also
+returns `imageUrl` for display, but keeps `image` exactly as stored, because the
+editor sends that value back unchanged when an entry is re-saved.
+
+The image URL carries a fingerprint of the picture (`?v=...`), which is what
+lets it be cached for a year: replacing a picture produces a new URL. Only
+JPEG, PNG, WebP, GIF and AVIF data URIs are served — SVG is refused, because an
+SVG can carry script. An external URL is never fetched, so the endpoint cannot
+be used to proxy someone else's server.
 
 ## Saved conversations and privacy
 

@@ -202,6 +202,43 @@ export function buildExcerpt(html: string, limit = 100): string {
     return text.length > limit ? `${text.slice(0, limit).trim()}...` : text;
 }
 
+/* ------------------------------------------------------------------ */
+/* Images                                                              */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Short, stable fingerprint of a stored image.
+ *
+ * An entry keeps its picture as a base64 data URI inside the row, so there is
+ * no filename and no file date to version a URL with. This stands in for one:
+ * it goes in the image URL, which lets that URL be cached hard and still serve
+ * fresh bytes the moment the picture is replaced.
+ */
+export function imageFingerprint(image: string): string {
+    // FNV-1a. Tiny, and enough to tell one picture from another.
+    let hash = 0x811c9dc5;
+    for (let index = 0; index < image.length; index += 1) {
+        hash ^= image.charCodeAt(index);
+        hash = Math.imul(hash, 0x01000193) >>> 0;
+    }
+    return hash.toString(36);
+}
+
+/**
+ * Turns a stored image value into something a page or a crawler can fetch.
+ *
+ * Data URIs are never handed out: they made the list endpoint 7.6MB of JSON,
+ * and LinkedIn and WhatsApp refuse to fetch one at all, which is why a shared
+ * entry showed the site's card instead of the entry's picture. A stored data
+ * URI becomes the entry's own image URL. An ordinary URL or path passes through.
+ */
+export function imageUrl(id: string, image: string): string {
+    const value = (image || '').trim();
+    if (!value) return '';
+    if (/^https?:\/\//i.test(value) || !value.startsWith('data:')) return value;
+    return `/api/blog/posts/${encodeURIComponent(id)}/image?v=${imageFingerprint(value)}`;
+}
+
 /** URL-safe slug derived from a title. */
 export function slugify(title: string): string {
     return title.toLowerCase().trim()

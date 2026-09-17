@@ -11,7 +11,7 @@
  */
 import { createClient } from '@libsql/client/web';
 import { json, badRequest, safeJson, requireAuth, sanitizeHtml, buildExcerpt, slugify,
-    pickPostFields, type Env, databaseUrl, databaseToken } from '../../_lib';
+    imageUrl, pickPostFields, type Env, databaseUrl, databaseToken } from '../../_lib';
 
 /** Largest accepted entry body. The original allowed 50MB of base64 images. */
 const MAX_BODY_BYTES = 2 * 1024 * 1024;
@@ -27,7 +27,15 @@ async function findPost(env: Env, id: string) {
 
 export const onRequestGet: PagesFunction<Env> = ({ env, params }) => safeJson(async () => {
     const post = await findPost(env, String(params.id));
-    return post ? json(post) : badRequest('Post not found.', 404);
+    if (!post) return badRequest('Post not found.', 404);
+
+    // `image` stays as stored, because the editor sends it back unchanged when
+    // an entry is re-saved. `imageUrl` is the same picture as a fetchable URL,
+    // which is what the page and the share previews need.
+    return json({
+        ...post,
+        imageUrl: imageUrl(String(post.id), String(post.image ?? '')),
+    });
 });
 
 export const onRequestPut: PagesFunction<Env> = async ({ request, env, params }) => {

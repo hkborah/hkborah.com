@@ -37,6 +37,18 @@ function resolveImage(image) {
     return image.startsWith('/') ? image : `/${image}`;
 }
 
+/**
+ * The picture for a card or a page.
+ *
+ * The list sends a URL, but a single entry still sends what is stored, which
+ * may be a base64 data URI. `imageUrl` is the API's own fetchable URL for the
+ * same picture, so it is preferred whenever it is there: it caches, and it
+ * keeps a wall of pictures out of the page source.
+ */
+function postImage(post) {
+    return resolveImage(post.imageUrl || post.image);
+}
+
 /** Formats the stored date string; falls back to the raw value. */
 function formatDate(value) {
     if (!value) return '';
@@ -168,7 +180,7 @@ async function sendLike(button) {
 }
 
 function cardHtml(post) {
-    const image = resolveImage(post.image);
+    const image = postImage(post);
     const href = `/blog-post?slug=${encodeURIComponent(post.slug || post.id)}`;
     // The date and the like sit outside the link: a button inside an anchor is
     // invalid, and would make the whole card try to navigate when liked.
@@ -288,7 +300,7 @@ async function renderPost() {
         return;
     }
 
-    const image = resolveImage(post.image);
+    const image = postImage(post);
 
     // Authored HTML is untrusted input: sanitise before it enters the DOM.
     const safeContent = window.DOMPurify

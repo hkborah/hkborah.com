@@ -1,6 +1,6 @@
 /** GET /api/blog/latest/:limit - the most recent entries. */
 import { createClient } from '@libsql/client/web';
-import { json, safeJson, type Env, databaseUrl, databaseToken } from '../../_lib';
+import { json, safeJson, imageUrl, type Env, databaseUrl, databaseToken } from '../../_lib';
 
 export const onRequestGet: PagesFunction<Env> = ({ env, params }) => safeJson(async () => {
     const requested = Number(params.limit);
@@ -12,5 +12,13 @@ export const onRequestGet: PagesFunction<Env> = ({ env, params }) => safeJson(as
              'FROM blog_posts ORDER BY created_at DESC LIMIT ?',
         args: [limit],
     });
-    return json(result.rows);
+
+    // Pictures are handed out as URLs rather than as the stored data URIs, for
+    // the same reason as the full list: see imageUrl in _lib.
+    const posts = result.rows.map((row) => ({
+        ...row,
+        image: imageUrl(String(row.id), String(row.image ?? '')),
+    }));
+
+    return json(posts);
 });
