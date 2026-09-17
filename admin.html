@@ -20,14 +20,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="assets/hk.css?v=33">
+    <link rel="stylesheet" href="assets/hk.css?v=35">
 
     <!-- Post bodies are sanitised before preview and before saving -->
     <script src="assets/vendor/purify.min.js" defer
             integrity="sha384-JEyTNhjM6R1ElGoJns4U2Ln4ofPcqzSsynQkmEc/KGy6336qAZl70tDLufbkla+3"
             crossorigin="anonymous"></script>
     <script type="module" src="assets/hk.js?v=33"></script>
-    <script type="module" src="assets/hk-admin.js?v=33"></script>
+    <script type="module" src="assets/hk-admin.js?v=35"></script>
 </head>
 <body>
 
@@ -143,7 +143,19 @@
 
                     <!-- Existing entries -->
                     <aside class="editor-list">
-                        <h2 class="mono-label editor-list__head">Published entries</h2>
+                        <h2 class="mono-label editor-list__head">Published entries
+                            <span class="editor-list__count" id="post-count"></span>
+                        </h2>
+                        <div class="editor-list__search">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            <input class="chat__input" type="search" id="post-search"
+                                   placeholder="Search title or category" autocomplete="off"
+                                   aria-label="Search published entries">
+                        </div>
                         <div id="post-list" class="editor-list__items"></div>
                     </aside>
                 </div>

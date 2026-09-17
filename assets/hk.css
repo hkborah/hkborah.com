@@ -1285,7 +1285,20 @@ strong { color: var(--ink); font-weight: 600; }
     gap: 2.5rem;
     align-items: start;
 }
-@media (max-width: 63.9rem) { .editor-grid { grid-template-columns: 1fr; } }
+@media (max-width: 63.9rem) {
+    .editor-grid { grid-template-columns: 1fr; }
+}
+/* On a wide screen the list keeps pace with the form, so writing a long entry
+   never scrolls the entry you want out of sight. */
+@media (min-width: 64rem) {
+    .editor-list {
+        position: sticky;
+        top: 6.5rem;
+        max-height: calc(100vh - 8rem);
+    }
+    /* The aside already caps the height, so the rows just fill what is left. */
+    .editor-list__items { max-height: none; }
+}
 
 .editor-form { display: flex; flex-direction: column; gap: .5rem; }
 .editor-form .mono-label { color: var(--titanium-dim); margin-top: 1.25rem; }
@@ -1325,7 +1338,10 @@ strong { color: var(--ink); font-weight: 600; }
 }
 
 .editor-surface {
-    min-height: 26rem;
+    /* Fixed height with its own scroll: a long entry grows inside the box
+       rather than pushing the page down. */
+    height: 30rem;
+    overflow-y: auto;
     border: 1px solid var(--line);
     background: var(--panel);
     padding: 1.5rem;
@@ -1352,13 +1368,43 @@ strong { color: var(--ink); font-weight: 600; }
 .editor-hint { font-size: .78rem; color: var(--titanium-dim); }
 
 /* Published entries list */
-.editor-list { border: 1px solid var(--line); background: var(--panel); }
+.editor-list { border: 1px solid var(--line); background: var(--panel); display: flex; flex-direction: column; }
 .editor-list__head {
     padding: 1rem 1.25rem;
     border-bottom: 1px solid var(--line);
     color: var(--titanium-dim);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: .75rem;
 }
-.editor-list__items { max-height: 34rem; overflow-y: auto; }
+.editor-list__count { color: var(--accent); letter-spacing: .1em; }
+
+.editor-list__search { position: relative; padding: .75rem 1rem; border-bottom: 1px solid var(--line); }
+.editor-list__search svg {
+    position: absolute;
+    left: 1.6rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--titanium-dim);
+    pointer-events: none;
+}
+.editor-list__search .chat__input {
+    width: 100%;
+    padding-left: 2.4rem;
+    font-size: .82rem;
+}
+.editor-list__search .chat__input::placeholder { color: var(--titanium-dim); }
+.editor-list__items {
+    flex: 1 1 auto;
+    max-height: 34rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--line) transparent;
+}
+/* Stacked under the form on narrow screens, the list gets a shorter window of
+   its own so it does not become a second page to scroll. */
+@media (max-width: 63.9rem) { .editor-list__items { max-height: 20rem; } }
 .editor-list__row {
     display: flex;
     align-items: stretch;
@@ -1367,11 +1413,13 @@ strong { color: var(--ink); font-weight: 600; }
     border-bottom: 1px solid var(--line);
 }
 .editor-list__row:last-child { border-bottom: 0; }
+/* Marks the entry you are editing, so a long list never leaves you guessing. */
+.editor-list__row.is-active { background: var(--accent-soft); box-shadow: inset 2px 0 0 var(--accent); }
 .editor-list__title {
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    gap: .35rem;
+    gap: .3rem;
     align-items: flex-start;
     text-align: left;
     background: none;
@@ -1379,12 +1427,19 @@ strong { color: var(--ink); font-weight: 600; }
     color: var(--titanium);
     font-family: var(--font-display);
     font-size: .9rem;
-    padding: 1rem 1.25rem;
+    padding: .9rem 1.25rem;
     cursor: pointer;
     transition: color var(--m-fast) linear;
 }
 .editor-list__title:hover { color: var(--accent); }
 .editor-list__title .mono-label { color: var(--titanium-dim); }
+.editor-list__cat {
+    font-family: var(--font-mono);
+    font-size: .58rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--accent);
+}
 .editor-list__delete {
     background: none;
     border: 0;

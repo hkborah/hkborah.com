@@ -219,26 +219,53 @@ async function save() {
 /* List, load, delete                                                  */
 /* ------------------------------------------------------------------ */
 
+/* The entries list keeps what it fetched, so the search box filters without
+   asking the server again on every keystroke. */
+const postList = { all: [], query: '' };
+
+function renderPostList() {
+    const list = $('#post-list');
+    if (!list) return;
+
+    const query = postList.query.trim().toLowerCase();
+    const rows = postList.all.filter((post) => !query
+        || (post.title || '').toLowerCase().includes(query)
+        || (post.category || '').toLowerCase().includes(query));
+
+    const count = $('#post-count');
+    if (count) {
+        count.textContent = query ? `${rows.length} of ${postList.all.length}` : String(postList.all.length);
+    }
+
+    if (!postList.all.length) {
+        list.innerHTML = '<p class="editor-hint">Nothing published yet.</p>';
+        return;
+    }
+    if (!rows.length) {
+        list.innerHTML = '<p class="editor-hint">No entry matches that search.</p>';
+        return;
+    }
+
+    list.innerHTML = rows.map((post) => `
+        <div class="editor-list__row${state.id === post.id ? ' is-active' : ''}">
+            <button class="editor-list__title" type="button" data-load="${post.id}">
+                <span>${escapeHtml(post.title || '')}</span>
+                ${post.category ? `<span class="editor-list__cat">${escapeHtml(post.category)}</span>` : ''}
+                <span class="mono-label">${escapeHtml(post.date || '')}</span>
+            </button>
+            <button class="editor-list__delete" type="button" data-delete="${post.id}"
+                    aria-label="Delete this entry">Delete</button>
+        </div>`).join('');
+}
+
 async function loadPostList() {
     const list = $('#post-list');
     if (!list) return;
     try {
-        const posts = await api('/blog/posts');
-        if (!posts.length) {
-            list.innerHTML = '<p class="editor-hint">Nothing published yet.</p>';
-            return;
-        }
-        list.innerHTML = posts.map((post) => `
-            <div class="editor-list__row">
-                <button class="editor-list__title" type="button" data-load="${post.id}">
-                    <span>${post.title.replace(/[<>&"]/g, '')}</span>
-                    <span class="mono-label">${post.date || ''}</span>
-                </button>
-                <button class="editor-list__delete" type="button" data-delete="${post.id}"
-                        aria-label="Delete this entry">Delete</button>
-            </div>`).join('');
+        postList.all = await api('/blog/posts');
+        renderPostList();
     } catch (error) {
-        list.innerHTML = `<p class="editor-hint">${error.message}</p>`;
+        list.innerHTML = `<p class="editor-hint">${escapeHtml(error.message)}</p>`;
     }
 }
 
@@ -255,19 +282,8 @@ async function loadPost(id) {
         showImagePreview();
         $('#editor-heading').textContent = 'Editing entry';
         status('');
+        renderPostList();
         $('#field-title').focus();
-    } catch (error) {
-        status(error.message, true);
-    }
-}
-
-async function remove(id) {
-    if (!confirm('Delete this entry? This cannot be undone.')) return;
-    try {
-        await api(`/blog/posts/${encodeURIComponent(id)}`, { method: 'DELETE' });
-        if (state.id === id) resetForm();
-        await loadPostList();
-        status('Entry deleted.');
     } catch (error) {
         status(error.message, true);
     }
@@ -286,6 +302,20 @@ function resetForm() {
     showImagePreview();
     $('#editor-heading').textContent = 'New entry';
     status('');
+    // Re-render so no row keeps the "you are editing this" highlight.
+    renderPostList();
+}
+
+async function removePost(id) {
+    if (!confirm('Delete this entry? This cannot be undone.')) return;
+    try {
+        await api(`/blog/posts/${encodeURIComponent(id)}`, { method: 'DELETE' });
+        if (state.id === id) resetForm();
+        await loadPostList();
+        status('Entry deleted.');
+    } catch (error) {
+        status(error.message, true);
+    }
 }
 
 /* ------------------------------------------------------------------ */
@@ -895,11 +925,16 @@ function init() {
         showImagePreview();
     });
 
+    $('#post-search')?.addEventListener('input', (event) => {
+        postList.query = event.target.value;
+        renderPostList();
+    });
+
     $('#post-list')?.addEventListener('click', (event) => {
         const load = event.target.closest('[data-load]');
         const del = event.target.closest('[data-delete]');
         if (load) loadPost(load.dataset.load);
-        if (del) remove(del.dataset.delete);
+        if (del) removePost(del.dataset.delete);
     });
 
     $('#transcript-list')?.addEventListener('toggle', (event) => {
