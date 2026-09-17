@@ -197,7 +197,11 @@ export const onRequestGet: PagesFunction<ShellEnv> = async ({ request, env }) =>
     const headers = new Headers(rewritten.headers);
     // Short, so a corrected headline or a new entry appears promptly, but long
     // enough that a crawler and a burst of visitors share one lookup.
-    headers.set('Cache-Control', 'public, max-age=300, must-revalidate');
+    // no-transform refuses any edge rewrite of this page: the privacy policy
+    // promises no third-party tracking script, and Cloudflare's analytics
+    // beacon is injected into HTML on its way through. The other pages carry
+    // the same instruction in the site's _headers file.
+    headers.set('Cache-Control', 'public, max-age=300, must-revalidate, no-transform');
 
     return new Response(rewritten.body, { status: rewritten.status, headers });
 };

@@ -28,3 +28,41 @@
 # already.
 /assets/*
   Cache-Control: public, max-age=600, must-revalidate
+
+# none of these pages may be rewritten at the edge.
+#
+# Cloudflare can inject its analytics beacon into HTML as it passes through.
+# The privacy page promises no third-party tracking scripts, and a Content
+# Security Policy of script-src 'self' blocks the beacon, so the promise held
+# only because the browser refused the script - which also meant a console
+# error on every page. no-transform refuses the rewrite outright instead, so
+# nothing can be added to a page whatever is switched on in the dashboard.
+#
+# The pages are listed one by one because a /* rule would overlap the /assets/
+# rule above and be concatenated into it. A URL that matches nothing here (a
+# 404, for instance) keeps the platform default. Pages served by a Function
+# set their own headers, so /blog-post carries this in its own code.
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/knowledge
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/advice
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/execution
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/execution/business-upgrade
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/execution/people-development
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/about
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/blog
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/privacy
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/terms
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/admin
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
+/404.html
+  Cache-Control: public, max-age=0, must-revalidate, no-transform
