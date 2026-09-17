@@ -17,7 +17,7 @@
  * fetched, so this cannot be turned into a proxy for someone else's server.
  */
 import { createClient } from '@libsql/client/web';
-import { badRequest, safeJson, databaseUrl, databaseToken, type Env } from '../../../_lib';
+import { badRequest, safeJson, headOf, databaseUrl, databaseToken, type Env } from '../../../_lib';
 
 /** Picture types the editor produces, and the only ones served back. */
 const ALLOWED_TYPES = new Set(['image/jpeg', 'image/png', 'image/webp', 'image/gif', 'image/avif']);
@@ -65,3 +65,7 @@ export const onRequestGet: PagesFunction<Env> = ({ env, params }) => safeJson(as
         },
     });
 });
+
+/* Crawlers ask whether a picture exists before fetching it. Answer the question
+   rather than 404: see headOf. */
+export const onRequestHead: PagesFunction<Env> = (context) => headOf(() => onRequestGet(context));

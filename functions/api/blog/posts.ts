@@ -4,7 +4,7 @@
  * display string and is not reliable for sorting.
  */
 import { createClient } from '@libsql/client/web';
-import { json, safeJson, imageUrl, type Env, databaseUrl, databaseToken } from '../_lib';
+import { json, safeJson, headOf, imageUrl, type Env, databaseUrl, databaseToken } from '../_lib';
 
 export const onRequestGet: PagesFunction<Env> = ({ env }) => safeJson(async () => {
     const db = createClient({ url: databaseUrl(env), authToken: databaseToken(env) });
@@ -24,3 +24,5 @@ export const onRequestGet: PagesFunction<Env> = ({ env }) => safeJson(async () =
 
     return json(posts);
 });
+
+export const onRequestHead: PagesFunction<Env> = (context) => headOf(() => onRequestGet(context));

@@ -14,7 +14,7 @@
  * original page is served untouched and the browser fills it in as before.
  */
 import { createClient } from '@libsql/client/web';
-import { databaseUrl, databaseToken, imageUrl, type Env } from './api/_lib';
+import { databaseUrl, databaseToken, imageUrl, headOf, type Env } from './api/_lib';
 
 const SITE = 'https://www.hkborah.com';
 
@@ -205,3 +205,7 @@ export const onRequestGet: PagesFunction<ShellEnv> = async ({ request, env }) =>
 
     return new Response(rewritten.body, { status: rewritten.status, headers });
 };
+
+/* Without this, Pages answers HEAD from the static file and a crawler is told
+   the page is the plain journal entry, not this entry. See headOf. */
+export const onRequestHead: PagesFunction<ShellEnv> = (context) => headOf(() => onRequestGet(context));

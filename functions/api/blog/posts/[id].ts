@@ -11,7 +11,7 @@
  */
 import { createClient } from '@libsql/client/web';
 import { json, badRequest, safeJson, requireAuth, sanitizeHtml, buildExcerpt, slugify,
-    imageUrl, pickPostFields, type Env, databaseUrl, databaseToken } from '../../_lib';
+    imageUrl, headOf, pickPostFields, type Env, databaseUrl, databaseToken } from '../../_lib';
 
 /** Largest accepted entry body. The original allowed 50MB of base64 images. */
 const MAX_BODY_BYTES = 2 * 1024 * 1024;
@@ -90,3 +90,5 @@ export const onRequestDelete: PagesFunction<Env> = async ({ request, env, params
     await db.execute({ sql: 'DELETE FROM blog_posts WHERE id = ?', args: [id] });
     return json({ success: true });
 };
+
+export const onRequestHead: PagesFunction<Env> = (context) => headOf(() => onRequestGet(context));

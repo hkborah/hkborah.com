@@ -71,6 +71,23 @@ export async function safeJson(work: () => Promise<Response>): Promise<Response>
     }
 }
 
+/**
+ * Turns a GET handler into the HEAD answer.
+ *
+ * A GET-only route answers HEAD with 404 on Pages, because a route is matched
+ * per method. That is harmless to a browser and fatal to a crawler: LinkedIn
+ * and Slack ask for an image this way before fetching it, and a 404 reads as
+ * "there is no picture here". HEAD must answer exactly as GET does, minus the
+ * body.
+ */
+export async function headOf(handler: () => Response | Promise<Response>): Promise<Response> {
+    const response = await handler();
+    const headers = new Headers(response.headers);
+    // The runtime sets this from the body, and a HEAD response has none.
+    headers.delete('Content-Length');
+    return new Response(null, { status: response.status, headers });
+}
+
 /* ------------------------------------------------------------------ */
 /* Tokens: base64url(payload) + "." + base64url(HMAC-SHA256)           */
 /* ------------------------------------------------------------------ */
